@@ -1,0 +1,17 @@
+[push]
+	default = simple
+[user]
+	name = Mike Williams
+	email = mike@pentangle.net
+[core]
+	editor = mvim -f
+[color]
+	ui = true
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+[core]
+	excludesfile = /Users/mike/.gitignore_global
