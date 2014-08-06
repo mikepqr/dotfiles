@@ -24,3 +24,7 @@ bind '"\e[B": history-search-forward'
 
 ## -- PROMPT --
 PS1='\[\033[01;37m\]\h\[\033[00m\]:\[\033[01;33m\]\W\[\033[00m\]\$ '
+
+## -- EDITOR --
+export VISUAL=$HOME/usr/bin/mvim
+export EDITOR=$HOME/usr/bin/vim
