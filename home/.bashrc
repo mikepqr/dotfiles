@@ -21,3 +21,6 @@ homeshick --quiet refresh
 # with that string: http://stackoverflow.com/questions/1030182/
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+
+## -- PROMPT --
+PS1='\[\033[01;37m\]\h\[\033[00m\]:\[\033[01;33m\]\W\[\033[00m\]\$ '
