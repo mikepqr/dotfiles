@@ -1,9 +1,9 @@
 ## -- PATH --
-if [ -d $HOME/miniconda/bin ]; then
-    PATH=/Users/mike/miniconda/bin:"$PATH"
-fi
 if [ -d ~/usr/bin ] ; then
     PATH=~/usr/bin:"${PATH}"
+fi
+if [ -d $HOME/miniconda/bin ]; then
+    PATH="$HOME"/miniconda/bin:"$PATH"
 fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
