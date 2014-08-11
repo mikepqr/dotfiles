@@ -36,3 +36,23 @@ export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 # after each command, save and reload history
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+## -- DIRECTORY --
+# Change to most recently used directory
+if [ -f ~/.lastdir ]; then
+    cd "`cat ~/.lastdir`"
+fi
+# Augment PROMPT_COMMAND to list 7 recently changed files when:
+# - a new shell is started in a directory other than home
+# - cd to any directory
+export LASTDIR=${HOME}
+function prompt_command {
+    newdir=`pwd`
+    if [ ! "$LASTDIR" = "$newdir" ]; then
+        printf %s "$PWD" > ~/.lastdir
+        # Note script -q /dev/null is required to retain color output
+        script -q /dev/null ls -ltFG | tail -7
+    fi
+    export LASTDIR=$newdir
+}
+PROMPT_COMMAND+='; prompt_command'
