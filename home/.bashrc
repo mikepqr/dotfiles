@@ -51,7 +51,7 @@ function prompt_command {
     if [ ! "$LASTDIR" = "$newdir" ]; then
         printf %s "$PWD" > ~/.lastdir
         # Note script -q /dev/null is required to retain color output
-        script -q /dev/null ls -ltFG | tail -7
+        script -q /dev/null ls -ltrFG | tail -7
     fi
     export LASTDIR=$newdir
 }
