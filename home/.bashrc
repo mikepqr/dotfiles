@@ -1,10 +1,14 @@
 ## -- PATH --
-if [ -d ~/usr/bin ] ; then
-    PATH=~/usr/bin:"${PATH}"
-fi
-if [ -d $HOME/miniconda/bin ]; then
-    PATH="$HOME"/miniconda/bin:"$PATH"
-fi
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+pathadd "/usr/local/bin"
+pathadd "$HOME/usr/bin"
+pathadd "$HOME/miniconda/bin"
+
+## -- SOURCE STUFF --
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
