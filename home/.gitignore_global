@@ -41,3 +41,7 @@ Thumbs.db
 # Vim
 ######################
 .*.swp
+
+# iPython
+######################
+.ipynb_checkpoints
