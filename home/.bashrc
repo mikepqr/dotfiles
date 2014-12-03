@@ -4,8 +4,8 @@ pathadd() {
         PATH="$1:$PATH"
     fi
 }
-pathadd "/usr/local/bin"
 pathadd "$HOME/usr/bin"
+pathadd "$(brew --prefix coreutils)/libexec/gnubin"
 pathadd "$HOME/miniconda/bin"
 
 ## -- SOURCE STUFF --
