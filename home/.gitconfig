@@ -4,7 +4,7 @@
 	name = Mike Williams
 	email = mike@pentangle.net
 [core]
-	editor = mvim -f
+	editor = vim
 [color]
 	ui = true
 [alias]
