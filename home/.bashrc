@@ -19,6 +19,13 @@ if [[ $? == 0 ]]; then
     fi
 fi
 
+## -- PYTHON --
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/proj
+source /usr/local/bin/virtualenvwrapper.sh
+
 ## -- HOMESHICK --
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
