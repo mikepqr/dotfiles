@@ -16,3 +16,7 @@
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [core]
 	excludesfile = /Users/mike/.gitignore_global
+	attributesfile = /Users/mike/.gitattributes
+[filter "dropoutput_ipynb"]
+	clean = /Users/mike/usr/bin/ipynb_git_filter.py
+	smudge = cat
