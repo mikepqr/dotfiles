@@ -6,7 +6,6 @@ pathadd() {
 }
 pathadd "$HOME/usr/bin"
 pathadd "$(brew --prefix coreutils)/libexec/gnubin"
-pathadd "$HOME/miniconda/bin"
 
 ## -- SOURCE STUFF --
 if [ -f ~/.bash_aliases ]; then
