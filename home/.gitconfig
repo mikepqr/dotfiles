@@ -17,6 +17,3 @@
 [core]
 	excludesfile = /Users/mike/.gitignore_global
 	attributesfile = /Users/mike/.gitattributes
-[filter "dropoutput_ipynb"]
-	clean = /Users/mike/usr/bin/ipynb_git_filter.py
-	smudge = cat
