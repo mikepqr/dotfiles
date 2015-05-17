@@ -1,3 +1,6 @@
+## -- VI BINDINGS --
+set -o vi
+
 ## -- PATH --
 # See http://superuser.com/a/583502. Prevent global /etc/profile path_helper
 # utility from prepending default PATH to previously chosen PATH in, e.g.
