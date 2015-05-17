@@ -1,4 +1,11 @@
 ## -- PATH --
+# See http://superuser.com/a/583502. Prevent global /etc/profile path_helper
+# utility from prepending default PATH to previously chosen PATH in, e.g.
+# tmux.
+if [ -f /etc/profile ]; then
+    PATH=""
+    source /etc/profile
+fi
 pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="$1:$PATH"
