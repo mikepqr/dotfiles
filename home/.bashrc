@@ -32,9 +32,10 @@ fi
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/proj
-source /usr/local/bin/virtualenvwrapper.sh
-workon ds
+export PROJECT_HOME=$HOME/projects
+export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper_lazy.sh
+source $WORKON_HOME/ds/bin/activate
 
 ## -- HOMESHICK --
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
