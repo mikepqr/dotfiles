@@ -71,7 +71,6 @@ function is_git_repository {
 function set_git_branch {
   # Set the final branch string
   BRANCH=`parse_git_branch`
-  local TIME=`fmt_time` # format time for prompt string
 }
 
 function parse_git_branch() {
@@ -80,15 +79,6 @@ function parse_git_branch() {
 
 function parse_git_dirty() {
   [[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
-}
-
-fmt_time () { #format time just the way I likes it
-    if [ `date +%p` = "PM" ]; then
-        meridiem="pm"
-    else
-        meridiem="am"
-    fi
-    date +"%l:%M:%S$meridiem"|sed 's/ //g'
 }
 
 # Return the prompt symbol to use, colorized based on the return value of the
