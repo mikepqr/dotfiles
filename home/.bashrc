@@ -35,7 +35,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/projects
 export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
 source /usr/local/bin/virtualenvwrapper_lazy.sh
-source $WORKON_HOME/ds/bin/activate
+source $WORKON_HOME/ds3/bin/activate
 
 ## -- HOMESHICK --
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
