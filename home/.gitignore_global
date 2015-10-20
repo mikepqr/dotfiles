@@ -41,8 +41,11 @@ Thumbs.db
 # Vim
 ######################
 .*.swp
+tags
 
 # Python
 ######################
 .ipynb_checkpoints
 *.egg-info
+*.pkl
+*.npy
