@@ -32,8 +32,8 @@ fi
 export PIP_REQUIRE_VIRTUALENV=true
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/projects
-export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+export VIRTUALENVWRAPPER_SCRIPT=$WORKON_HOME/ds3/bin/virtualenvwrapper.sh
+source $WORKON_HOME/ds3/bin/virtualenvwrapper_lazy.sh
 source $WORKON_HOME/ds3/bin/activate
 
 ## -- HOMESHICK --
