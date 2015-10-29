@@ -2,20 +2,12 @@
 set -o vi
 
 ## -- PATH --
-# See http://superuser.com/a/583502. Prevent global /etc/profile path_helper
-# utility from prepending default PATH to previously chosen PATH in, e.g.
-# tmux.
-if [ -f /etc/profile ]; then
-    PATH=""
-    source /etc/profile
-fi
 pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="$1:$PATH"
     fi
 }
 pathadd "$HOME/usr/bin"
-pathadd "$(brew --prefix coreutils)/libexec/gnubin"
 
 ## -- SOURCE STUFF --
 if [ -f ~/.bash_aliases ]; then
@@ -23,11 +15,18 @@ if [ -f ~/.bash_aliases ]; then
 fi
 which -s brew
 if [[ $? == 0 ]]; then
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
+    # See http://superuser.com/a/583502. Prevent global /etc/profile path_helper
+    # utility from prepending default PATH to previously chosen PATH in, e.g.
+    # tmux.
+    if [ -f /etc/profile ]; then
+        PATH=""
+        source /etc/profile
+    fi
+    pathadd "$(brew --prefix coreutils)/libexec/gnubin"
+    if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+        . $(brew --prefix)/share/bash-completion/bash_completion
     fi
 fi
-
 ## -- PYTHON --
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
