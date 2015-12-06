@@ -13,7 +13,7 @@ pathadd "$HOME/usr/bin"
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-which -s brew
+which brew > /dev/null
 if [[ $? == 0 ]]; then
     # See http://superuser.com/a/583502. Prevent global /etc/profile path_helper
     # utility from prepending default PATH to previously chosen PATH in, e.g.
@@ -32,9 +32,10 @@ fi
 export PIP_REQUIRE_VIRTUALENV=true
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/projects
-export VIRTUALENVWRAPPER_SCRIPT=$WORKON_HOME/ds3/bin/virtualenvwrapper.sh
-source $WORKON_HOME/ds3/bin/virtualenvwrapper_lazy.sh
-source $WORKON_HOME/ds3/bin/activate
+DEFAULT_VIRTUALENV=tldr
+export VIRTUALENVWRAPPER_SCRIPT=$WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper.sh
+source $WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper_lazy.sh
+source $WORKON_HOME/$DEFAULT_VIRTUALENV/bin/activate
 
 ## -- HOMESHICK --
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
