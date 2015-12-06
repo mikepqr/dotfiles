@@ -7,8 +7,6 @@ pathadd() {
         PATH="$1:$PATH"
     fi
 }
-pathadd "$HOME/usr/bin"
-
 ## -- SOURCE STUFF --
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -27,6 +25,8 @@ if [[ $? == 0 ]]; then
         . $(brew --prefix)/share/bash-completion/bash_completion
     fi
 fi
+pathadd "$HOME/usr/bin"
+
 ## -- PYTHON --
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
