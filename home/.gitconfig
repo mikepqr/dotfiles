@@ -2,7 +2,6 @@
 	default = simple
 [user]
 	name = Mike Williams
-	email = mike@pentangle.net
 [core]
 	editor = vim
 [color]
@@ -15,5 +14,6 @@
 	unstage = reset HEAD --
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [core]
-	excludesfile = /Users/mike/.gitignore_global
-	attributesfile = /Users/mike/.gitattributes
+	excludesfile = ~/.gitignore-global
+[include]
+    path = ~/.gitconfig-ff
