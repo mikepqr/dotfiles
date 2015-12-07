@@ -16,4 +16,4 @@
 [core]
 	excludesfile = ~/.gitignore-global
 [include]
-    path = ~/.gitconfig-personal
+    path = ~/.gitconfig-host
