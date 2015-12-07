@@ -8,33 +8,42 @@ pathadd() {
     fi
 }
 ## -- SOURCE STUFF --
+pathadd "$HOME/usr/bin"
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-which -s brew
-if [[ $? == 0 ]]; then
-    # See http://superuser.com/a/583502. Prevent global /etc/profile path_helper
-    # utility from prepending default PATH to previously chosen PATH in, e.g.
-    # tmux.
+
+## -- OS SPECIFIC --
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    DEFAULT_VIRTUALENV=tldr
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    export EDITOR=$HOME/usr/bin/vim
+    export VISUAL=$HOME/usr/bin/mvim
+    DEFAULT_VIRTUALENV=ds3
+    # See http://superuser.com/a/583502. Prevent global /etc/profile
+    # path_helper utility from prepending default PATH to previously chosen
+    # PATH in, e.g. tmux.
     if [ -f /etc/profile ]; then
         PATH=""
         source /etc/profile
     fi
-    pathadd "$(brew --prefix coreutils)/libexec/gnubin"
-    if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
-        . $(brew --prefix)/share/bash-completion/bash_completion
+    which -s brew
+    if [[ $? == 0 ]]; then
+        pathadd "$(brew --prefix coreutils)/libexec/gnubin"
+        if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+            . $(brew --prefix)/share/bash-completion/bash_completion
+        fi
     fi
 fi
-pathadd "$HOME/usr/bin"
 
 ## -- PYTHON --
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/projects
-export VIRTUALENVWRAPPER_SCRIPT=$WORKON_HOME/ds3/bin/virtualenvwrapper.sh
-source $WORKON_HOME/ds3/bin/virtualenvwrapper_lazy.sh
-source $WORKON_HOME/ds3/bin/activate
+export PROJECT_HOME=$HOME/p
+export VIRTUALENVWRAPPER_SCRIPT=$WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper.sh
+source $WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper_lazy.sh
+source $WORKON_HOME/$DEFAULT_VIRTUALENV/bin/activate
 
 ## -- HOMESHICK --
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
@@ -45,10 +54,6 @@ homeshick --quiet refresh
 # with that string: http://stackoverflow.com/questions/1030182/
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
-
-## -- EDITOR --
-export VISUAL=$HOME/usr/bin/mvim
-export EDITOR=$HOME/usr/bin/vim
 
 ## -- PROMPT --
 # http://stackoverflow.com/questions/23399183/bash-command-prompt-with-virtualenv-and-git-branch
