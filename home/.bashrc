@@ -1,17 +1,22 @@
-## -- VI BINDINGS --
-set -o vi
-
 ## -- PATH --
 pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="$1:$PATH"
     fi
 }
-## -- SOURCE STUFF --
-pathadd "$HOME/usr/bin"
+# See http://superuser.com/a/583502. Prevent global /etc/profile
+# path_helper utility from prepending default PATH to previously chosen
+# PATH in, e.g. tmux.
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [ -f /etc/profile ]; then
+        PATH=""
+        source /etc/profile
+    fi
+fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+pathadd $HOME/usr/bin
 
 ## -- OS SPECIFIC --
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -20,13 +25,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     export EDITOR=$HOME/usr/bin/vim
     export VISUAL=$HOME/usr/bin/mvim
     DEFAULT_VIRTUALENV=ds3
-    # See http://superuser.com/a/583502. Prevent global /etc/profile
-    # path_helper utility from prepending default PATH to previously chosen
-    # PATH in, e.g. tmux.
-    if [ -f /etc/profile ]; then
-        PATH=""
-        source /etc/profile
-    fi
     which -s brew
     if [[ $? == 0 ]]; then
         pathadd "$(brew --prefix coreutils)/libexec/gnubin"
@@ -54,6 +52,9 @@ homeshick --quiet refresh
 # with that string: http://stackoverflow.com/questions/1030182/
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+
+## -- VI BINDINGS --
+set -o vi
 
 ## -- PROMPT --
 # http://stackoverflow.com/questions/23399183/bash-command-prompt-with-virtualenv-and-git-branch
