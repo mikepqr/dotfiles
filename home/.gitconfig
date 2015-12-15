@@ -12,7 +12,8 @@
 	ci = commit
 	st = status
 	unstage = reset HEAD --
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    llg = log --oneline --numstat --decorate --graph
+    lg = log --oneline --decorate --graph
 [core]
 	excludesfile = ~/.gitignore-global
 [include]
