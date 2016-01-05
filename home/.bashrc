@@ -155,3 +155,6 @@ function prompt_command {
     export LASTDIR=$newdir
 }
 PROMPT_COMMAND+='; prompt_command'
+
+# z must come after PROMPT_COMMAND stuff
+[ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
