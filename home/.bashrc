@@ -18,6 +18,9 @@ if [ -f ~/.bash_aliases ]; then
 fi
 pathadd $HOME/usr/bin
 
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 ## -- OS SPECIFIC --
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     DEFAULT_VIRTUALENV=tldr
