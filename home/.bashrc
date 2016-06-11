@@ -18,12 +18,13 @@ if [ -f ~/.bash_aliases ]; then
 fi
 pathadd $HOME/usr/bin
 
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 ## -- OS SPECIFIC --
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     DEFAULT_VIRTUALENV=tldr
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    export EDITOR=$HOME/usr/bin/vim
-    export VISUAL=$HOME/usr/bin/mvim
     DEFAULT_VIRTUALENV=ds3
     which -s brew
     if [[ $? == 0 ]]; then
@@ -50,7 +51,7 @@ homeshick --quiet refresh
 
 ## -- VI BINDINGS --
 set -o vi
-export EDITOR=vi
+export EDITOR=`which vim`
 
 # Type a few characters before pressing up to search for commands that begin
 # with that string: http://stackoverflow.com/questions/1030182/
