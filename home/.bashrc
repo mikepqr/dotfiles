@@ -48,13 +48,14 @@ source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 homeshick --quiet refresh
 
+## -- VI BINDINGS --
+set -o vi
+export EDITOR=vi
+
 # Type a few characters before pressing up to search for commands that begin
 # with that string: http://stackoverflow.com/questions/1030182/
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
-
-## -- VI BINDINGS --
-set -o vi
 
 ## -- PROMPT --
 # http://stackoverflow.com/questions/23399183/bash-command-prompt-with-virtualenv-and-git-branch
