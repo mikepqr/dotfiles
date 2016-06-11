@@ -25,8 +25,6 @@ pathadd $HOME/usr/bin
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     DEFAULT_VIRTUALENV=tldr
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    export EDITOR=$HOME/usr/bin/vim
-    export VISUAL=$HOME/usr/bin/mvim
     DEFAULT_VIRTUALENV=ds3
     which -s brew
     if [[ $? == 0 ]]; then
@@ -44,20 +42,23 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/p
 export VIRTUALENVWRAPPER_SCRIPT=$WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper.sh
 source $WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper_lazy.sh
-source $WORKON_HOME/$DEFAULT_VIRTUALENV/bin/activate
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    source $WORKON_HOME/$DEFAULT_VIRTUALENV/bin/activate
+fi
 
 ## -- HOMESHICK --
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 homeshick --quiet refresh
 
+## -- VI BINDINGS --
+set -o vi
+export EDITOR=`which vim`
+
 # Type a few characters before pressing up to search for commands that begin
 # with that string: http://stackoverflow.com/questions/1030182/
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
-
-## -- VI BINDINGS --
-set -o vi
 
 ## -- PROMPT --
 # http://stackoverflow.com/questions/23399183/bash-command-prompt-with-virtualenv-and-git-branch
