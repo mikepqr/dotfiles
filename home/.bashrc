@@ -42,7 +42,9 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/p
 export VIRTUALENVWRAPPER_SCRIPT=$WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper.sh
 source $WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper_lazy.sh
-source $WORKON_HOME/$DEFAULT_VIRTUALENV/bin/activate
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    source $WORKON_HOME/$DEFAULT_VIRTUALENV/bin/activate
+fi
 
 ## -- HOMESHICK --
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
