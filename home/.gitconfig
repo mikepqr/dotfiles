@@ -2,6 +2,7 @@
 	default = simple
 [user]
 	name = Mike Williams
+	email = mike@mike.place
 [core]
 	editor = vim
 [color]
