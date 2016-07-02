@@ -103,6 +103,14 @@ function set_virtualenv () {
       PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
   fi
 }
+# Get remote hostname string (i.e. if not sabon)
+function set_remote_hostname () {
+  if [[ $(hostname) != "sabon" ]] ; then
+      REMOTE_HOSTNAME="${RED}`hostname`${COLOR_NONE} "
+  else
+      REMOTE_HOSTNAME=""
+  fi
+}
 
 # Set the full bash prompt.
 function set_bash_prompt () {
@@ -110,8 +118,9 @@ function set_bash_prompt () {
   # return value of the last command.
   set_prompt_symbol $?
 
-  # Set the PYTHON_VIRTUALENV variable.
+  # Set the PYTHON_VIRTUALENV and REMOTE_HOSTNAME variables.
   set_virtualenv
+  set_remote_hostname
 
   # Set the BRANCH variable.
   if is_git_repository ; then
@@ -121,9 +130,8 @@ function set_bash_prompt () {
   fi
 
   # Set the bash prompt variable.
-  PS1="${PYTHON_VIRTUALENV}${YELLOW}\w${COLOR_NONE} ${BRANCH}\n${PROMPT_SYMBOL} "
+  PS1="${PYTHON_VIRTUALENV}${REMOTE_HOSTNAME}${YELLOW}\w${COLOR_NONE} ${BRANCH}\n${PROMPT_SYMBOL} "
 }
-
 # Tell bash to execute this function just before displaying its prompt.
 PROMPT_COMMAND="set_bash_prompt;"
 
@@ -137,7 +145,7 @@ HISTCONTROL="erasedups:ignoreboth"
 # Don't record some commands
 HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 # Record each line as it gets issued
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a;"
+PROMPT_COMMAND+="history -a;"
 # Huge history
 HISTSIZE=500000
 HISTFILESIZE=100000
