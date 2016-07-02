@@ -55,11 +55,6 @@ homeshick --quiet refresh
 set -o vi
 export EDITOR=`which vim`
 
-# Type a few characters before pressing up to search for commands that begin
-# with that string: http://stackoverflow.com/questions/1030182/
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-
 ## -- PROMPT --
 # http://stackoverflow.com/questions/23399183/bash-command-prompt-with-virtualenv-and-git-branch
         RED="\[\033[0;31m\]"

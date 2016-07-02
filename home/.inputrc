@@ -1,3 +1,9 @@
 set editing-mode vi
 set keymap vi
 set convert-meta on
+# Type a few characters before pressing up to search for commands that begin
+# with that string: http://stackoverflow.com/questions/1030182/
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
