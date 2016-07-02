@@ -1,6 +1,7 @@
 set editing-mode vi
 set keymap vi
 set convert-meta on
+set completion-ignore-case on
 # Type a few characters before pressing up to search for commands that begin
 # with that string: http://stackoverflow.com/questions/1030182/
 "\e[A": history-search-backward
