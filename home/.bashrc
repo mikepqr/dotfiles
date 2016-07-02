@@ -125,15 +125,26 @@ function set_bash_prompt () {
 }
 
 # Tell bash to execute this function just before displaying its prompt.
-PROMPT_COMMAND=set_bash_prompt
+PROMPT_COMMAND="set_bash_prompt;"
 
 ## -- HISTORY --
-# avoid duplicates
-export HISTCONTROL=ignoredups:erasedups  
-# append history entries
+# Append to the history file, don't overwrite it
 shopt -s histappend
-# after each command, save and reload history
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+# Save multi-line commands as one command
+shopt -s cmdhist
+# avoid duplicate entries
+HISTCONTROL="erasedups:ignoreboth"
+# Don't record some commands
+HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+# Record each line as it gets issued
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a;"
+# Huge history
+HISTSIZE=500000
+HISTFILESIZE=100000
+# Use standard ISO 8601 timestamp
+# %F equivalent to %Y-%m-%d
+# %T equivalent to %H:%M:%S (24-hours format)
+HISTTIMEFORMAT='%F %T '
 
 ## -- DIRECTORY --
 # Change to most recently used directory
@@ -144,16 +155,16 @@ fi
 # - a new shell is started in a directory other than home
 # - cd to any directory
 export LASTDIR=${HOME}
-function prompt_command {
+function autols {
     newdir=`pwd`
     if [ ! "$LASTDIR" = "$newdir" ]; then
         printf %s "$PWD" > ~/.lastdir
         # Note script -q /dev/null is required to retain color output
-        ls -ltrFG | tail -7
+        script -q /dev/null ls -ltrFG | tail -7
     fi
     export LASTDIR=$newdir
 }
-PROMPT_COMMAND+='; prompt_command'
+PROMPT_COMMAND+='autols;'
 
 # z must come after PROMPT_COMMAND stuff
 which brew >> /dev/null
