@@ -106,7 +106,7 @@ function set_virtualenv () {
 # Get remote hostname string (i.e. if not sabon)
 function set_remote_hostname () {
   if [[ $(hostname) != "sabon" ]] ; then
-      REMOTE_HOSTNAME="${RED}`hostname`${COLOR_NONE} "
+      REMOTE_HOSTNAME="${RED}`hostname`${COLOR_NONE}:"
   else
       REMOTE_HOSTNAME=""
   fi
