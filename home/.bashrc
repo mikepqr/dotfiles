@@ -40,6 +40,7 @@ fi
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_HOOK_DIR=$HOME/.virtualenvhooks
 export PROJECT_HOME=$HOME/p
 export VIRTUALENVWRAPPER_SCRIPT=$WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper.sh
 source "$WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper_lazy.sh"
@@ -180,3 +181,6 @@ which brew >> /dev/null
 if [[ $? == 0 ]]; then
     [ -f "$(brew --prefix)/etc/profile.d/z.sh" ] && source "$(brew --prefix)/etc/profile.d/z.sh"
 fi
+
+# modify cd to source $PWD/.env on cd
+source $(brew --prefix autoenv)/activate.sh
