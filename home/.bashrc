@@ -84,7 +84,7 @@ function parse_git_branch() {
 }
 
 function parse_git_dirty() {
-  [[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
+    [[ $(git status --porcelain) ]] && echo "*"
 }
 
 # Return the prompt symbol to use, colorized based on the return value of the
