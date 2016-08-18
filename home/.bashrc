@@ -177,10 +177,10 @@ function autols {
 PROMPT_COMMAND+='autols;'
 
 # z must come after PROMPT_COMMAND stuff
+# modify cd to source $PWD/.env on cd
 which brew >> /dev/null
 if [[ $? == 0 ]]; then
     [ -f "$(brew --prefix)/etc/profile.d/z.sh" ] && source "$(brew --prefix)/etc/profile.d/z.sh"
+    source $(brew --prefix autoenv)/activate.sh
 fi
 
-# modify cd to source $PWD/.env on cd
-source $(brew --prefix autoenv)/activate.sh
