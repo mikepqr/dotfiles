@@ -74,7 +74,11 @@ endif
 if &t_Co > 2 || has("gui_running")
     syntax on
     set background=dark
-    colorscheme base16-default-dark
+    try
+        colorscheme base16-default-dark
+    catch /^Vim\%((\a\+)\)\=:E185/
+        colorscheme default
+    endtry
 endif
 " Set fullscreen background to same color as normal test
 if has("gui_running")
