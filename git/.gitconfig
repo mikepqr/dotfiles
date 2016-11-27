@@ -16,4 +16,4 @@
     llg = log --oneline --numstat --decorate --graph
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [core]
-	excludesfile = ~/.gitignore-global
+	excludesfile = ~/.gitignore
