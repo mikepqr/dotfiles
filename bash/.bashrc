@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1090
 ## -- PATH --
 pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -27,8 +28,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     DEFAULT_VIRTUALENV=tldr
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     DEFAULT_VIRTUALENV=ds3
-    which -s brew
-    if [[ $? == 0 ]]; then
+    if which -s brew; then
         pathadd "$(brew --prefix coreutils)/libexec/gnubin"
         if [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
             . "$(brew --prefix)/share/bash-completion/bash_completion"
@@ -47,11 +47,6 @@ source "$WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper_lazy.sh"
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source "$WORKON_HOME/$DEFAULT_VIRTUALENV/bin/activate"
 fi
-
-## -- HOMESHICK --
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
-homeshick --quiet refresh
 
 ## -- VI BINDINGS --
 set -o vi
@@ -160,7 +155,7 @@ HISTTIMEFORMAT='%F %T '
 ## -- DIRECTORY --
 # Change to most recently used directory
 if [ -f ~/.lastdir ]; then
-    cd "$(cat ~/.lastdir)"
+    cd "$(cat ~/.lastdir)" || :
 fi
 # Augment PROMPT_COMMAND to list 7 recently changed files when:
 # - a new shell is started in a directory other than home
@@ -178,9 +173,7 @@ PROMPT_COMMAND+='autols;'
 
 # z must come after PROMPT_COMMAND stuff
 # modify cd to source $PWD/.env on cd
-which brew >> /dev/null
-if [[ $? == 0 ]]; then
+if which -s brew; then
     [ -f "$(brew --prefix)/etc/profile.d/z.sh" ] && source "$(brew --prefix)/etc/profile.d/z.sh"
-    source $(brew --prefix autoenv)/activate.sh
+    source "$(brew --prefix autoenv)/activate.sh"
 fi
-
