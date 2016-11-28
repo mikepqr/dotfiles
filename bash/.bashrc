@@ -28,7 +28,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     DEFAULT_VIRTUALENV=tldr
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     DEFAULT_VIRTUALENV=ds3
-    if which -s brew; then
+    if command -v brew >/dev/null 2>&1; then
         pathadd "$(brew --prefix coreutils)/libexec/gnubin"
         if [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
             . "$(brew --prefix)/share/bash-completion/bash_completion"
@@ -173,7 +173,7 @@ PROMPT_COMMAND+='autols;'
 
 # z must come after PROMPT_COMMAND stuff
 # modify cd to source $PWD/.env on cd
-if which -s brew; then
+if command -v brew >/dev/null 2>&1; then
     [ -f "$(brew --prefix)/etc/profile.d/z.sh" ] && source "$(brew --prefix)/etc/profile.d/z.sh"
     source "$(brew --prefix autoenv)/activate.sh"
 fi
