@@ -19,6 +19,8 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 pathadd "$HOME/usr/bin"
+export GOPATH=$HOME/go
+pathadd "$GOPATH/bin"
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
