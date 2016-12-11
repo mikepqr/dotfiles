@@ -30,10 +30,11 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     DEFAULT_VIRTUALENV=tldr
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     DEFAULT_VIRTUALENV=ds3
+    BREW_PREFIX=$(brew --prefix)
     if command -v brew >/dev/null 2>&1; then
-        pathadd "$(brew --prefix coreutils)/libexec/gnubin"
-        if [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-            . "$(brew --prefix)/share/bash-completion/bash_completion"
+        pathadd "$BREW_PREFIX/local/opt/libexec/gnubin"
+        if [ -f "$BREW_PREFIX/share/bash-completion/bash_completion" ]; then
+            . "$BREW_PREFIX/share/bash-completion/bash_completion"
         fi
     fi
 fi
@@ -174,8 +175,6 @@ function autols {
 PROMPT_COMMAND+='autols;'
 
 # z must come after PROMPT_COMMAND stuff
+[ -f "$BREW_PREFIX/etc/profile.d/z.sh" ] && source "$BREW_PREFIX/etc/profile.d/z.sh"
 # modify cd to source $PWD/.env on cd
-if command -v brew >/dev/null 2>&1; then
-    [ -f "$(brew --prefix)/etc/profile.d/z.sh" ] && source "$(brew --prefix)/etc/profile.d/z.sh"
-    source "$(brew --prefix autoenv)/activate.sh"
-fi
+[ -f "$BREW_PREFIX/opt/autoenv/activate.sh" ] && source "$BREW_PREFIX/opt/autoenv/activate.sh"
