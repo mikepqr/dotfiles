@@ -25,33 +25,26 @@ pathadd "$GOPATH/bin"
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+## -- PYTHON --
+workon () {
+    if [ -f "$HOME/.virtualenvs/$1/bin/activate" ]; then
+        source "$HOME/.virtualenvs/$1/bin/activate"
+    fi
+}
+workon ds3
+
 ## -- OS SPECIFIC --
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    DEFAULT_VIRTUALENV=tldr
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    DEFAULT_VIRTUALENV=ds3
-    BREW_PREFIX=$(brew --prefix)
+if [[ "$OSTYPE" == "darwin"* ]]; then
     if command -v brew >/dev/null 2>&1; then
+        BREW_PREFIX=$(brew --prefix)
         pathadd "$BREW_PREFIX/opt/coreutils/libexec/gnubin"
         if [ -f "$BREW_PREFIX/share/bash-completion/bash_completion" ]; then
-            . "$BREW_PREFIX/share/bash-completion/bash_completion"
+            source "$BREW_PREFIX/share/bash-completion/bash_completion"
         fi
     fi
 fi
 
-# ## -- PYTHON --
-# # pip should only run if there is a virtualenv currently activated
-export PIP_REQUIRE_VIRTUALENV=true
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_HOOK_DIR=$HOME/.virtualenvhooks
-export PROJECT_HOME=$HOME/p
-export VIRTUALENVWRAPPER_SCRIPT=$WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper.sh
-source "$WORKON_HOME/$DEFAULT_VIRTUALENV/bin/virtualenvwrapper_lazy.sh"
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    source "$WORKON_HOME/$DEFAULT_VIRTUALENV/bin/activate"
-fi
-
-## -- VI BINDINGS --
+## -- VI --
 set -o vi
 export EDITOR
 EDITOR=$(which vim)
@@ -156,6 +149,10 @@ HISTFILESIZE=100000
 HISTTIMEFORMAT='%F %T '
 
 # z must come after PROMPT_COMMAND stuff
-[ -f "$BREW_PREFIX/etc/profile.d/z.sh" ] && source "$BREW_PREFIX/etc/profile.d/z.sh"
+if [ -f "$BREW_PREFIX/etc/profile.d/z.sh" ]; then
+    source "$BREW_PREFIX/etc/profile.d/z.sh"
+fi
 # modify cd to source $PWD/.env on cd
-[ -f "$BREW_PREFIX/opt/autoenv/activate.sh" ] && source "$BREW_PREFIX/opt/autoenv/activate.sh"
+if [ -f "$BREW_PREFIX/opt/autoenv/activate.sh" ]; then
+    source "$BREW_PREFIX/opt/autoenv/activate.sh"
+fi
