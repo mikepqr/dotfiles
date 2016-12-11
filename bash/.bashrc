@@ -32,7 +32,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     DEFAULT_VIRTUALENV=ds3
     BREW_PREFIX=$(brew --prefix)
     if command -v brew >/dev/null 2>&1; then
-        pathadd "$BREW_PREFIX/local/opt/libexec/gnubin"
+        pathadd "$BREW_PREFIX/opt/coreutils/libexec/gnubin"
         if [ -f "$BREW_PREFIX/share/bash-completion/bash_completion" ]; then
             . "$BREW_PREFIX/share/bash-completion/bash_completion"
         fi
