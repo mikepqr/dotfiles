@@ -18,7 +18,7 @@ fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-pathadd "$HOME/usr/bin"
+pathadd "$HOME/bin"
 export GOPATH=$HOME/go
 pathadd "$GOPATH/bin"
 
