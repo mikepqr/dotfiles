@@ -2,6 +2,7 @@
 
 set -e
 set -u
+mkdir "$HOME/bin"
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 

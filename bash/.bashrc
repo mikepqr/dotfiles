@@ -19,7 +19,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 pathadd "$HOME/bin"
-export GOPATH=$HOME/go
+GOPATH=$HOME/go
 pathadd "$GOPATH/bin"
 
 # If not running interactively, don't do anything
@@ -39,8 +39,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     fi
 fi
 
-## -- PYTHON --
-# pip should only run if there is a virtualenv currently activated
+# ## -- PYTHON --
+# # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_HOOK_DIR=$HOME/.virtualenvhooks
@@ -154,25 +154,6 @@ HISTFILESIZE=100000
 # %F equivalent to %Y-%m-%d
 # %T equivalent to %H:%M:%S (24-hours format)
 HISTTIMEFORMAT='%F %T '
-
-## -- DIRECTORY --
-# Change to most recently used directory
-if [ -f ~/.lastdir ]; then
-    cd "$(cat ~/.lastdir)" || :
-fi
-# Augment PROMPT_COMMAND to list 7 recently changed files when:
-# - a new shell is started in a directory other than home
-# - cd to any directory
-export LASTDIR=${HOME}
-function autols {
-    newdir=$(pwd)
-    if [ ! "$LASTDIR" = "$newdir" ]; then
-        printf %s "$PWD" > ~/.lastdir
-        ls -ltrFG | tail -7
-    fi
-    export LASTDIR=$newdir
-}
-PROMPT_COMMAND+='autols;'
 
 # z must come after PROMPT_COMMAND stuff
 [ -f "$BREW_PREFIX/etc/profile.d/z.sh" ] && source "$BREW_PREFIX/etc/profile.d/z.sh"
