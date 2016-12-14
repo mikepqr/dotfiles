@@ -148,6 +148,21 @@ HISTFILESIZE=100000
 # %T equivalent to %H:%M:%S (24-hours format)
 HISTTIMEFORMAT='%F %T '
 
+## -- DIRECTORY --
+# Change to most recently used directory
+if [ -f ~/.lastdir ]; then
+    cd "$(cat ~/.lastdir)" || :
+fi
+export LASTDIR=${HOME}
+function savelastdir {
+    newdir=$(pwd)
+    if [ ! "$LASTDIR" = "$newdir" ]; then
+        printf %s "$PWD" > ~/.lastdir
+    fi
+    export LASTDIR=$newdir
+}
+PROMPT_COMMAND+='savelastdir;'
+
 # z must come after PROMPT_COMMAND stuff
 if [ -f "$BREW_PREFIX/etc/profile.d/z.sh" ]; then
     source "$BREW_PREFIX/etc/profile.d/z.sh"
