@@ -7,3 +7,5 @@ set completion-ignore-case on
 "\e[B": history-search-forward
 "\e[C": forward-char
 "\e[D": backward-char
+"\e.":yank-last-arg
+"\e_": yank-last-arg
