@@ -171,3 +171,6 @@ fi
 if [ -f "$BREW_PREFIX/opt/autoenv/activate.sh" ]; then
     source "$BREW_PREFIX/opt/autoenv/activate.sh"
 fi
+# readable colors
+[ -e ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)"
+    eval "$(dircolors -b)"
