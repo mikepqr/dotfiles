@@ -25,14 +25,6 @@ pathadd "$GOPATH/bin"
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-## -- PYTHON --
-workon () {
-    if [ -f "$HOME/.virtualenvs/$1/bin/activate" ]; then
-        source "$HOME/.virtualenvs/$1/bin/activate"
-    fi
-}
-workon ds3
-
 ## -- OS SPECIFIC --
 if [[ "$OSTYPE" == "darwin"* ]]; then
     if command -v brew >/dev/null 2>&1; then
@@ -43,6 +35,14 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         fi
     fi
 fi
+
+## -- PYTHON --
+workon () {
+    if [ -f "$HOME/.virtualenvs/$1/bin/activate" ]; then
+        source "$HOME/.virtualenvs/$1/bin/activate"
+    fi
+}
+workon ds3
 
 ## -- VI --
 set -o vi
