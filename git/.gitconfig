@@ -1,7 +1,7 @@
 [push]
 	default = simple
 [user]
-	name = Mike Williams
+	name = Mike Lee Williams
 	email = mike@mike.place
 [core]
 	editor = vim
