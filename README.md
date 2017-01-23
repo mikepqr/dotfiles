@@ -1,11 +1,27 @@
-# Configuration
+# Mike Lee Williams's dotfiles
+
+The install script uses [shtow](https://github.com/williamsmj/shtow) to symlink
+dotfiles into the appropriate location.
+
+## On systems with git
 
 ```sh
-brew install stow
+git clone https://github.com/williamsmj/dotfiles.git ~/.dotfiles
+~/.dotfiles/install.sh
+git clone https://github.com/williamsmj/dotfiles-private.git ~/.dotfiles-private
+~/.dotfiles-private/install.sh
+```
 
-git clone git@github.com:williamsmj/dotfiles.git ${HOME}/.dotfiles
-${HOME}/.dotfiles/install.sh
+## On systems without git
 
-git clone git@github.com:williamsmj/dotfiles.git ${HOME}/.dotfiles-private
-${HOME}/.dotfiles-private/install.sh
+```sh
+mkdir ~/.dotfiles
+curl -O https://github.com/williamsmj/shtow/archive/master.zip
+unzip master.zip -d ~/.dotfiles
+~/.dotfiles/install.sh
+
+mkdir ~/.dotfiles-private
+curl -O https://github.com/williamsmj/shtow/archive/master.zip
+unzip master.zip -d ~/.dotfiles-private
+~/.dotfiles-private/install.sh
 ```
