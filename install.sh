@@ -19,11 +19,11 @@ done
 
 # install OS-specific packages if appropriate
 if [[ $(uname) == "Darwin" ]] ; then
-    bin/bin/stowsh darwin "$HOME"
+    bin/bin/stowsh -s darwin "$HOME"
 fi
 
 if [[ $(uname) == "Linux" ]] ; then
-    bin/bin/stowsh linux "$HOME"
+    bin/bin/stowsh -s linux "$HOME"
 fi
 
 # bootstrap vim plugin configuration
