@@ -3,9 +3,15 @@
 ## -- PATH --
 pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        PATH="$1:$PATH"
+        export PATH="$1:$PATH"
     fi
 }
+manpathadd() {
+    if [ -d "$1" ] && [[ ":$MANPATH:" != *":$1:"* ]]; then
+        export MANPATH="$1:$MANPATH"
+    fi
+}
+
 # See http://superuser.com/a/583502. Prevent global /etc/profile
 # path_helper utility from prepending default PATH to previously chosen
 # PATH in, e.g. tmux.
@@ -33,6 +39,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     if command -v brew >/dev/null 2>&1; then
         BREW_PREFIX=$(brew --prefix)
         pathadd "$BREW_PREFIX/opt/coreutils/libexec/gnubin"
+        pathadd "$BREW_PREFIX/opt/findutils/libexec/gnubin"
+        manpathadd "$BREW_PREFIX/opt/coreutils/libexec/gnuman"
+        manpathadd "$BREW_PREFIX/opt/findutils/libexec/gnuman"
         if [ -f "$BREW_PREFIX/share/bash-completion/bash_completion" ]; then
             source "$BREW_PREFIX/share/bash-completion/bash_completion"
         fi
