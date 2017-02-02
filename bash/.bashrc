@@ -50,9 +50,17 @@ fi
 
 ## -- PYTHON --
 workon () {
-    if [ -f "$HOME/.virtualenvs/$1/bin/activate" ]; then
-        source "$HOME/.virtualenvs/$1/bin/activate"
+    if [ -f "${HOME}/.virtualenvs/$1/bin/activate" ]; then
+        source "${HOME}/.virtualenvs/$1/bin/activate"
     fi
+}
+mkvirtualenv () {
+    deactivate 2> /dev/null || true
+    python3 -m virtualenv ${HOME}/.virtualenvs/${1}
+}
+mkvirtualenv_legacy () {
+    deactivate 2> /dev/null || true
+    python2 -m virtualenv ${HOME}/.virtualenvs/${1}
 }
 workon ds3
 
