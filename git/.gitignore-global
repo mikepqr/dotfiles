@@ -51,6 +51,7 @@ __pycache__
 *.pkl
 *.npy
 .cache
+.hypothesis
 
 # Environments
 ######################
