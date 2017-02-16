@@ -49,18 +49,19 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 ## -- PYTHON --
+VENVHOME="${HOME}/.virtualenvs"
 workon () {
-    if [ -f "${HOME}/.virtualenvs/$1/bin/activate" ]; then
-        source "${HOME}/.virtualenvs/$1/bin/activate"
+    if [ -f "${VENVHOME}/$1/bin/activate" ]; then
+        source "${VENVHOME}/$1/bin/activate"
     fi
 }
 mkvirtualenv () {
     deactivate 2> /dev/null || true
-    python3 -m virtualenv ${HOME}/.virtualenvs/${1}
+    python3 -m virtualenv "${VENVHOME}/${1}"
 }
 mkvirtualenv_legacy () {
     deactivate 2> /dev/null || true
-    python2 -m virtualenv ${HOME}/.virtualenvs/${1}
+    python2 -m virtualenv "${VENVHOME}/${1}"
 }
 workon ds3
 
