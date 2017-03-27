@@ -16,7 +16,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'ervandew/supertab'
 Plug 'maverickg/stan.vim'
 Plug 'Alok/notational-fzf-vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 call plug#end()
 
 " Buffers
