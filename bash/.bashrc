@@ -58,12 +58,15 @@ workon () {
 mkvirtualenv () {
     deactivate 2> /dev/null || true
     python3 -m virtualenv "${VENVHOME}/${1}"
+    workon ${1}
 }
 mkvirtualenv_legacy () {
     deactivate 2> /dev/null || true
     python2 -m virtualenv "${VENVHOME}/${1}"
+    workon ${1}
 }
 workon ds3
+
 
 ## -- VI --
 set -o vi
