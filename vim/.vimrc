@@ -15,6 +15,8 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
 Plug 'ervandew/supertab'
 Plug 'maverickg/stan.vim'
+Plug 'Alok/notational-fzf-vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 call plug#end()
 
 " Buffers
@@ -145,3 +147,6 @@ nnoremap <leader>7 :call PropagatePasteBufferToOSX()<cr>
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+let g:nv_directories = ['~/Dropbox/notes']
+let g:nv_use_short_pathnames = 1
