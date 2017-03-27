@@ -199,3 +199,8 @@ fi
 if command -v dircolors > /dev/null 2>&1; then
     [ -e ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)"
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="rg --hidden --files --null 2> /dev/null | xargs -0 dirname | uniq"
