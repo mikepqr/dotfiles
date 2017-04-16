@@ -1,17 +1,17 @@
 [push]
-	default = simple
+    default = simple
     followTags = true  # push new tags
 [user]
-	name = Mike Lee Williams
-	email = mike@mike.place
+    name = Mike Lee Williams
+    email = mike@mike.place
 [core]
-	editor = vim
+    editor = vim
 [color]
-	ui = true
+    ui = true
 [alias]
-	co = checkout
-	st = status
-	unstage = reset HEAD --
+    co = checkout
+    st = status
+    unstage = reset HEAD --
     llg = log --oneline --numstat --decorate --graph
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     undo = reset --soft HEAD^  # undo last commit
@@ -19,6 +19,6 @@
 [merge]
     ff = only  # fast-forward merges only
 [core]
-	excludesfile = ~/.gitignore-global
+    excludesfile = ~/.gitignore-global
 [status]
     showUntrackedFiles = all  # show untracked files in untracked directories
