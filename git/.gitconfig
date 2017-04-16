@@ -1,5 +1,6 @@
 [push]
 	default = simple
+    followTags = true  # push new tags
 [user]
 	name = Mike Lee Williams
 	email = mike@mike.place
@@ -9,11 +10,15 @@
 	ui = true
 [alias]
 	co = checkout
-	br = branch
-	ci = commit
 	st = status
 	unstage = reset HEAD --
     llg = log --oneline --numstat --decorate --graph
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    undo = reset --soft HEAD^  # undo last commit
+    recommit = commit -c ORIG_HEAD  # commit again with previous commit message, useful after undo
+[merge]
+    ff = only  # fast-forward merges only
 [core]
 	excludesfile = ~/.gitignore-global
+[status]
+    showUntrackedFiles = all  # show untracked files in untracked directories
