@@ -17,6 +17,7 @@ Plug 'ervandew/supertab'
 Plug 'maverickg/stan.vim'
 Plug 'Alok/notational-fzf-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'maralla/completor.vim'
 call plug#end()
 
 " Buffers
@@ -130,23 +131,15 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
-" https://gist.github.com/burke/5960455
-function! PropagatePasteBufferToOSX()
-  let @n=getreg('"')
-  call system('pbcopy-remote', @n)
-  echo "done"
-endfunction
-
-function! PopulatePasteBufferFromOSX()
-  let @" = system('pbpaste-remote')
-  echo "done"
-endfunction
-
-nnoremap <leader>6 :call PopulatePasteBufferFromOSX()<cr>
-nnoremap <leader>7 :call PropagatePasteBufferToOSX()<cr>
+" Name current syntax group
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+" notational
 let g:nv_directories = ['~/Dropbox/notes']
 let g:nv_use_short_pathnames = 1
+
+" Completor
+let g:completor_python_binary = '/Users/mike/.virtualenvs/ds3/bin/python'
+let g:completor_auto_trigger = 0
