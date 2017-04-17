@@ -52,6 +52,8 @@ __pycache__
 *.npy
 .cache
 .hypothesis
+Scratch.ipynb
+Untitled*.ipynb
 
 # Environments
 ######################
