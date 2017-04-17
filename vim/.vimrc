@@ -17,7 +17,9 @@ Plug 'ervandew/supertab'
 Plug 'maverickg/stan.vim'
 Plug 'Alok/notational-fzf-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'maralla/completor.vim'
+if v:version >= 800 && (has('python') || has('python3'))
+    Plug 'maralla/completor.vim'
+endif
 call plug#end()
 
 " Buffers
@@ -142,4 +144,3 @@ let g:nv_use_short_pathnames = 1
 
 " Completor
 let g:completor_python_binary = '/Users/mike/.virtualenvs/ds3/bin/python'
-let g:completor_auto_trigger = 0
