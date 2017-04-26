@@ -190,20 +190,34 @@ function savelastdir {
 }
 PROMPT_COMMAND+='savelastdir;'
 
-# z must come after PROMPT_COMMAND stuff
-if [ -f "$BREW_PREFIX/etc/profile.d/z.sh" ]; then
-    source "$BREW_PREFIX/etc/profile.d/z.sh"
-fi
 # modify cd to source $PWD/.env on cd
 if [ -f "$BREW_PREFIX/opt/autoenv/activate.sh" ]; then
     source "$BREW_PREFIX/opt/autoenv/activate.sh"
 fi
+
 # readable colors
 if command -v dircolors > /dev/null 2>&1; then
     [ -e ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)"
 fi
 
+# Use fasd to build up database of touched files and visited directories
+eval "$(fasd --init bash-hook)"
+# Use fzf to work with that database
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" 2> /dev/null'
+export FZF_DEFAULT_COMMAND='fasd -alR'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="rg --hidden --files --null 2> /dev/null | xargs -0 dirname | uniq"
+export FZF_ALT_C_COMMAND="fasd -dlR"
+# cd
+z() {
+  local dir
+  dir=$(fasd -dlR | fzf --reverse --height 40% -q "$*" -1 -0)
+  [[ -n "$dir" ]] && cd "${dir}" || return
+}
+# v (~/.viminfo)
+v() {
+  local files
+  files=$(grep '^>' ~/.viminfo | cut -c3- |
+          while read -r line; do
+            [ -f "${line/\~/$HOME}" ] && echo "$line"
+          done | fzf -m -q "$*" -1) && vim $files
+}
