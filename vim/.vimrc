@@ -138,9 +138,16 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" notational
-let g:nv_directories = ['~/Dropbox/notes']
-let g:nv_use_short_pathnames = 1
+" ss to generate new split
+nnoremap <silent> ss <C-w>s
+
+" readline bindings for command mode
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+
+" FZF bindings
+nmap <leader>h :History<cr>
+nmap <leader>b :Buffers<cr>
 
 " Completor
 let g:completor_python_binary = '/Users/mike/.virtualenvs/ds3/bin/python'
