@@ -207,17 +207,17 @@ eval "$(fasd --init bash-hook)"
 export FZF_DEFAULT_COMMAND='fasd -alR'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fasd -dlR"
-# cd
+# cd to the highest fuzzy ranked directory in db
 z() {
   local dir
-  dir=$(fasd -dlR | fzf --reverse --height 40% -q "$*" -1 -0)
-  [[ -n "$dir" ]] && cd "${dir}" || return
+  dir=$(fasd -dlR | fzf -f "$*" --no-sort | head -1) && cd "${dir}" || return 1
 }
-# v (~/.viminfo)
+# v (~/.viminfo), https://github.com/junegunn/fzf/wiki/examples#v
 v() {
   local files
   files=$(grep '^>' ~/.viminfo | cut -c3- |
           while read -r line; do
             [ -f "${line/\~/$HOME}" ] && echo "$line"
-          done | fzf -m -q "$*" -1) && vim $files
+          done | fzf --reverse --height 40% -d -m -q "$*" -1) && \
+          vim ${files//\~/$HOME}
 }
