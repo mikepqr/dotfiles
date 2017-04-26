@@ -13,10 +13,9 @@ Plug 'scrooloose/syntastic'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'maverickg/stan.vim'
-Plug 'Alok/notational-fzf-vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 if v:version >= 800 && (has('python') || has('python3'))
     Plug 'maralla/completor.vim'
 endif
@@ -123,6 +122,7 @@ au BufReadPost *
 " Expand %% to directory of file in current buffer (also %:h<Tab>)
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
+
 " Learn not to use arrow keys
 noremap <Up> <Nop>
 noremap <Down> <Nop>
@@ -149,5 +149,17 @@ cnoremap <C-E> <End>
 nmap <leader>h :History<cr>
 nmap <leader>b :Buffers<cr>
 
-" Completor
-let g:completor_python_binary = '/Users/mike/.virtualenvs/ds3/bin/python'
+" Tab launches and cycles through user completion (i.e. completor)
+let g:completor_auto_trigger = 0
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "<c-o>:call TabComplete()<cr>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+" Type literal tab if nothing to complete
+function! TabComplete()
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~# '\k'
+    call feedkeys("\<tab>", 'n')
+    return
+  endif
+  call feedkeys("\<c-x>\<c-u>")
+endfunction
