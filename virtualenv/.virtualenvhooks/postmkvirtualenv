@@ -1,3 +1,0 @@
-#!/usr/local/bin/bash
-# This hook is sourced after a new virtualenv is activated.
-
