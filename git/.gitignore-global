@@ -58,4 +58,7 @@ Untitled*.ipynb
 # Environments
 ######################
 .env
+.envrc
+.direnv
 venv
+env-local
