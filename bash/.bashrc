@@ -52,23 +52,19 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 ## -- PYTHON --
-VENVHOME="${HOME}/.virtualenvs"
+export VENVHOME="${HOME}/.ves"
+eval "$(pyenv init -)"
 workon () {
     if [ -f "${VENVHOME}/$1/bin/activate" ]; then
         source "${VENVHOME}/$1/bin/activate"
     fi
 }
+workon default
 mkvirtualenv () {
     deactivate 2> /dev/null || true
-    python3 -m virtualenv "${VENVHOME}/${1}"
+    python -m virtualenv "${VENVHOME}/${1}"
     workon ${1}
 }
-mkvirtualenv_legacy () {
-    deactivate 2> /dev/null || true
-    python2 -m virtualenv "${VENVHOME}/${1}"
-    workon ${1}
-}
-workon ds3
 
 
 ## -- VI --
@@ -190,10 +186,8 @@ function savelastdir {
 }
 PROMPT_COMMAND+='savelastdir;'
 
-# modify cd to source $PWD/.env on cd
-if [ -f "$BREW_PREFIX/opt/autoenv/activate.sh" ]; then
-    source "$BREW_PREFIX/opt/autoenv/activate.sh"
-fi
+# source .envrc
+eval "$(direnv hook bash)"
 
 # readable colors
 if command -v dircolors > /dev/null 2>&1; then
@@ -209,8 +203,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fasd -dlR"
 # cd to the highest fuzzy ranked directory in db
 z() {
-  local dir
-  dir=$(fasd -dlR | fzf -f "$*" --no-sort | head -1) && cd "${dir}" || return 1
+    local dir
+    dir=$(fasd -dlR | fzf -f "$*" --no-sort | head -1) && cd "${dir}" || return 1
 }
 # v (~/.viminfo), https://github.com/junegunn/fzf/wiki/examples#v
 v() {
