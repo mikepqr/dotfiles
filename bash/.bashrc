@@ -41,6 +41,7 @@ esac
 if [[ "$OSTYPE" == "darwin"* ]]; then
     if command -v brew >/dev/null 2>&1; then
         BREW_PREFIX=/usr/local  # hard-coded for speed, `brew --prefix`
+        pathadd "$BREW_PREFIX/sbin"
         pathadd "$BREW_PREFIX/opt/coreutils/libexec/gnubin"
         pathadd "$BREW_PREFIX/opt/findutils/libexec/gnubin"
         manpathadd "$BREW_PREFIX/opt/coreutils/libexec/gnuman"
