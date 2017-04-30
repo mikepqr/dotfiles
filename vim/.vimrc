@@ -66,25 +66,31 @@ nmap k gk
 nmap j gj
 vmap k gk
 vmap j gj
+" Color long lines
+set colorcolumn=80
+set cursorline
 
 " Show list of possible files on tab completion, rather than first guess
 set wildmode=longest,list
 
 set statusline=%f\ %y\ %=%c,%l/%L
-if v:version >= 703
-    set colorcolumn=80
-    set cursorline
-endif
-if &t_Co > 2 || has("gui_running")
-    syntax on
-    set background=dark
+
+" Match shell base16 colorscheme if set
+if filereadable(expand("~/.vimrc_background"))
+    let base16colorspace=256
+    source ~/.vimrc_background
+else
     try
+        " Otherwise use base16-default-dark
         colorscheme base16-default-dark
-    catch /^Vim\%((\a\+)\)\=:E185/
+    catch
+        " Otheriwse default
+        set background=dark
         colorscheme default
     endtry
 endif
-" Set fullscreen background to same color as normal test
+
+" Set fullscreen background to same color as normal text
 if has("gui_running")
     set gfn=Source\ Code\ Pro:h13
     set fuoptions=maxvert
