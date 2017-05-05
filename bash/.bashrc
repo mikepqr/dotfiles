@@ -53,8 +53,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 ## -- PYTHON --
-export VENVHOME="${HOME}/.ves"
+pathadd "$HOME/.pyenv/bin"
 eval "$(pyenv init -)"
+export VENVHOME="${HOME}/.ves"
 workon () {
     if [ -f "${VENVHOME}/$1/bin/activate" ]; then
         source "${VENVHOME}/$1/bin/activate"
@@ -188,34 +189,38 @@ function savelastdir {
 PROMPT_COMMAND+='savelastdir;'
 
 # source .envrc
-eval "$(direnv hook bash)"
+if command -v direnv > /dev/null 2>&1; then
+    eval "$(direnv hook bash)"
+fi
 
 # readable colors
 if command -v dircolors > /dev/null 2>&1; then
     [ -e ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)"
 fi
 
-# Use fasd to build up database of touched files and visited directories
-eval "$(fasd --init bash-hook)"
-# Use fzf to work with that database
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_COMMAND='fasd -alR'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fasd -dlR"
-# cd to the highest fuzzy ranked directory in db
-z() {
-    local dir
-    dir=$(fasd -dlR | fzf -f "$*" --no-sort | head -1) && cd "${dir}" || return 1
-}
-# v (~/.viminfo), https://github.com/junegunn/fzf/wiki/examples#v
-v() {
-  local files
-  files=$(grep '^>' ~/.viminfo | cut -c3- |
-          while read -r line; do
-            [ -f "${line/\~/$HOME}" ] && echo "$line"
-          done | fzf --reverse --height 40% -d -m -q "$*" -1) && \
-          vim ${files//\~/$HOME}
-}
+if command -v fasd > /dev/null 2>&1; then
+    # Use fasd to build up database of touched files and visited directories
+    eval "$(fasd --init bash-hook)"
+    # Use fzf to work with that database
+    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+    export FZF_DEFAULT_COMMAND='fasd -alR'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="fasd -dlR"
+    # cd to the highest fuzzy ranked directory in db
+    z() {
+        local dir
+        dir=$(fasd -dlR | fzf -f "$*" --no-sort | head -1) && cd "${dir}" || return 1
+    }
+    # v (~/.viminfo), https://github.com/junegunn/fzf/wiki/examples#v
+    v() {
+      local files
+      files=$(grep '^>' ~/.viminfo | cut -c3- |
+              while read -r line; do
+                [ -f "${line/\~/$HOME}" ] && echo "$line"
+              done | fzf --reverse --height 40% -d -m -q "$*" -1) && \
+              vim ${files//\~/$HOME}
+    }
+fi
 
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s ${BASE16_SHELL}/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
