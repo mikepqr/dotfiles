@@ -75,19 +75,18 @@ set wildmode=longest,list
 
 set statusline=%f\ %y\ %=%c,%l/%L
 
+try
+    " Use base16-default-dark
+    let base16colorspace=256
+    colorscheme base16-default-dark
+catch
+    " Otheriwse default
+    set background=dark
+    colorscheme default
+endtry
 " Match shell base16 colorscheme if set
 if filereadable(expand("~/.vimrc_background"))
-    let base16colorspace=256
     source ~/.vimrc_background
-else
-    try
-        " Otherwise use base16-default-dark
-        colorscheme base16-default-dark
-    catch
-        " Otheriwse default
-        set background=dark
-        colorscheme default
-    endtry
 endif
 
 " Set fullscreen background to same color as normal text
