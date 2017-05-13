@@ -73,7 +73,15 @@ set cursorline
 " Show list of possible files on tab completion, rather than first guess
 set wildmode=longest,list
 
-set statusline=%f\ %y\ %=%c,%l/%L
+function! StatuslineGit()
+    let l:branchname = fugitive#head()
+    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+set statusline=
+set statusline+=%#PmenuSel#
+set statusline+=%{StatuslineGit()}
+set statusline+=%#LineNr#
+set statusline+=\ %f\ %y\ %=%c,%l/%L
 
 try
     " Use base16-default-dark
