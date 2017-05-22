@@ -14,8 +14,13 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'ajh17/VimCompletesMe'
+Plug 'ervandew/supertab'
+if v:version >= 800 && (has('python') || has('python3'))
+    Plug 'maralla/completor.vim'
+endif
 call plug#end()
+let g:completor_auto_trigger=0
+
 
 " Buffers
 set hidden
@@ -116,10 +121,8 @@ let g:syntastic_python_checkers=["flake8"]
 " let g:syntastic_python_flake8_args="--max-line-length=100"
 
 " Format-specific formating
-autocmd FileType markdown,text
-    \ setlocal ai fo+=n nojoinspaces
-    \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
-    \ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
+autocmd FileType markdown,text setlocal ai fo+=n nojoinspaces
+autocmd Filetype gitcommit,markdown,text setlocal spell
 autocmd FileType python setlocal textwidth=79 colorcolumn=79
 
 " Go to the last cursor location when file opened, unless a git commit
