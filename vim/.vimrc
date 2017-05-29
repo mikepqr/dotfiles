@@ -19,8 +19,11 @@ if v:version >= 800 && (has('python') || has('python3'))
     Plug 'maralla/completor.vim'
 endif
 call plug#end()
+
+" Completion
 let g:completor_auto_trigger=0
 let $PYTHONPATH .= ':'.expand('~/.jedi')
+set completeopt=menu,preview  " this gets overwritten, https://github.com/maralla/completor.vim/issues/109
 
 " Buffers
 set hidden
@@ -121,9 +124,9 @@ let g:syntastic_python_checkers=["flake8"]
 " let g:syntastic_python_flake8_args="--max-line-length=100"
 
 " Format-specific formating
-autocmd FileType markdown,text setlocal ai fo+=n nojoinspaces
-autocmd Filetype gitcommit,markdown,text setlocal spell
-autocmd FileType python setlocal textwidth=79 colorcolumn=79
+autocmd FileType asciidoc,markdown,text setlocal ai fo+=n nojoinspaces
+autocmd Filetype asciidoc,gitcommit,markdown,text setlocal spell
+autocmd FileType python setlocal textwidth=79
 
 " Go to the last cursor location when file opened, unless a git commit
 au BufReadPost *
