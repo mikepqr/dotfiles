@@ -3,4 +3,6 @@ alias l='ls'
 alias ll='ls -l'
 alias grep='grep --color'
 alias jn='jupyter notebook'
-alias tmux='direnv exec / tmux'
+if command -v direnv >/dev/null 2>&1; then
+    alias tmux='direnv exec / tmux'
+fi
