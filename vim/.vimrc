@@ -20,7 +20,7 @@ if v:version >= 800 && (has('python') || has('python3'))
 endif
 call plug#end()
 let g:completor_auto_trigger=0
-
+let $PYTHONPATH .= ':'.expand('~/.jedi')
 
 " Buffers
 set hidden
@@ -89,7 +89,7 @@ try
     let base16colorspace=256
     colorscheme base16-default-dark
 catch
-    " Otheriwse default
+    " Otherwise default
     set background=dark
     colorscheme default
 endtry

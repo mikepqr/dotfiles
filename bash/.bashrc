@@ -67,10 +67,6 @@ mkvirtualenv () {
     python -m virtualenv "${VENVHOME}/${1}"
     workon "${1}"
 }
-if [ -d "$HOME/.jedi/" ]; then
-    export PYTHONPATH="$HOME/.jedi:$PYTHONPATH"
-fi
-
 
 ## -- VI --
 set -o vi
