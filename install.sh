@@ -14,16 +14,16 @@ pkgs=${pkgs//linux/}
 for pkg in $pkgs
 do
     echo "Installing $pkg configuration"
-    bin/bin/stowsh -s "$pkg" "$HOME"
+    bin/bin/stowsh -s "$pkg" -t "$HOME"
 done
 
 # install OS-specific packages if appropriate
 if [[ $(uname) == "Darwin" ]] ; then
-    bin/bin/stowsh -s darwin "$HOME"
+    bin/bin/stowsh -s darwin -t "$HOME"
 fi
 
 if [[ $(uname) == "Linux" ]] ; then
-    bin/bin/stowsh -s linux "$HOME"
+    bin/bin/stowsh -s linux -t "$HOME"
 fi
 
 # bootstrap vim plugin configuration
