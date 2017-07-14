@@ -13,8 +13,7 @@ pkgs=${pkgs//linux/}
 
 for pkg in $pkgs
 do
-    echo "Installing $pkg configuration"
-    bin/bin/stowsh -s "$pkg" -t "$HOME"
+    bin/bin/stowsh -v -s "$pkg" -t "$HOME"
 done
 
 # install OS-specific packages if appropriate
