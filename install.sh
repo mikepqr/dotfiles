@@ -2,8 +2,8 @@
 cd "$(dirname "${BASH_SOURCE[0]}")" || exit
 
 # get stowsh (and put it in a package)
-curl -o bin/bin/stowsh https://raw.githubusercontent.com/williamsmj/stowsh/master/stowsh
-chmod +x bin/bin/stowsh
+curl -o ./bin/.local/bin/stowsh https://raw.githubusercontent.com/williamsmj/stowsh/master/stowsh
+chmod +x ./bin/.local/bin/stowsh
 
 # get all the root level directories that don't start with "."
 pkgs="$(find . -maxdepth 1 ! -name '.*' -type d | sed "s|./||")"
@@ -13,16 +13,16 @@ pkgs=${pkgs//linux/}
 
 for pkg in $pkgs
 do
-    bin/bin/stowsh -v -s "$pkg" -t "$HOME"
+    bin/.local/bin/stowsh -v -s "$pkg" -t "$HOME"
 done
 
 # install OS-specific packages if appropriate
 if [[ $(uname) == "Darwin" ]] ; then
-    bin/bin/stowsh -s darwin -t "$HOME"
+    bin/.local/bin/stowsh -s darwin -t "$HOME"
 fi
 
 if [[ $(uname) == "Linux" ]] ; then
-    bin/bin/stowsh -s linux -t "$HOME"
+    bin/.local/bin/stowsh -s linux -t "$HOME"
 fi
 
 # bootstrap vim plugin configuration
