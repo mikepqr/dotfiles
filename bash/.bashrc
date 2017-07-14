@@ -199,6 +199,8 @@ fi
 
 if command -v fasd > /dev/null 2>&1; then
     # Use fasd to build up database of touched files and visited directories
+    # Install fasd from https://github.com/whjvenyl/fasd fork. Original is
+    # buggy/inactive
     eval "$(fasd --init bash-hook)"
     # Use fzf to work with that database
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
