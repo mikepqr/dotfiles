@@ -23,7 +23,7 @@ call plug#end()
 " Completion
 let g:completor_auto_trigger=0
 let $PYTHONPATH .= ':'.expand('~/.jedi')
-set completeopt=menu,preview  " this gets overwritten, https://github.com/maralla/completor.vim/issues/109
+set completeopt=menu,preview
 
 " Buffers
 set hidden
