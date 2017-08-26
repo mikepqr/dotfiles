@@ -62,3 +62,4 @@ Untitled*.ipynb
 .direnv
 venv
 env-local
+zappa_settings.json
