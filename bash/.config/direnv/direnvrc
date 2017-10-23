@@ -1,3 +1,7 @@
+# : ${XDG_CACHE_HOME:=$HOME/.cache}
+# pwd_hash=$(basename $PWD)-$(echo -n $PWD | shasum | cut -d ' ' -f 1)
+# direnv_layout_dir=$XDG_CACHE_HOME/direnv/layouts/$pwd_hash
+
 use_python() {
   local python_root=$HOME/.pyenv/versions/$1
   load_prefix "$python_root"
