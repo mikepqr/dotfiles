@@ -161,4 +161,4 @@ cnoremap <C-E> <End>
 
 " FZF bindings
 nmap <leader>h :History<cr>
-vmap <leader>b :Buffers<cr>
+nmap <leader>b :Buffers<cr>
