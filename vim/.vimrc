@@ -9,7 +9,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'hynek/vim-python-pep8-indent'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
@@ -117,11 +118,6 @@ nnoremap <leader>tx :!open -a TeXShop %<cr><cr>
 
 " Use :w!! to save root files you forgot to open with sudo
 ca w!! w !sudo tee "%"
-
-" Syntastic options
-let g:syntastic_check_on_open=1
-let g:syntastic_python_checkers=["flake8"]
-" let g:syntastic_python_flake8_args="--max-line-length=100"
 
 " Format-specific formating
 autocmd FileType asciidoc,markdown,text setlocal ai fo+=n nojoinspaces
