@@ -123,6 +123,9 @@ ca w!! w !sudo tee "%"
 autocmd FileType asciidoc,markdown,text setlocal ai fo+=n nojoinspaces
 autocmd Filetype asciidoc,gitcommit,markdown,text setlocal spell
 autocmd FileType python setlocal textwidth=79
+let g:ale_fixers = {
+\   'python': ['isort'],
+\}
 
 " Go to the last cursor location when file opened, unless a git commit
 au BufReadPost *
