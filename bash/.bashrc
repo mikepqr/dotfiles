@@ -54,7 +54,9 @@ fi
 
 ## -- PYTHON --
 pathadd "$HOME/.pyenv/bin"
-eval "$(pyenv init -)"
+if command -v pyenv >/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
 export VENVHOME="${HOME}/.ves"
 workon () {
     if [ -f "${VENVHOME}/$1/bin/activate" ]; then
