@@ -89,18 +89,12 @@ set statusline+=%#LineNr#
 set statusline+=\ %f\ %y\ %=%c,%l/%L
 
 try
-    " Use base16-default-dark
-    let base16colorspace=256
     colorscheme base16-default-dark
 catch
     " Otherwise default
     set background=dark
     colorscheme default
 endtry
-" Match shell base16 colorscheme if set
-if filereadable(expand("~/.vimrc_background"))
-    source ~/.vimrc_background
-endif
 
 " Set fullscreen background to same color as normal text
 if has("gui_running")

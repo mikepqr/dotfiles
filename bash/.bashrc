@@ -211,6 +211,3 @@ if [ -f ~/.fzf.bash ]; then
               done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
     }
 fi
-
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s ${BASE16_SHELL}/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
