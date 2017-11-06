@@ -9,7 +9,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'hynek/vim-python-pep8-indent'
-" Plug 'scrooloose/syntastic'
 Plug 'w0rp/ale'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bronson/vim-visual-star-search'
@@ -29,26 +28,31 @@ set completeopt=menu,preview
 " Buffers
 set hidden
 " Windows
+set textwidth=79  " want this more often than not
+set colorcolumn=80
+set nowrap
 set nosplitbelow
 set nosplitright
 set diffopt+=vertical
+set cursorline
 " Tabs
 set shiftwidth=4
 set tabstop=4
 set expandtab
 " Mouse
-set mouse=a                     " mouse support in terminals
+set mouse=a  " mouse support in terminals
 if &term =~ '^screen'
     " resize splits in tmux
     set ttymouse=xterm2
 endif
 " Clipboard
-set clipboard=unnamed           " yanks and cuts go in system clipboard
+set clipboard=unnamed  " yanks and cuts go in system clipboard
 " Search
 set ignorecase
 set smartcase
 set showmatch
 set hlsearch
+set gdefault  " use global flag by default in s: commands
 " Keys
 set pastetoggle=<Leader>tp
 nnoremap <leader><space> :noh<cr>
@@ -71,9 +75,6 @@ nmap k gk
 nmap j gj
 vmap k gk
 vmap j gj
-" Color long lines
-set colorcolumn=80
-set cursorline
 
 " Show list of possible files on tab completion, rather than first guess
 set wildmode=longest,list
@@ -116,7 +117,6 @@ ca w!! w !sudo tee "%"
 " Format-specific formating
 autocmd FileType asciidoc,markdown,text setlocal ai fo+=n nojoinspaces
 autocmd Filetype asciidoc,gitcommit,markdown,text setlocal spell
-autocmd FileType python setlocal textwidth=79
 let g:ale_fixers = {
 \   'python': ['isort'],
 \}
