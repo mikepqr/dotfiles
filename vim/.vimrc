@@ -1,5 +1,3 @@
-set nocompatible
-
 call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
@@ -37,7 +35,6 @@ set diffopt+=vertical
 set cursorline
 " Tabs
 set shiftwidth=4
-set tabstop=4
 set expandtab
 " Mouse
 set mouse=a  " mouse support in terminals
@@ -46,7 +43,7 @@ if &term =~ '^screen'
     set ttymouse=xterm2
 endif
 " Clipboard
-set clipboard=unnamed  " yanks and cuts go in system clipboard
+set clipboard^=unnamed  " yanks and cuts go in system clipboard
 " Search
 set ignorecase
 set smartcase
@@ -115,8 +112,8 @@ nnoremap <leader>tx :!open -a TeXShop %<cr><cr>
 ca w!! w !sudo tee "%"
 
 " Format-specific formating
-autocmd FileType asciidoc,markdown,text setlocal ai fo+=n nojoinspaces
-autocmd Filetype asciidoc,gitcommit,markdown,text setlocal spell
+autocmd FileType asciidoc,markdown,text setlocal formatoptions+=n nojoinspaces spell
+autocmd Filetype gitcommit setlocal spell
 let g:ale_fixers = {
 \   'python': ['isort'],
 \}
