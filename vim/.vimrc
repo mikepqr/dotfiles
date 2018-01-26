@@ -32,7 +32,6 @@ set nowrap
 set nosplitbelow
 set nosplitright
 set diffopt+=vertical
-set cursorline
 " Tabs
 set shiftwidth=4
 set expandtab
