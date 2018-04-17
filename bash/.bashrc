@@ -201,9 +201,9 @@ fi
 
 if [ -f ~/.fzf.bash ]; then
     source ~/.fzf.bash
-    export FZF_DEFAULT_COMMAND="fd . ${HOME}"
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_ALT_C_COMMAND="fd -t d . ${HOME}"
+    export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND . ${HOME}"
+    export FZF_ALT_C_COMMAND="fd --type d . ${HOME}"
     # v (~/.viminfo), https://github.com/junegunn/fzf/wiki/examples#v
     v() {
       local files
