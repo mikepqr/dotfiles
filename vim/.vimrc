@@ -6,7 +6,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
-Plug 'hynek/vim-python-pep8-indent'
+Plug 'tpope/vim-rhubarb'
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'w0rp/ale'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bronson/vim-visual-star-search'
@@ -110,12 +111,15 @@ nnoremap <leader>tx :!open -a TeXShop %<cr><cr>
 " Use :w!! to save root files you forgot to open with sudo
 ca w!! w !sudo tee "%"
 
-" Format-specific formating
+" Filetype-specific configuration
 autocmd FileType asciidoc,markdown,text setlocal formatoptions+=n nojoinspaces spell
 autocmd Filetype gitcommit setlocal spell
 let g:ale_fixers = {
 \   'python': ['isort'],
 \}
+" Disable expensive syntax rules
+autocmd syntax markdown syntax clear markdownCodeBlock
+autocmd syntax asciidoc syntax clear asciidocLiteralParagraph
 
 " Go to the last cursor location when file opened, unless a git commit
 au BufReadPost *
@@ -151,3 +155,4 @@ cnoremap <C-E> <End>
 " FZF bindings
 nmap <leader>h :History<cr>
 nmap <leader>b :Buffers<cr>
+nmap <leader>f :Files<cr>
