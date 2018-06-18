@@ -160,3 +160,9 @@ cnoremap <C-E> <End>
 nmap <leader>h :History<cr>
 nmap <leader>b :Buffers<cr>
 nmap <leader>f :Files<cr>
+
+" Unimpaired-style mappings to jump to ALE warnings/errors
+nmap <silent> [W <Plug>(ale_first)
+nmap <silent> [w <Plug>(ale_previous)
+nmap <silent> ]w <Plug>(ale_next)
+nmap <silent> ]W <Plug>(ale_last)
