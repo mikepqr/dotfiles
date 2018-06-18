@@ -13,11 +13,14 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'davidhalter/jedi-vim'
 Plug 'maralla/completor.vim'
 call plug#end()
 
 " Completion
+let g:jedi#completions_enabled = 0
 let g:completor_auto_trigger = 0
+let g:completor_auto_close_doc = 0
 inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <Tab> Tab_Or_Complete()
 
