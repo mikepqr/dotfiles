@@ -105,6 +105,9 @@ set statusline+=\ %f\ %y\ %=%c,%l/%L
 
 try
     colorscheme base16-default-dark
+    " Override
+    highlight SpellBad cterm=undercurl ctermbg=none
+    highlight SpellCap cterm=undercurl ctermbg=none
 catch
     " Otherwise default
     set background=dark
