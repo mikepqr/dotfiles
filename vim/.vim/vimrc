@@ -15,6 +15,7 @@ Plug 'chriskempson/base16-vim'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'maralla/completor.vim'
+Plug 'greymd/oscyank.vim'
 call plug#end()
 
 " Completion
@@ -175,3 +176,6 @@ nmap <silent> ]W <Plug>(ale_last)
 
 " Lint less
 let g:ale_lint_on_text_changed = 'never'
+
+" Leader-y to yank to system clipboard (works over remote tmux)
+noremap <silent> <Leader>y :Oscyank<cr>
