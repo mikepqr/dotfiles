@@ -44,6 +44,8 @@ let $PYTHONPATH .= ':'.expand('~/.jedi')
 
 " Buffers
 set hidden
+" Remember more files
+set viminfo=!,'1000,<50,s10,h
 " Windows
 set textwidth=79  " want this more often than not
 set colorcolumn=80
