@@ -69,7 +69,6 @@ set ignorecase
 set smartcase
 set showmatch
 set hlsearch
-set gdefault  " use global flag by default in s: commands
 " Keys
 set pastetoggle=<Leader>tp
 nnoremap <leader><space> :noh<cr>
