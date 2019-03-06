@@ -54,9 +54,10 @@ set nowrap
 set nosplitbelow
 set nosplitright
 set diffopt+=vertical
-" Tabs
+" Tabs and whitespace
 set shiftwidth=4
 set expandtab
+set list
 " Mouse
 set mouse=a  " mouse support in terminals
 if &term =~ '^screen'
