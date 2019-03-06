@@ -20,6 +20,7 @@ call plug#end()
 
 " Completion
 let g:jedi#completions_enabled = 0
+let g:completor_complete_options = 'menuone,preview'
 let g:completor_auto_trigger = 0
 let g:completor_auto_close_doc = 0
 inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
