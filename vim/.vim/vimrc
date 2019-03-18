@@ -138,6 +138,7 @@ ca w!! w !sudo tee "%"
 " Filetype-specific configuration
 autocmd FileType asciidoc,markdown,text setlocal formatoptions+=n nojoinspaces spell
 autocmd Filetype gitcommit setlocal spell
+autocmd Filetype javascript setlocal shiftwidth=2
 let g:ale_fixers = {
 \   'python': ['isort'],
 \}
