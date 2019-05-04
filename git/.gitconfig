@@ -1,6 +1,5 @@
 [push]
     default = simple
-    followTags = true  # push new tags
 [user]
     name = Mike Lee Williams
     email = mike@mike.place
