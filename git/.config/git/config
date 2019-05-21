@@ -18,7 +18,5 @@
     recommit = commit --amend --no-edit
 [merge]
     ff = only  # fast-forward merges only
-[core]
-    excludesfile = ~/.gitignore-global
 [status]
     showUntrackedFiles = all  # show untracked files in untracked directories
