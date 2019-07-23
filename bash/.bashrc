@@ -216,3 +216,8 @@ if [ -f ~/.fzf.bash ]; then
               done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
     }
 fi
+
+# Fix ssh agent forwarding in remote tmux sessions
+fixssh() {
+    eval $(tmux show-env -s |grep '^SSH_')
+}
