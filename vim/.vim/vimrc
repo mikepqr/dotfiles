@@ -17,6 +17,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'maralla/completor.vim'
 Plug 'greymd/oscyank.vim'
+Plug 'farmergreg/vim-lastplace'
 call plug#end()
 
 " Completion
@@ -146,12 +147,6 @@ let g:ale_fixers = {
 " Disable expensive syntax rules
 autocmd syntax markdown syntax clear markdownCodeBlock
 autocmd syntax asciidoc syntax clear asciidocLiteralParagraph
-
-" Go to the last cursor location when file opened, unless a git commit
-au BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "gitcommit" |
-        \ execute("normal `\"") |
-    \ endif
 
 " Expand %% to directory of file in current buffer (also %:h<Tab>)
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
