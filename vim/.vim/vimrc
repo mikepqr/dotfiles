@@ -47,6 +47,7 @@ let $PYTHONPATH .= ':'.expand('~/.jedi')
 
 " Buffers
 set hidden
+set autoread
 " Remember more files
 set viminfo=!,'1000,<50,s10,h
 " Windows
@@ -99,13 +100,9 @@ vmap j gj
 " Show list of possible files on tab completion, rather than first guess
 set wildmode=longest,list
 
-function! StatuslineGit()
-    let l:branchname = fugitive#head()
-    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
 set statusline=
 set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
+set statusline+=%{FugitiveStatusline()}
 set statusline+=%#LineNr#
 set statusline+=\ %f\ %y\ %=%c,%l/%L
 
