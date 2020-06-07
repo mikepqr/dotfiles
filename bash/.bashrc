@@ -163,6 +163,8 @@ PROMPT_COMMAND="set_bash_prompt;"
 shopt -s histappend
 # Save multi-line commands as one command
 shopt -s cmdhist
+# Confirm before running history command
+shopt -s histverify
 # avoid duplicate entries
 HISTCONTROL="erasedups:ignoreboth"
 # Don't record some commands
