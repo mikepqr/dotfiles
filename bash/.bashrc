@@ -126,9 +126,9 @@ function set_virtualenv () {
       python_virtualenv="${blue}[$(basename "$VIRTUAL_ENV")]${color_none} "
   fi
 }
-# Get remote hostname string (i.e. if not sabon)
+# Get remote hostname string
 function set_remote_hostname () {
-  if [[ $(hostname) != "sabon" ]] ; then
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
       remote_hostname="${red}$(hostname)${color_none}:"
   else
       remote_hostname=""
