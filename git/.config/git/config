@@ -7,6 +7,8 @@
     editor = vim
 [color]
     ui = true
+[commit]
+    verbose = true
 [alias]
     pish = push
     co = checkout
