@@ -11,7 +11,6 @@ manpathadd() {
         export MANPATH="$1:$MANPATH"
     fi
 }
-
 # See http://superuser.com/a/583502. Prevent global /etc/profile
 # path_helper utility from prepending default PATH to previously chosen
 # PATH in, e.g. tmux.
@@ -79,6 +78,7 @@ export EDITOR
 EDITOR=$(which vim)
 
 ## -- PROMPT --
+PROMPT_COMMAND=""
 # http://stackoverflow.com/questions/23399183/bash-command-prompt-with-virtualenv-and-git-branch
         red="\[\033[0;31m\]"
      yellow="\[\033[1;33m\]"
@@ -156,7 +156,12 @@ function set_bash_prompt () {
   PS1="${python_virtualenv}${remote_hostname}${yellow}\w${color_none} ${branch}\n${prompt_symbol} "
 }
 # Tell bash to execute this function just before displaying its prompt.
-PROMPT_COMMAND="set_bash_prompt;"
+PROMPT_COMMAND+="set_bash_prompt;"
+
+# Fix ssh agent forwarding in remote tmux sessions
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    PROMPT_COMMAND+="eval $(tmux show-env -s |grep '^SSH_')"
+fi
 
 ## -- HISTORY --
 # Append to the history file, don't overwrite it
@@ -222,8 +227,3 @@ if [ -f ~/.fzf.bash ]; then
               done | fzf-tmux -d -m -q "$*" -1) && vim "${files//\~/$HOME}"
     }
 fi
-
-# Fix ssh agent forwarding in remote tmux sessions
-fixssh() {
-    eval $(tmux show-env -s |grep '^SSH_')
-}
