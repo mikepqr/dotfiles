@@ -138,9 +138,9 @@ nnoremap <leader>tx :!open -a TeXShop %<cr><cr>
 ca w!! w !sudo tee "%"
 
 " Filetype-specific configuration
-autocmd FileType asciidoc,markdown,text setlocal formatoptions+=n nojoinspaces spell
-autocmd Filetype gitcommit setlocal spell
-autocmd Filetype javascript setlocal shiftwidth=2
+autocmd FileType asciidoc,markdown,text,gitcommit setlocal formatoptions+=n nojoinspaces spell
+autocmd FileType javascript setlocal shiftwidth=2
+autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
 let g:ale_fixers = {
 \   'python': ['isort'],
 \}
