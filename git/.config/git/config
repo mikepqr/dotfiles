@@ -24,3 +24,5 @@
     ff = only  # fast-forward merges only
 [status]
     showUntrackedFiles = all  # show untracked files in untracked directories
+[pull]
+	ff = only
