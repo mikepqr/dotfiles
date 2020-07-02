@@ -19,6 +19,7 @@ Plug 'greymd/oscyank.vim'
 Plug 'farmergreg/vim-lastplace'
 Plug 'machakann/vim-highlightedyank'  " not needed in neovim
 Plug 'cocopon/iceberg.vim'
+Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 
 " Completion
@@ -175,3 +176,8 @@ let g:ale_lint_on_text_changed = 'never'
 
 " Leader-y to yank to system clipboard (works over remote tmux)
 noremap <silent> <Leader>y :Oscyank<cr>
+
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup = 1
+" Same as iceberg LineNr
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=235 guibg=#1e2132
