@@ -159,8 +159,12 @@ function set_bash_prompt () {
 PROMPT_COMMAND+="set_bash_prompt;"
 
 # Fix ssh agent forwarding in remote tmux sessions
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    PROMPT_COMMAND+="eval $(tmux show-env -s |grep '^SSH_')"
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && [ -n "$TMUX" ]; then
+    echo "tmux && ssh"
+    fixssh() {
+        eval $(tmux show-env -s |grep '^SSH_')
+    }
+    PROMPT_COMMAND+="fixssh;"
 fi
 
 ## -- HISTORY --
