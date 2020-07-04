@@ -66,6 +66,11 @@ set mouse=a  " mouse support in terminals
 if &term =~ '^screen'
     " resize splits in tmux
     set ttymouse=xterm2
+    " make bracketed paste mode work, https://vi.stackexchange.com/a/16579
+    let &t_BE="\<Esc>[?2004h"
+    let &t_BD="\<Esc>[?2004l"
+    let &t_PS="\<Esc>[200~"
+    let &t_PE="\<Esc>[201~"
 endif
 " Clipboard
 set clipboard^=unnamed  " yanks and cuts go in system clipboard
@@ -141,9 +146,6 @@ autocmd Filetype javascript setlocal shiftwidth=2
 let g:ale_fixers = {
 \   'python': ['isort'],
 \}
-" Disable expensive syntax rules
-autocmd syntax markdown syntax clear markdownCodeBlock
-autocmd syntax asciidoc syntax clear asciidocLiteralParagraph
 
 " Expand %% to directory of file in current buffer (also %:h<Tab>)
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -176,3 +178,6 @@ let g:ale_lint_on_text_changed = 'never'
 
 " Leader-y to yank to system clipboard (works over remote tmux)
 noremap <silent> <Leader>y :Oscyank<cr>
+
+if &term =~ '^screen'
+endif
