@@ -18,6 +18,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'maralla/completor.vim'
 Plug 'greymd/oscyank.vim'
 Plug 'farmergreg/vim-lastplace'
+Plug 'machakann/vim-highlightedyank'  " not needed in neovim
 call plug#end()
 
 " Completion
