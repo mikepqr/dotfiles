@@ -53,8 +53,9 @@ set autoread
 " Remember more files
 set viminfo=!,'1000,<50,s10,h
 " Windows
-set textwidth=79  " want this more often than not
+set textwidth=80
 set colorcolumn=80
+set scrolloff=5
 set nowrap
 set diffopt+=vertical
 " Change default position of new splits
