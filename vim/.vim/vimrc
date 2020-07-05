@@ -107,6 +107,7 @@ vmap j gj
 set wildmode=longest,list
 
 " Screen decoration
+set number
 set relativenumber
 set statusline=
 set statusline+=%#PmenuSel#
