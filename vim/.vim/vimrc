@@ -11,7 +11,6 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'w0rp/ale'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bronson/vim-visual-star-search'
-Plug 'chriskempson/base16-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'davidhalter/jedi-vim'
@@ -19,6 +18,7 @@ Plug 'maralla/completor.vim'
 Plug 'greymd/oscyank.vim'
 Plug 'farmergreg/vim-lastplace'
 Plug 'machakann/vim-highlightedyank'  " not needed in neovim
+Plug 'cocopon/iceberg.vim'
 call plug#end()
 
 " Completion
@@ -55,9 +55,10 @@ set viminfo=!,'1000,<50,s10,h
 set textwidth=79  " want this more often than not
 set colorcolumn=80
 set nowrap
-set nosplitbelow
-set nosplitright
 set diffopt+=vertical
+" Change default position of new splits
+set splitbelow
+set splitright
 " Tabs and whitespace
 set shiftwidth=4
 set expandtab
@@ -88,9 +89,6 @@ set whichwrap=h,l,~
 " Q reformats current paragraph or selected text
 nnoremap Q gqap
 vnoremap Q gq
-" Make Y yank to the end of the line (like C and D) rather than the entire
-" line
-noremap Y y$
 " Use up and down to move by screen line
 map <up> gk
 map <down> gj
@@ -106,17 +104,19 @@ vmap j gj
 " Show list of possible files on tab completion, rather than first guess
 set wildmode=longest,list
 
+" Screen decoration
+set relativenumber
 set statusline=
 set statusline+=%#PmenuSel#
 set statusline+=%{FugitiveStatusline()}
 set statusline+=%#LineNr#
 set statusline+=\ %f\ %y\ %=%c,%l/%L
 
+" Colors
+set termguicolors
 try
-    colorscheme base16-default-dark
-    " Override
-    highlight SpellBad cterm=undercurl ctermbg=none
-    highlight SpellCap cterm=undercurl ctermbg=none
+    set background=dark
+    colorscheme iceberg
 catch
     " Otherwise default
     set background=dark
@@ -129,10 +129,6 @@ if has("gui_running")
     set fuoptions=maxvert
     set guioptions-=T
 endif
-
-" Change default position of new splits
-set splitbelow
-set splitright
 
 " Open in TeXShop
 nnoremap <leader>tx :!open -a TeXShop %<cr><cr>
@@ -179,6 +175,3 @@ let g:ale_lint_on_text_changed = 'never'
 
 " Leader-y to yank to system clipboard (works over remote tmux)
 noremap <silent> <Leader>y :Oscyank<cr>
-
-if &term =~ '^screen'
-endif
