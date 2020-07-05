@@ -118,6 +118,8 @@ set termguicolors
 try
     set background=dark
     colorscheme iceberg
+    " Make comments red
+    highlight Comment ctermfg=203 guifg=#e27878
 catch
     " Otherwise default
     set background=dark
@@ -179,5 +181,6 @@ noremap <silent> <Leader>y :Oscyank<cr>
 
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
-" Same as iceberg LineNr
+" Use same color as iceberg LineNr. Configure with autocmd so robust against
+" colorscheme changes during runtime.
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=235 guibg=#1e2132
