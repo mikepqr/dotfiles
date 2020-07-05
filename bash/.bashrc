@@ -54,6 +54,15 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     fi
 fi
 
+# Make completion work on Debian-like systems
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
 ## -- PYTHON --
 pathadd "$HOME/.pyenv/bin"
 if command -v pyenv >/dev/null 2>&1; then
