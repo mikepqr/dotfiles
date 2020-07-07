@@ -122,7 +122,11 @@ set statusline+=%#LineNr#
 set statusline+=\ %f\ %y\ %=%c,%l/%L
 
 " Colors
-set background=dark
+if $ITERM_PROFILE == 'Light'
+    set background=light
+else
+    set background=dark
+endif
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
