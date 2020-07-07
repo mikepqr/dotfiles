@@ -115,6 +115,7 @@ set wildmode=longest,list
 " Screen decoration
 set number
 set relativenumber
+set cursorline
 set statusline=
 set statusline+=%#PmenuSel#
 set statusline+=%{FugitiveStatusline()}
@@ -135,9 +136,14 @@ endif
 " Must happen before we set colorscheme; will rerun it it changes
 augroup CustomColors
     autocmd!
+    autocmd ColorScheme * highlight! link IndentGuidesEven LineNr
+    " No underline or bg color for spelling
+    autocmd ColorScheme * highlight! link SpellBad Error
+    autocmd ColorScheme * highlight! link SpellCap SpellBad
+    autocmd ColorScheme * highlight! link SpellLocal SpellBad
+    autocmd ColorScheme * highlight! link SpellRare SpellBad
     " Prominent comments
     autocmd ColorScheme * highlight! link Comment Error
-    autocmd ColorScheme * highlight! link IndentGuidesEven LineNr
 augroup END
 try
     colorscheme iceberg
