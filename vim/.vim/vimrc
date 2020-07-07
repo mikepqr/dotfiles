@@ -132,12 +132,16 @@ if exists('+termguicolors')
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
+" Must happen before we set colorscheme; will rerun it it changes
+augroup CustomColors
+    autocmd!
+    " Prominent comments
+    autocmd ColorScheme * highlight! link Comment Error
+    autocmd ColorScheme * highlight! link IndentGuidesEven LineNr
+augroup END
 try
     colorscheme iceberg
-    " Make comments red
-    highlight Comment ctermfg=203 guifg=#e27878
 catch
-    set background=dark
     colorscheme default
 endtry
 
@@ -196,9 +200,6 @@ noremap <silent> <Leader>y :Oscyank<cr>
 
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
-" Use same color as iceberg LineNr. Configure with autocmd so robust against
-" colorscheme changes during runtime.
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=235 guibg=#1e2132
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
