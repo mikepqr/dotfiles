@@ -20,6 +20,7 @@ Plug 'farmergreg/vim-lastplace'
 Plug 'machakann/vim-highlightedyank'  " not needed in neovim
 Plug 'cocopon/iceberg.vim'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'junegunn/vim-easy-align'
 call plug#end()
 
 " Completion
@@ -194,3 +195,8 @@ let g:indent_guides_enable_on_vim_startup = 1
 " Use same color as iceberg LineNr. Configure with autocmd so robust against
 " colorscheme changes during runtime.
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=235 guibg=#1e2132
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
