@@ -71,10 +71,15 @@ if &term =~ '^screen'
     " resize splits in tmux
     set ttymouse=xterm2
     " make bracketed paste mode work, https://vi.stackexchange.com/a/16579
-    let &t_BE="\<Esc>[?2004h"
-    let &t_BD="\<Esc>[?2004l"
-    let &t_PS="\<Esc>[200~"
-    let &t_PE="\<Esc>[201~"
+    try
+        let &t_BE="\<Esc>[?2004h"
+        let &t_BD="\<Esc>[?2004l"
+        let &t_PS="\<Esc>[200~"
+        let &t_PE="\<Esc>[201~"
+    catch
+        " Fail silently on error. Bracketed paste mode doesn't work in vim
+        " ~8.0.3, which I sometimes use :-(
+    endtry
 endif
 " Clipboard
 set clipboard^=unnamed  " yanks and cuts go in system clipboard
