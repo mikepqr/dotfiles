@@ -7,9 +7,14 @@ chmod +x ./bin/.local/bin/stowsh
 
 # get all the root level directories that don't start with "."
 pkgs="$(find . -maxdepth 1 ! -name '.*' -type d | sed "s|./||")"
+
 # remove OS-specific packages from this list
+# symlinked on macOS only
 pkgs=${pkgs//darwin/}
+# symlinked on macOS only
 pkgs=${pkgs//linux/}
+# ignored by stowsh, not linked outside this directory
+pkgs=${pkgs//nolink/}
 
 for pkg in $pkgs
 do
@@ -19,6 +24,7 @@ done
 # install OS-specific packages if appropriate
 if [[ $(uname) == "Darwin" ]] ; then
     bin/.local/bin/stowsh -s darwin -t "$HOME"
+    bin/nolink/iterm/iterm.sh
 fi
 
 if [[ $(uname) == "Linux" ]] ; then
