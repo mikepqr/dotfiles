@@ -185,12 +185,12 @@ shopt -s histverify
 # avoid duplicate entries
 HISTCONTROL="erasedups:ignoreboth"
 # Don't record some commands
-HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
-# Record each line as it gets issued
-PROMPT_COMMAND+="history -a;"
+HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear"
+# Keep history up to date in every shell
+PROMPT_COMMAND+="history -a;history -n;"
 # Huge history
-HISTSIZE=500000
-HISTFILESIZE=100000
+HISTSIZE=100000
+HISTFILESIZE=10000000
 # Use standard ISO 8601 timestamp
 # %F equivalent to %Y-%m-%d
 # %T equivalent to %H:%M:%S (24-hours format)
