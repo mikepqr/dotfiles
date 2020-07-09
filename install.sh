@@ -24,7 +24,7 @@ done
 # install OS-specific packages if appropriate
 if [[ $(uname) == "Darwin" ]] ; then
     bin/.local/bin/stowsh -s darwin -t "$HOME"
-    bin/nolink/iterm/iterm.sh
+    nolink/iterm/iterm.sh
 fi
 
 if [[ $(uname) == "Linux" ]] ; then
