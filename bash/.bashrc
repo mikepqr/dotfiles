@@ -239,3 +239,7 @@ if [ -f ~/.fzf.bash ]; then
               done | fzf-tmux -d -m -q "$*" -1) && vim "${files//\~/$HOME}"
     }
 fi
+
+if [ -f ~/.bashrc_private ]; then
+    source ~/.bashrc_private
+fi
