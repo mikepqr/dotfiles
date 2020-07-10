@@ -676,7 +676,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>0 545 620 392 2305 -1120 1792 1097 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>116 368 730 502 0 0 1536 960 </string>
+	<string>856 421 1702 996 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>497 137 730 502 0 0 1536 960 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1361,26 +1361,26 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.81960785388946533</real>
+				<real>0.12941176470588237</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.78431373834609985</real>
+				<real>0.094117647058823528</real>
 				<key>Red Component</key>
-				<real>0.7764706015586853</real>
+				<real>0.086274509803921567</real>
 			</dict>
 			<key>Selection Color</key>
 			<dict>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.12941177189350128</real>
+				<real>0.81960784313725488</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.094117648899555206</real>
+				<real>0.78431372549019607</real>
 				<key>Red Component</key>
-				<real>0.086274512112140656</real>
+				<real>0.77647058823529413</real>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
@@ -2051,20 +2051,11 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>1000</integer>
+			<integer>0</integer>
 			<key>Selected Text Color</key>
 			<dict>
-				<key>Blue Component</key>
-				<real>0.29803921568627451</real>
-				<key>Color Space</key>
-				<string>sRGB</string>
-				<key>Green Component</key>
-				<real>0.21568627450980393</real>
-				<key>Red Component</key>
-				<real>0.20000000000000001</real>
-			</dict>
-			<key>Selection Color</key>
-			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
 				<real>0.92549019607843142</real>
 				<key>Color Space</key>
@@ -2073,6 +2064,19 @@
 				<real>0.9137254901960784</real>
 				<key>Red Component</key>
 				<real>0.90980392156862744</real>
+			</dict>
+			<key>Selection Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
+				<key>Blue Component</key>
+				<real>0.29803921568627451</real>
+				<key>Color Space</key>
+				<string>sRGB</string>
+				<key>Green Component</key>
+				<real>0.21568627450980393</real>
+				<key>Red Component</key>
+				<real>0.20000000000000001</real>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
@@ -2936,7 +2940,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-07-09T04:20:52Z</date>
+	<date>2020-07-10T04:20:53Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
@@ -2949,5 +2953,9 @@
 	<false/>
 	<key>iTerm Version</key>
 	<string>3.3.12</string>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>0</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
 </dict>
 </plist>
