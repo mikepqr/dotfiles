@@ -123,7 +123,7 @@ function set_prompt_symbol () {
   if test "$1" -eq 0 ; then
       prompt_symbol="\$"
   else
-      prompt_symbol="${light_red}\$${color_none}"
+      prompt_symbol="${red}\$${color_none}"
   fi
 }
 
@@ -186,8 +186,8 @@ shopt -s histverify
 HISTCONTROL="erasedups:ignoreboth"
 # Don't record some commands
 HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear"
-# Keep history up to date in every shell
-PROMPT_COMMAND+="history -a;history -n;"
+# Append to history after every command
+PROMPT_COMMAND+="history -a;"
 # Huge history
 HISTSIZE=100000
 HISTFILESIZE=10000000
