@@ -108,6 +108,10 @@ nmap k gk
 nmap j gj
 vmap k gk
 vmap j gj
+" Use J and K to move selection up and down in visual mode
+" https://github.com/erkrnt/awesome-streamerrc/blob/5547d1da187ccd6fe4794b15f05c3cdcdc3725d0/ThePrimeagen/init.vim#L116-L117
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " Show list of possible files on tab completion, rather than first guess
 set wildmode=longest,list
