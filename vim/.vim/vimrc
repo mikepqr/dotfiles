@@ -21,6 +21,7 @@ Plug 'machakann/vim-highlightedyank'  " not needed in neovim
 Plug 'cocopon/iceberg.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/vim-easy-align'
+Plug 'mbbill/undotree'
 call plug#end()
 
 " Completion
@@ -112,6 +113,16 @@ vmap j gj
 " https://github.com/erkrnt/awesome-streamerrc/blob/5547d1da187ccd6fe4794b15f05c3cdcdc3725d0/ThePrimeagen/init.vim#L116-L117
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+" Use undotree and persist undo across sessions
+if !isdirectory($HOME."/.vim")
+    call mkdir($HOME."/.vim", "", 0770)
+endif
+if !isdirectory($HOME."/.vim/undo-dir")
+    call mkdir($HOME."/.vim/undo-dir", "", 0700)
+endif
+set undodir=~/.vim/undo-dir
+set undofile
+nnoremap <leader>u :UndotreeToggle<CR>
 
 " Show list of possible files on tab completion, rather than first guess
 set wildmode=longest,list
