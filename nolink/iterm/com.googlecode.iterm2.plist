@@ -676,13 +676,13 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>0 545 620 392 2305 -1120 1792 1097 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>856 421 1702 996 0 0 2560 1417 </string>
+	<string>940 193 1297 1224 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>497 137 730 502 0 0 1536 960 </string>
+	<string>528 458 730 479 0 0 1536 937 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>161 208 730 502 0 0 1536 960 </string>
+	<string>1309 781 730 502 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>1280 0 1279 1417 0 0 2560 1417 </string>
+	<string>256 435 730 502 0 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1389,7 +1389,7 @@
 			<key>Silence Bell</key>
 			<false/>
 			<key>Smart Cursor Color</key>
-			<false/>
+			<true/>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -2085,7 +2085,7 @@
 			<key>Silence Bell</key>
 			<false/>
 			<key>Smart Cursor Color</key>
-			<false/>
+			<true/>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -2099,6 +2099,8 @@
 			<key>Use Bold Font</key>
 			<true/>
 			<key>Use Bright Bold</key>
+			<false/>
+			<key>Use Cursor Guide</key>
 			<false/>
 			<key>Use Custom Window Title</key>
 			<false/>
@@ -2138,12 +2140,12 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1536, 960}}</string>
 		<key>topLeft</key>
-		<string>{72, 716}</string>
+		<string>{268, 774}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>570E5111-9DCE-4D2E-8815-38E48CD78A4E</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>23</integer>
+	<integer>24</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2940,7 +2942,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-07-10T04:20:53Z</date>
+	<date>2020-07-17T23:03:17Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
