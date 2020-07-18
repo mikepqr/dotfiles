@@ -133,7 +133,7 @@ if exists('+termguicolors')
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
-" Must happen before we set colorscheme; will rerun it it changes
+" Must happen before we set colorscheme; will rerun when colorscheme changes
 augroup CustomColors
     autocmd!
     autocmd ColorScheme * highlight! link IndentGuidesEven LineNr
@@ -144,6 +144,8 @@ augroup CustomColors
     autocmd ColorScheme * highlight! link SpellRare SpellBad
     " Prominent comments
     autocmd ColorScheme * highlight! link Comment Error
+    " Reverse selection
+    autocmd ColorScheme * highlight! Visual cterm=reverse gui=reverse
 augroup END
 try
     colorscheme iceberg
