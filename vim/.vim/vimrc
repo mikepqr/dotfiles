@@ -208,6 +208,7 @@ cnoremap <C-E> <End>
 nmap <leader>h :History<cr>
 nmap <leader>b :Buffers<cr>
 nmap <leader>f :Files<cr>
+nmap <leader>g :Rg<cr>
 
 " Unimpaired-style mappings to jump to ALE warnings/errors
 nmap <silent> [W <Plug>(ale_first)
@@ -228,3 +229,11 @@ let g:indent_guides_enable_on_vim_startup = 1
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Make :Rg match occurences of patterns inside files, not filenames
+" https://github.com/junegunn/fzf.vim#example-rg-command-with-preview-window
+" https://github.com/junegunn/fzf.vim/issues/346#issuecomment-412558898
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
