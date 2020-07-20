@@ -64,6 +64,7 @@ if ! shopt -oq posix; then
 fi
 
 ## -- PYTHON --
+export PYTHONSTARTUP=${HOME}/.config/python/pythonrc.py
 pathadd "$HOME/.pyenv/bin"
 if command -v pyenv >/dev/null 2>&1; then
     eval "$(pyenv init -)"
