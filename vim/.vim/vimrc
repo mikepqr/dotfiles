@@ -47,6 +47,7 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
+" pip install --upgrade --root ~/.jedi jedi
 let $PYTHONPATH .= ':'.expand('~/.jedi')
 
 " Buffers
@@ -237,3 +238,9 @@ command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
+" Markdown: link selected text using URL in system clipboard
+augroup mdkeys
+  autocmd! mdkeys
+  autocmd Filetype markdown vnoremap <Leader>k <ESC>`>a](<ESC>"*pa)<ESC>`<i[<ESC>
+augroup end
