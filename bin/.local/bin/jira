@@ -1,13 +1,15 @@
+#!/bin/bash
+
 function jira() {
-    arg="$1"
-    url="https://jira.cloudera.com/browse/"
-    if echo ${arg} | grep -q "^[0-9]\+" ; then
-        ticket="DSE-"${arg}
+    arg="$*"
+    # Assume arg is a DSE ticket if only numerals
+    if echo "${arg}" | grep -q "^[0-9]\+$" ; then
+        url="https://jira.cloudera.com/browse/DSE-${arg}"
     else
-        ticket=${arg}
+        url="https://jira.cloudera.com/secure/QuickSearch.jspa?searchString=$*"
     fi
-    echo $url$ticket
-    open "$url$ticket"
+    open "$url"
 }
 
-jira $1
+
+jira "$*"
