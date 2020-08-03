@@ -21,6 +21,7 @@ Plug 'machakann/vim-highlightedyank'  " not needed in neovim
 Plug 'cocopon/iceberg.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'mbbill/undotree'
+Plug 'AndrewRadev/splitjoin.vim'
 call plug#end()
 
 " Completion
@@ -243,3 +244,6 @@ augroup mdkeys
   autocmd! mdkeys
   autocmd Filetype markdown vnoremap <Leader>k <ESC>`>a](<ESC>"*pa)<ESC>`<i[<ESC>
 augroup end
+
+let g:splitjoin_trailing_comma = 1
+let g:splitjoin_python_brackets_on_separate_lines = 1
