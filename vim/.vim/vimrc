@@ -20,7 +20,6 @@ Plug 'farmergreg/vim-lastplace'
 Plug 'machakann/vim-highlightedyank'  " not needed in neovim
 Plug 'cocopon/iceberg.vim'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'junegunn/vim-easy-align'
 Plug 'mbbill/undotree'
 call plug#end()
 
