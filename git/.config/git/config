@@ -26,3 +26,5 @@
     showUntrackedFiles = all  # show untracked files in untracked directories
 [pull]
 	ff = only
+[init]
+	defaultBranch = main
