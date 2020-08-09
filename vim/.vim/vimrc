@@ -226,11 +226,6 @@ noremap <silent> <Leader>y :Oscyank<cr>
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
 " Make :Rg match occurences of patterns inside files, not filenames
 " https://github.com/junegunn/fzf.vim#example-rg-command-with-preview-window
 " https://github.com/junegunn/fzf.vim/issues/346#issuecomment-412558898
