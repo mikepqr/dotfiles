@@ -133,9 +133,7 @@ set number
 set relativenumber
 set cursorline
 set statusline=
-set statusline+=%#PmenuSel#
 set statusline+=%{FugitiveStatusline()}
-set statusline+=%#LineNr#
 set statusline+=\ %f\ %y\ %=%c,%l/%L
 
 " Colors
