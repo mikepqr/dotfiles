@@ -161,6 +161,11 @@ augroup CustomColors
     autocmd ColorScheme * highlight! link Comment Error
     " Reverse selection
     autocmd ColorScheme * highlight! Visual cterm=reverse gui=reverse
+    " statusline
+    autocmd ColorScheme * highlight! link StatusLine PmenuSel
+    autocmd ColorScheme * highlight! link StatusLineTerm PmenuSel
+    autocmd ColorScheme * highlight! link StatusLineNC LineNr
+    autocmd ColorScheme * highlight! link StatusLineTermNC LineNr
 augroup END
 try
     colorscheme iceberg
