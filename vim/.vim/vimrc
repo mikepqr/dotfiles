@@ -22,6 +22,7 @@ Plug 'cocopon/iceberg.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'mbbill/undotree'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'ap/vim-buftabline'
 Plug 'delphinus/vim-auto-cursorline'
 call plug#end()
 
@@ -161,6 +162,9 @@ augroup CustomColors
     autocmd ColorScheme * highlight! link Comment Error
     " Reverse selection
     autocmd ColorScheme * highlight! Visual cterm=reverse gui=reverse
+    " buftabline
+    autocmd ColorScheme * highlight! link BufTabLineCurrent PmenuSel
+    autocmd ColorScheme * highlight! link BufTabLineActive TabLineSel
     " statusline
     autocmd ColorScheme * highlight! link StatusLine PmenuSel
     autocmd ColorScheme * highlight! link StatusLineTerm PmenuSel
