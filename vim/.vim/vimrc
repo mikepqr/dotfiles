@@ -22,6 +22,7 @@ Plug 'cocopon/iceberg.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'mbbill/undotree'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'delphinus/vim-auto-cursorline'
 call plug#end()
 
 " Completion
