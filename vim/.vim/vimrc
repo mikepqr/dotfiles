@@ -165,6 +165,7 @@ augroup CustomColors
     " buftabline
     autocmd ColorScheme * highlight! link BufTabLineCurrent PmenuSel
     autocmd ColorScheme * highlight! link BufTabLineActive TabLineSel
+    autocmd ColorScheme * highlight! link BufTabLineFill Normal
     " statusline
     autocmd ColorScheme * highlight! link StatusLine PmenuSel
     autocmd ColorScheme * highlight! link StatusLineTerm PmenuSel
@@ -179,7 +180,7 @@ endtry
 
 " Set fullscreen background to same color as normal text
 if has("gui_running")
-    set gfn=Source\ Code\ Pro:h13
+    set gfn=Source\ Code\ Pro:h15
     set fuoptions=maxvert
     set guioptions-=T
 endif
