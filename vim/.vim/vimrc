@@ -24,6 +24,7 @@ Plug 'mbbill/undotree'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ap/vim-buftabline'
 Plug 'delphinus/vim-auto-cursorline'
+Plug 'bkad/CamelCaseMotion'
 call plug#end()
 
 " Completion
@@ -251,5 +252,11 @@ augroup mdkeys
   autocmd Filetype markdown vnoremap <Leader>k <ESC>`>a](<ESC>"*pa)<ESC>`<i[<ESC>
 augroup end
 
+" splitjoin
 let g:splitjoin_trailing_comma = 1
 let g:splitjoin_python_brackets_on_separate_lines = 1
+
+" CamelCaseMotion
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> w <Plug>CamelCaseMotion_w
