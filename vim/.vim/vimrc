@@ -25,6 +25,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ap/vim-buftabline'
 Plug 'delphinus/vim-auto-cursorline'
 Plug 'bkad/CamelCaseMotion'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 " Completion
@@ -260,3 +261,7 @@ let g:splitjoin_python_brackets_on_separate_lines = 1
 map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e
 map <silent> w <Plug>CamelCaseMotion_w
+
+" vimwiki
+let g:vimwiki_list = [{'path': '~/share/wiki', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext = 0
