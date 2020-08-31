@@ -26,6 +26,7 @@ Plug 'ap/vim-buftabline'
 Plug 'delphinus/vim-auto-cursorline'
 Plug 'bkad/CamelCaseMotion'
 Plug 'vimwiki/vimwiki'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 " Completion
