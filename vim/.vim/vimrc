@@ -27,6 +27,7 @@ Plug 'delphinus/vim-auto-cursorline'
 Plug 'bkad/CamelCaseMotion'
 Plug 'vimwiki/vimwiki'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'vim-scripts/ReplaceWithRegister'
 call plug#end()
 
 " Completion
