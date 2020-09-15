@@ -24,7 +24,6 @@ Plug 'mbbill/undotree'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ap/vim-buftabline'
 Plug 'delphinus/vim-auto-cursorline'
-Plug 'bkad/CamelCaseMotion'
 Plug 'vimwiki/vimwiki'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-scripts/ReplaceWithRegister'
@@ -258,11 +257,6 @@ augroup end
 " splitjoin
 let g:splitjoin_trailing_comma = 1
 let g:splitjoin_python_brackets_on_separate_lines = 1
-
-" CamelCaseMotion
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-map <silent> w <Plug>CamelCaseMotion_w
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/share/wiki', 'syntax': 'markdown', 'ext': '.md'}]
