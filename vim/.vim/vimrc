@@ -261,6 +261,7 @@ let g:splitjoin_python_brackets_on_separate_lines = 1
 " vimwiki
 let g:vimwiki_list = [{'path': '~/share/wiki', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0
+let g:vimwiki_key_mappings = { 'headers': 0 }
 
 " Automatic rename of tmux window
 if exists('$TMUX') && !exists('$NORENAME')
