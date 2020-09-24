@@ -58,6 +58,7 @@ let $PYTHONPATH .= ':'.expand('~/.jedi')
 " Buffers
 set hidden
 set autoread
+set noswapfile
 " Remember more files
 set viminfo=!,'1000,<50,s10,h
 " Windows
