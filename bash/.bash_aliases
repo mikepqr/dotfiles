@@ -68,7 +68,7 @@ if [[ -n "$ITERM_PROFILE" ]]; then
 fi
 
 # Alias diff --color to dif if possible
-diff_version=$(diff --version | head -1 | grep -o -E '\d+\.\d+')
+diff_version=$(diff --version | head -1 | grep -o -E '[0-9]+\.[0-9]+')
 # --color added in diff 3.4
 compare_versions "$diff_version" 3.3.99999  || cmp_return=$?
 unset diff_version
