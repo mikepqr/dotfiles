@@ -168,8 +168,8 @@ augroup CustomColors
     autocmd ColorScheme * highlight! Visual cterm=reverse gui=reverse
     " buftabline
     autocmd ColorScheme * highlight! link BufTabLineCurrent PmenuSel
-    autocmd ColorScheme * highlight! link BufTabLineActive TabLineSel
-    autocmd ColorScheme * highlight! link BufTabLineFill Normal
+    autocmd ColorScheme * highlight! link BufTabLineHidden LineNr
+    autocmd ColorScheme * highlight! link BufTabLineFill LineNr
     " statusline
     autocmd ColorScheme * highlight! link StatusLine PmenuSel
     autocmd ColorScheme * highlight! link StatusLineTerm PmenuSel
