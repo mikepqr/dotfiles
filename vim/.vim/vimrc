@@ -285,3 +285,4 @@ autocmd FileChangedShellPost *
 " jk for esc
 inoremap <esc> <nop>
 inoremap jk <esc>
+source ~/.vim/private.vim
