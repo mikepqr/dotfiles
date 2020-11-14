@@ -144,23 +144,19 @@ function set_remote_hostname () {
 
 # Set the full bash prompt.
 function set_bash_prompt () {
-  # Set the PROMPT_SYMBOL variable. We do this first so we don't lose the
+  # Set the PROMPT_SYMBOL variable first so we don't lose the
   # return value of the last command.
   set_prompt_symbol $?
-
-  # Set the PYTHON_VIRTUALENV and REMOTE_HOSTNAME variables.
   set_virtualenv
   set_remote_hostname
-
-  # Set the BRANCH variable.
   if is_git_repository ; then
     set_git_branch
   else
     branch=''
   fi
-
-  # Set the bash prompt variable.
-  PS1="${python_virtualenv}${remote_hostname}${yellow}\w${color_none} ${branch}\n${prompt_symbol} "
+  # Note the final character is a nbsp (ctrl-K<space><space> to insert in vim)
+  # which makes it easier to search for (https://youtu.be/uglorjY0Ntg)
+  PS1="${python_virtualenv}${remote_hostname}${yellow}\w${color_none} ${branch}\n${prompt_symbol} "
 }
 # Tell bash to execute this function just before displaying its prompt.
 PROMPT_COMMAND+="set_bash_prompt;"
