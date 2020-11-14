@@ -13,7 +13,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'bronson/vim-visual-star-search'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'davidhalter/jedi-vim'
 Plug 'maralla/completor.vim'
 Plug 'greymd/oscyank.vim'
 Plug 'farmergreg/vim-lastplace'
@@ -30,7 +29,6 @@ Plug 'vim-scripts/ReplaceWithRegister'
 call plug#end()
 
 " Completion
-let g:jedi#completions_enabled = 0
 let g:completor_complete_options = 'menuone,preview'
 let g:completor_auto_trigger = 0
 let g:completor_auto_close_doc = 0
@@ -51,9 +49,6 @@ function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
-
-" pip install --upgrade --root ~/.jedi jedi
-let $PYTHONPATH .= ':'.expand('~/.jedi')
 
 " Buffers
 set hidden
