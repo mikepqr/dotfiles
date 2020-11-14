@@ -26,6 +26,7 @@ Plug 'delphinus/vim-auto-cursorline'
 Plug 'vimwiki/vimwiki'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'wincent/corpus'
 call plug#end()
 
 " Completion
