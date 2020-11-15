@@ -39,6 +39,9 @@ colors:
     white:   '#d2d4de'
 
 window:
+  dimensions:
+    columns: 100
+    lines: 30
   padding:
     x: 4
     y: 4
