@@ -222,7 +222,7 @@ cnoremap <C-E> <End>
 nmap <leader>h :History<cr>
 nmap <leader>b :Buffers<cr>
 nmap <leader>f :Files<cr>
-nmap <leader>g :Rg<cr>
+nmap <leader>g :Rg<space>
 
 " Unimpaired-style mappings to jump to ALE warnings/errors
 nmap <silent> [W <Plug>(ale_first)
