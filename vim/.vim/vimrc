@@ -291,7 +291,7 @@ if has('nvim')
   lua <<
     CorpusDirectories = {
       ['~/notes'] = {
-        autocommit = false,
+        autocommit = true,
         autoreference = 1,
         autotitle = 1,
         base = './',
