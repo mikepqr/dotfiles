@@ -175,7 +175,7 @@ augroup CustomColors
     autocmd ColorScheme * highlight! link StatusLineNC LineNr
     autocmd ColorScheme * highlight! link StatusLineTermNC LineNr
     " vertsplit (for Corpus, see https://github.com/wincent/corpus/issues/75)
-    autocmd ColorScheme * highlight! link VertSplit LineNr
+    autocmd ColorScheme * highlight! link VertSplit Normal
 augroup END
 try
     colorscheme iceberg
@@ -272,7 +272,7 @@ if exists('$TMUX') && !exists('$NORENAME')
     au VimLeave * call system('tmux set-window automatic-rename on')
 endif
 
-" Triger `autoread` when files changes on disk
+" Trigger `autoread` when files changes on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
 " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
@@ -286,3 +286,26 @@ autocmd FileChangedShellPost *
 " jk for esc
 inoremap <esc> <nop>
 inoremap jk <esc>
+
+if has('nvim')
+  lua <<
+    CorpusDirectories = {
+      ['~/notes'] = {
+        autocommit = false,
+        autoreference = 1,
+        autotitle = 1,
+        base = './',
+        transform = 'local',
+      },
+  }
+.
+endif
+
+" Write file without changing modification time
+" https://unix.stackexchange.com/a/527154/20079
+function! WriteSmall()
+    let mtime = system("stat -c %.Y ".shellescape(expand('%:p')))
+    write
+    call system("touch --date='@".mtime."' ".shellescape(expand('%:p')))
+    edit
+endfunction
