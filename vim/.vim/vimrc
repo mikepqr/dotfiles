@@ -30,6 +30,8 @@ Plug 'wincent/corpus'
 Plug 'aymericbeaumet/vim-symlink'
 call plug#end()
 
+source ~/.vim/private.vim
+
 " Completion
 let g:completor_complete_options = 'menuone,preview'
 let g:completor_auto_trigger = 0
@@ -284,4 +286,3 @@ autocmd FileChangedShellPost *
 " jk for esc
 inoremap <esc> <nop>
 inoremap jk <esc>
-source ~/.vim/private.vim
