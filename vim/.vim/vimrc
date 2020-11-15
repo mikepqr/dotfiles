@@ -27,6 +27,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'wincent/corpus'
+Plug 'aymericbeaumet/vim-symlink'
 call plug#end()
 
 " Completion
