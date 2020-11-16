@@ -3,7 +3,7 @@ live_config_reload: true
 font:
   normal:
     family: Fira Code
-    style: Regular
+    style: Retina
   size: 14
   offset:
     x: 0
