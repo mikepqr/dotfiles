@@ -13,7 +13,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'bronson/vim-visual-star-search'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'maralla/completor.vim'
 Plug 'greymd/oscyank.vim'
 Plug 'farmergreg/vim-lastplace'
 Plug 'machakann/vim-highlightedyank'  " not needed in neovim
@@ -32,28 +31,6 @@ Plug 'aymericbeaumet/vim-symlink'
 call plug#end()
 
 source ~/.vim/private.vim
-
-" Completion
-let g:completor_complete_options = 'menuone,preview'
-let g:completor_auto_trigger = 0
-let g:completor_auto_close_doc = 0
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <silent><expr> <Tab> Tab_Or_Complete()
-
-function! Tab_Or_Complete() abort
-  if pumvisible()
-    return "\<C-n>"
-  elseif s:check_back_space()
-    return "\<Tab>"
-  else
-    return "\<C-R>=completor#do('complete')\<CR>"
-  endif
-endfunction
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
 
 " Buffers
 set hidden
@@ -176,7 +153,7 @@ augroup CustomColors
     autocmd ColorScheme * highlight! link StatusLineNC LineNr
     autocmd ColorScheme * highlight! link StatusLineTermNC LineNr
     " vertsplit (for Corpus, see https://github.com/wincent/corpus/issues/75)
-    autocmd ColorScheme * highlight! link VertSplit Normal
+    " autocmd ColorScheme * highlight! link VertSplit Normal
 augroup END
 try
     colorscheme iceberg
@@ -300,6 +277,7 @@ if has('nvim')
       },
   }
 .
+let g:CorpusPreviewWinhighlight='Normal:Normal'
 endif
 
 " Write file without changing modification time
