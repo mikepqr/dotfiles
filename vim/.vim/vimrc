@@ -175,9 +175,8 @@ ca w!! w !sudo tee "%"
 augroup edit_text
     autocmd!
     autocmd FileType asciidoc,markdown,text,gitcommit setlocal
-        " https://github.com/neovim/neovim/blob/ce70edb80e965c90fadafea72d758b4d2d531077/runtime/ftplugin/markdown.vim#L13-L14
         \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
-        \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
+        \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
         \ nojoinspaces spell
 augroup END
 
