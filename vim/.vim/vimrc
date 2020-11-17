@@ -163,7 +163,7 @@ endtry
 
 " Set fullscreen background to same color as normal text
 if has("gui_running")
-    set gfn=Source\ Code\ Pro:h15
+    set gfn=Fira\ Code:h14
     set fuoptions=maxvert
     set guioptions-=T
 endif
