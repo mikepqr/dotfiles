@@ -38,6 +38,11 @@ colors:
     cyan:    '#95c4ce'
     white:   '#d2d4de'
 
+bell:
+  animation: EaseOutExpo
+  duration: 10
+  color: '#ffffff'
+
 window:
   dimensions:
     columns: 100
