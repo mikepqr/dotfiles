@@ -172,14 +172,28 @@ endif
 ca w!! w !sudo tee "%"
 
 " Filetype-specific configuration
-autocmd FileType asciidoc,markdown,text,gitcommit setlocal formatoptions+=n nojoinspaces spell
-autocmd FileType javascript setlocal shiftwidth=2
-autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
-let g:ale_fixers = {
-\   'python': ['isort', 'black'],
-\}
-let g:ale_lint_on_text_changed = 1
+augroup edit_text
+    autocmd!
+    autocmd FileType asciidoc,markdown,text,gitcommit setlocal
+        " https://github.com/neovim/neovim/blob/ce70edb80e965c90fadafea72d758b4d2d531077/runtime/ftplugin/markdown.vim#L13-L14
+        \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
+        \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
+        \ nojoinspaces spell
+augroup END
+
+augroup edit_cloudera
+    autocmd FileType javascript setlocal shiftwidth=2
+    autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
+augroup END
+
+let g:ale_fixers = {'python': ['isort', 'black']}
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
+" Unimpaired-style mappings to jump to ALE warnings/errors
+nmap <silent> [W <Plug>(ale_first)
+nmap <silent> [w <Plug>(ale_previous)
+nmap <silent> ]w <Plug>(ale_next)
+nmap <silent> ]W <Plug>(ale_last)
 
 " Expand %% to directory of file in current buffer (also %:h<Tab>)
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -201,15 +215,6 @@ nmap <leader>h :History<cr>
 nmap <leader>b :Buffers<cr>
 nmap <leader>f :Files<cr>
 nmap <leader>g :Rg<space>
-
-" Unimpaired-style mappings to jump to ALE warnings/errors
-nmap <silent> [W <Plug>(ale_first)
-nmap <silent> [w <Plug>(ale_previous)
-nmap <silent> ]w <Plug>(ale_next)
-nmap <silent> ]W <Plug>(ale_last)
-
-" Lint less
-let g:ale_lint_on_text_changed = 'never'
 
 " Leader-y to yank to system clipboard (works over remote tmux)
 noremap <silent> <Leader>y :Oscyank<cr>
