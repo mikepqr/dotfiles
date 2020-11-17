@@ -3,7 +3,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'ap/vim-buftabline'
 Plug 'aymericbeaumet/vim-symlink'
-Plug 'bronson/vim-visual-star-search'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/iceberg.vim'
 Plug 'delphinus/vim-auto-cursorline'
@@ -24,7 +23,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'w0rp/ale'
 Plug 'wincent/corpus'
 call plug#end()
@@ -96,6 +94,10 @@ vmap j gj
 " https://github.com/erkrnt/awesome-streamerrc/blob/5547d1da187ccd6fe4794b15f05c3cdcdc3725d0/ThePrimeagen/init.vim#L116-L117
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+" jk for esc
+inoremap <esc> <nop>
+inoremap jk <esc>
+
 " Use undotree and persist undo across sessions
 if !isdirectory($HOME."/.vim")
     call mkdir($HOME."/.vim", "", 0770)
@@ -125,12 +127,13 @@ else
     set background=dark
 endif
 if exists('+termguicolors')
+    " :help xterm-true-color (possibly unnecessary in nvim)
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
 " Must happen before we set colorscheme; will rerun when colorscheme changes
-augroup CustomColors
+augroup customize_iceberg
     autocmd!
     autocmd ColorScheme * highlight! link IndentGuidesEven LineNr
     " Underline spelling problems
@@ -151,8 +154,6 @@ augroup CustomColors
     autocmd ColorScheme * highlight! link StatusLineTerm PmenuSel
     autocmd ColorScheme * highlight! link StatusLineNC LineNr
     autocmd ColorScheme * highlight! link StatusLineTermNC LineNr
-    " vertsplit (for Corpus, see https://github.com/wincent/corpus/issues/75)
-    " autocmd ColorScheme * highlight! link VertSplit Normal
 augroup END
 try
     colorscheme iceberg
@@ -166,9 +167,6 @@ if has("gui_running")
     set fuoptions=maxvert
     set guioptions-=T
 endif
-
-" Open in TeXShop
-nnoremap <leader>tx :!open -a TeXShop %<cr><cr>
 
 " Use :w!! to save root files you forgot to open with sudo
 ca w!! w !sudo tee "%"
@@ -188,8 +186,8 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " Name current syntax group
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+    \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " ss to generate new split
 nnoremap <silent> ss <C-w>s
@@ -253,10 +251,6 @@ autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
 " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
 autocmd FileChangedShellPost *
   \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
-
-" jk for esc
-inoremap <esc> <nop>
-inoremap jk <esc>
 
 if has('nvim')
   lua <<
