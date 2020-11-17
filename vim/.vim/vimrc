@@ -22,7 +22,6 @@ Plug 'mbbill/undotree'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ap/vim-buftabline'
 Plug 'delphinus/vim-auto-cursorline'
-Plug 'vimwiki/vimwiki'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -237,12 +236,6 @@ augroup end
 " splitjoin
 let g:splitjoin_trailing_comma = 1
 let g:splitjoin_python_brackets_on_separate_lines = 1
-
-" vimwiki
-let g:vimwiki_list = [{'path': '~/share/wiki', 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_global_ext = 0
-let g:vimwiki_key_mappings = { 'headers': 0 }
-let g:vimwiki_url_maxsave = 0
 
 " Automatic rename of tmux window
 if exists('$TMUX') && !exists('$NORENAME')
