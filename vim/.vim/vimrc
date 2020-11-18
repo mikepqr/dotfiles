@@ -180,11 +180,11 @@ ca w!! w !sudo tee "%"
 " Filetype-specific configuration
 augroup edit_text
     autocmd!
+    " taken from ftplugin/markdown.vim
+    " spellcapcheck= disables capitalization checks
     autocmd FileType asciidoc,markdown,text,gitcommit setlocal
-        " taken from ftplugin/markdown.vim
         \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
-        " spellcapcheck= disables capitalization checks
         \ nojoinspaces spell spellcapcheck=
 augroup END
 
