@@ -15,7 +15,9 @@ colors:
   primary:
     background: '#161821'
     foreground: '#d2d4de'
-
+  cursor:
+    text:   '#161821'
+    cursor: '#d2d4de'
   # Normal colors
   normal:
     black:   '#161821'
