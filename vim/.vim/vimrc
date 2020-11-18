@@ -45,6 +45,7 @@ set viminfo=!,'1000,<50,s10,h
 set textwidth=80
 set colorcolumn=80
 set scrolloff=5
+set sidescrolloff=3
 set nowrap
 set diffopt+=vertical
 " Change default position of new splits
@@ -181,9 +182,11 @@ ca w!! w !sudo tee "%"
 augroup edit_text
     autocmd!
     autocmd FileType asciidoc,markdown,text,gitcommit setlocal
+        " taken from ftplugin/markdown.vim
         \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
-        \ nojoinspaces spell
+        " spellcapcheck= disables capitalization checks
+        \ nojoinspaces spell spellcapcheck=
 augroup END
 
 augroup edit_cloudera
