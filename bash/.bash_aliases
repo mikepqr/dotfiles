@@ -10,6 +10,10 @@ if command -v direnv >/dev/null 2>&1; then
     alias tmux='direnv exec / tmux'
 fi
 
+if command -v nvim > /dev/null 2>&1; then
+    alias vim=nvim
+fi
+
 function mktempdir() {
     dir="$1"
     if [[ -z $dir ]] ; then

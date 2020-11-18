@@ -82,7 +82,11 @@ mkvirtualenv () {
 ## -- VI --
 set -o vi
 export EDITOR
-EDITOR=$(which vim)
+if command -v nvim > /dev/null 2>&1; then
+    EDITOR=nvim
+else
+    EDITOR=vim
+fi
 
 ## -- PROMPT --
 PROMPT_COMMAND=""

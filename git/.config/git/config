@@ -3,8 +3,6 @@
 [user]
     name = Mike Lee Williams
     email = mike@mike.place
-[core]
-    editor = vim
 [color]
     ui = true
 [commit]
