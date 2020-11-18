@@ -15,7 +15,6 @@ Plug 'justinmk/vim-dirvish'
 Plug 'machakann/vim-highlightedyank'  " not needed in neovim
 Plug 'mbbill/undotree'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -24,10 +23,17 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'w0rp/ale'
-Plug 'wincent/corpus'
+if has("nvim")
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'wincent/corpus'
+endif
 call plug#end()
 
-source ~/.vim/private.vim
+try
+    source ~/.vim/private.vim
+catch
+    echom "~/.vim/private.vim not found"
+endtry
 
 " Buffers
 set hidden
@@ -239,6 +245,9 @@ augroup end
 let g:splitjoin_trailing_comma = 1
 let g:splitjoin_python_brackets_on_separate_lines = 1
 
+" fugitive
+let g:github_enterprise_urls = ['https://github.infra.cloudera.com']
+
 " Automatic rename of tmux window
 if exists('$TMUX') && !exists('$NORENAME')
     au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
@@ -256,6 +265,15 @@ autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
 autocmd FileChangedShellPost *
   \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
+" Write file without changing modification time
+" https://unix.stackexchange.com/a/527154/20079
+function! WriteSmall()
+    let mtime = system("stat -c %.Y ".shellescape(expand('%:p')))
+    write
+    call system("touch --date='@".mtime."' ".shellescape(expand('%:p')))
+    edit
+endfunction
+
 if has('nvim')
   lua <<
     CorpusDirectories = {
@@ -270,15 +288,6 @@ if has('nvim')
 .
 let g:CorpusPreviewWinhighlight='Normal:Normal'
 endif
-
-" Write file without changing modification time
-" https://unix.stackexchange.com/a/527154/20079
-function! WriteSmall()
-    let mtime = system("stat -c %.Y ".shellescape(expand('%:p')))
-    write
-    call system("touch --date='@".mtime."' ".shellescape(expand('%:p')))
-    edit
-endfunction
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
