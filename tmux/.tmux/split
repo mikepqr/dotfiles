@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Split tmux pane.
+#
+# If there is one pane, do a vertical split, otherwise do a horizontal split.
+
+npanes=$(tmux list-panes | wc -l)
+
+if [[ $(echo "$npanes > 1" | bc) -eq 1 ]]; then
+    tmux split-window -v
+else
+    tmux split-window -h
+fi
