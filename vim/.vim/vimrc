@@ -177,6 +177,9 @@ endif
 " Use :w!! to save root files you forgot to open with sudo
 ca w!! w !sudo tee "%"
 
+" Default (overriden for specific filetypes below)
+set formatoptions-=t
+
 " Filetype-specific configuration
 augroup edit_text
     autocmd!
@@ -189,6 +192,7 @@ augroup edit_text
 augroup END
 
 augroup edit_cloudera
+    " cloudera
     autocmd FileType javascript setlocal shiftwidth=2
     autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
 augroup END
