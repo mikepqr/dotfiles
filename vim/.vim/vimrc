@@ -226,20 +226,14 @@ nmap <leader>h :History<cr>
 nmap <leader>b :Buffers<cr>
 nmap <leader>f :Files<cr>
 nmap <leader>g :Rg<space>
+" Search for current word
+nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
 " Leader-y to yank to system clipboard (works over remote tmux)
 noremap <silent> <Leader>y :Oscyank<cr>
 
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
-
-" Make :Rg match occurences of patterns inside files, not filenames
-" https://github.com/junegunn/fzf.vim#example-rg-command-with-preview-window
-" https://github.com/junegunn/fzf.vim/issues/346#issuecomment-412558898
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 " Markdown: link selected text using URL in system clipboard
 augroup mdkeys
