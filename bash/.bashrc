@@ -43,9 +43,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         pathadd "$BREW_PREFIX/opt/findutils/libexec/gnubin"
         manpathadd "$BREW_PREFIX/opt/coreutils/libexec/gnuman"
         manpathadd "$BREW_PREFIX/opt/findutils/libexec/gnuman"
-        if [ -f "$BREW_PREFIX/share/bash-completion/bash_completion" ]; then
-            source "$BREW_PREFIX/share/bash-completion/bash_completion"
-        fi
+        [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
     fi
 fi
 
