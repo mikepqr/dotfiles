@@ -1,5 +1,6 @@
 #!/bin/bash
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
+
 ## -- PATH --
 pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -92,15 +93,15 @@ fi
 ## -- PROMPT --
 PROMPT_COMMAND=""
 # http://stackoverflow.com/questions/23399183/bash-command-prompt-with-virtualenv-and-git-branch
-        red="\[\033[0;31m\]"
-     yellow="\[\033[1;33m\]"
-      green="\[\033[0;32m\]"
-       blue="\[\033[1;34m\]"
-  light_red="\[\033[1;31m\]"
-light_green="\[\033[1;32m\]"
-      white="\[\033[1;37m\]"
- light_gray="\[\033[0;37m\]"
- color_none="\[\e[0m\]"
+          red="\[\033[0;31m\]"
+#       green="\[\033[0;32m\]"
+       yellow="\[\033[1;33m\]"
+         blue="\[\033[1;34m\]"
+#   light_red="\[\033[1;31m\]"
+# light_green="\[\033[1;32m\]"
+#       white="\[\033[1;37m\]"
+#  light_gray="\[\033[0;37m\]"
+        color_none="\[\e[0m\]"
 
 # Detect whether the current directory is a git repository.
 function is_git_repository {
@@ -169,7 +170,7 @@ PROMPT_COMMAND+="set_bash_prompt;"
 # Fix ssh agent forwarding in remote tmux sessions
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && [ -n "$TMUX" ]; then
     fixssh() {
-        eval $(tmux show-env -s |grep '^SSH_')
+        eval "$(tmux show-env -s |grep '^SSH_')"
     }
     PROMPT_COMMAND+="fixssh;"
 fi
@@ -233,7 +234,7 @@ if [ -f ~/.fzf.bash ]; then
     v() {
       local files
       files=$(grep '^>' ~/.viminfo | cut -c3- |
-              while read line; do
+              while read -r line; do
                 [ -f "${line/\~/$HOME}" ] && echo "$line"
               done | fzf-tmux -d -m -q "$*" -1) && vim "${files//\~/$HOME}"
     }
