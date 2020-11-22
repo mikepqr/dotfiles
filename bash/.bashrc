@@ -24,10 +24,8 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 pathadd "$HOME/bin"
-# go
 GOPATH=$HOME/go
 pathadd "$GOPATH/bin"
-# pipsi
 pathadd "$HOME/.local/bin"
 
 # If not running interactively, don't do anything
@@ -63,8 +61,13 @@ fi
 ## -- PYTHON --
 export PYTHONSTARTUP=${HOME}/.config/python/pythonrc.py
 pathadd "$HOME/.pyenv/bin"
+# Lazily load pyenv (saves ~200ms of shell startup)
 if command -v pyenv >/dev/null 2>&1; then
-    eval "$(pyenv init -)"
+    function pyenv() {
+        unset -f "pyenv"
+        eval "$(pyenv init -)"
+        pyenv "${@}"
+    }
 fi
 export VENVHOME="${HOME}/.ves"
 workon () {
