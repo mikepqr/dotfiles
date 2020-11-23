@@ -51,12 +51,16 @@ bell:
 
 window:
   dimensions:
-    columns: 100
-    lines: 30
+    # Half width, full height at 14pt on MBP
+    columns: 90
+    lines: 56
   padding:
     x: 0
     y: 0
   decorations: buttonless
+  position:
+    x: 1542
+    y: 0
 
 key_bindings:
   # enter
