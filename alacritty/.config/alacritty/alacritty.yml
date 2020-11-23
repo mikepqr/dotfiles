@@ -11,8 +11,8 @@ font:
   use_thin_strokes: true
 
 mouse:
-    url:
-        modifiers: Shift
+  url:
+    modifiers: Shift
 
 colors:
   # Iceberg Dark
@@ -55,11 +55,11 @@ window:
     columns: 90
     lines: 56
   padding:
-    x: 0
+    x: 1
     y: 0
   decorations: buttonless
   position:
-    x: 1542
+    x: 1534
     y: 0
 
 key_bindings:
