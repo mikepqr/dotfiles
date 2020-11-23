@@ -44,3 +44,4 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 au TermOpen * setlocal nonumber norelativenumber
 tnoremap <Esc> <C-\><C-n>
+nmap <leader>t :terminal<cr>i
