@@ -10,6 +10,10 @@ font:
     y: 0
   use_thin_strokes: true
 
+mouse:
+    url:
+        modifiers: Shift
+
 colors:
   # Iceberg Dark
   primary:
@@ -50,8 +54,9 @@ window:
     columns: 100
     lines: 30
   padding:
-    x: 4
-    y: 4
+    x: 0
+    y: 0
+  decorations: buttonless
 
 key_bindings:
   # enter
