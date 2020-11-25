@@ -42,6 +42,7 @@ Thumbs.db
 ######################
 .*.swp
 tags
+Session.vim
 
 # Python
 ######################

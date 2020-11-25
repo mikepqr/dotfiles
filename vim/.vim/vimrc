@@ -21,6 +21,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-obsession'
 Plug 'w0rp/ale'
 Plug 'williamsmj/oscyank.vim', { 'branch': 'williamsmj/neovim' }
 if has("nvim")
@@ -125,7 +126,7 @@ set number
 set relativenumber
 set cursorline
 set statusline=
-set statusline+=%{FugitiveStatusline()}
+set statusline+=%{FugitiveStatusline()}%{ObsessionStatus()}
 set statusline+=\ %f\ %y\ %=%c,%l/%L
 
 " Colors
