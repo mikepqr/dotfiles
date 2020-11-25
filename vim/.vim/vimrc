@@ -57,8 +57,10 @@ set list
 " Mouse
 set mouse=a  " mouse support in terminals
 if &term =~ '^screen'
-    " resize splits in tmux
-    set ttymouse=xterm2
+    " resize vim splits in tmux (not necessary and raises error in nvim)
+    if !has("nvim")
+        set ttymouse=xterm2
+    endif
     " make bracketed paste mode work, https://vi.stackexchange.com/a/16579
     try
         let &t_BE="\<Esc>[?2004h"
