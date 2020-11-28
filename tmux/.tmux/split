@@ -2,12 +2,15 @@
 #
 # Split tmux pane.
 #
-# If there is one pane, do a vertical split, otherwise do a horizontal split.
+# If the pane is wider than 2*minwidth then split it vertically. Otherwise split
+# it horizontally
 
-npanes=$(tmux list-panes | wc -l)
+minwidth=70
 
-if [[ $(echo "$npanes > 1" | bc) -eq 1 ]]; then
-    tmux split-window -v
-else
+width=$(tmux display-message -p '#{pane_width}')
+
+if [[ $(echo "$width > 2*$minwidth" | bc) -eq 1 ]]; then
     tmux split-window -h
+else
+    tmux split-window -v
 fi
