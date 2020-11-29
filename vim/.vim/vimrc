@@ -8,6 +8,7 @@ Plug 'cocopon/iceberg.vim'
 Plug 'delphinus/vim-auto-cursorline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'farmergreg/vim-lastplace'
+Plug 'greymd/oscyank.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
@@ -16,14 +17,13 @@ Plug 'mbbill/undotree'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-obsession'
 Plug 'w0rp/ale'
-Plug 'williamsmj/oscyank.vim', { 'branch': 'williamsmj/neovim' }
 if has("nvim")
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'wincent/corpus'
