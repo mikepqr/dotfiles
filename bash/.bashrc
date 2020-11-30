@@ -37,6 +37,7 @@ esac
 
 ## -- OS SPECIFIC --
 if [[ "$OSTYPE" == "darwin"* ]]; then
+    export XDG_CACHE_HOME="${HOME}/Library/Caches"
     if command -v brew >/dev/null 2>&1; then
         BREW_PREFIX=/usr/local  # hard-coded for speed, `brew --prefix`
         pathadd "$BREW_PREFIX/sbin"
