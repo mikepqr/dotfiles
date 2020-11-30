@@ -231,14 +231,6 @@ if [ -f ~/.fzf.bash ]; then
     else
         export FZF_ALT_C_COMMAND="fd --type d . ~"
     fi
-    # v (~/.viminfo), https://github.com/junegunn/fzf/wiki/examples#v
-    v() {
-      local files
-      files=$(grep '^>' ~/.viminfo | cut -c3- |
-              while read -r line; do
-                [ -f "${line/\~/$HOME}" ] && echo "$line"
-              done | fzf-tmux -d -m -q "$*" -1) && vim "${files//\~/$HOME}"
-    }
 fi
 
 if [ -f ~/.bashrc_private ]; then
