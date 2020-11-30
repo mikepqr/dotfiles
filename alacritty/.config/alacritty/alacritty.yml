@@ -59,7 +59,6 @@ window:
     y: 0
   decorations: buttonless
   position:
-    x: 1534
     y: 0
 
 key_bindings:
