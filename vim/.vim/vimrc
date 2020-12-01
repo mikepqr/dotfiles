@@ -23,6 +23,9 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-obsession'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'w0rp/ale'
 if has("nvim")
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
