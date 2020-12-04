@@ -42,6 +42,8 @@ endif
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
 au TermOpen * setlocal nonumber norelativenumber
 tnoremap <Esc> <C-\><C-n>
 nmap <leader>t :terminal<cr>i
