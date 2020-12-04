@@ -6,7 +6,7 @@ lua <<
     CorpusDirectories = {
       ['~/notes'] = {
         autocommit = true,
-        autoreference = 1,
+        autoreference = false,
         autotitle = 1,
         base = './',
         transform = 'local',
