@@ -65,3 +65,8 @@ Untitled*.ipynb
 venv
 env-local
 zappa_settings.json
+
+# JavaScript
+######################
+node_modules/
+dist/
