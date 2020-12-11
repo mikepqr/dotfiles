@@ -86,6 +86,7 @@ set hlsearch
 " Keys
 set pastetoggle=<Leader>tp
 nnoremap <leader><space> :noh<cr>
+nnoremap <leader>w :bdelete<cr>
 " h and l and ~ wrap over lines
 set whichwrap=h,l,~
 " Q reformats current paragraph or selected text
