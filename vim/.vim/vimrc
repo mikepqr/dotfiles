@@ -207,7 +207,7 @@ augroup END
 
 augroup edit_code
     autocmd FileType css,html setlocal shiftwidth=2
-    autocmd FileType javascript,typescript setlocal shiftwidth=2
+    autocmd FileType javascript,typescript,typescriptreact setlocal shiftwidth=2
     autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
 augroup END
 
