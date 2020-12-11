@@ -60,11 +60,16 @@ set expandtab
 set list
 " Mouse
 set mouse=a  " mouse support in terminals
-if &term =~ '^screen'
+
+if !has("nvim")
     " resize vim splits in tmux (not necessary and raises error in nvim)
-    if !has("nvim")
+    if &term =~ '^(tmux|screen)'
         set ttymouse=xterm2
     endif
+    " make italics work in macOS's broken xterm-256color
+    " https://stackoverflow.com/a/53625973/409879
+    let &t_ZH="\e[3m"
+    let &t_ZR="\e[23m"
     " make bracketed paste mode work, https://vi.stackexchange.com/a/16579
     try
         let &t_BE="\<Esc>[?2004h"
@@ -108,7 +113,6 @@ vmap j gj
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 " jk for esc
-inoremap <esc> <nop>
 inoremap jk <esc>
 
 " Use undotree and persist undo across sessions
