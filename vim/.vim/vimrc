@@ -153,6 +153,9 @@ augroup customize_iceberg
     autocmd ColorScheme * highlight! link SpellCap SpellBad
     autocmd ColorScheme * highlight! link SpellLocal SpellBad
     autocmd ColorScheme * highlight! link SpellRare SpellBad
+    " Tweak Error group (used for comments, etc.)
+    " italic and no bg (so it doesn't look weird under CursorLine)
+    autocmd ColorScheme * highlight! Error cterm=italic gui=italic ctermbg=NONE guibg=NONE
     " Prominent comments
     autocmd ColorScheme * highlight! link Comment Error
     " Reverse selection
