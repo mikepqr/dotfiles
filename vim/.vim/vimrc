@@ -70,7 +70,7 @@ if !has("nvim")
     " https://stackoverflow.com/a/53625973/409879
     let &t_ZH="\e[3m"
     let &t_ZR="\e[23m"
-    " make bracketed paste mode work, https://vi.stackexchange.com/a/16579
+    " " make bracketed paste mode work, https://vi.stackexchange.com/a/16579
     try
         let &t_BE="\<Esc>[?2004h"
         let &t_BD="\<Esc>[?2004l"
@@ -160,7 +160,11 @@ augroup customize_iceberg
     autocmd ColorScheme * highlight! link SpellRare SpellBad
     " Tweak Error group (used for comments, etc.)
     " italic and no bg (so it doesn't look weird under CursorLine)
-    autocmd ColorScheme * highlight! Error cterm=italic gui=italic ctermbg=NONE guibg=NONE
+    if system("uname") == "Darwin\n"
+        autocmd ColorScheme * highlight! Error cterm=italic gui=italic ctermbg=NONE guibg=NONE
+    else
+        autocmd ColorScheme * highlight! Error ctermbg=NONE guibg=NONE
+    endif
     " Prominent comments
     autocmd ColorScheme * highlight! link Comment Error
     " Reverse selection
