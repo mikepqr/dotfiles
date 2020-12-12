@@ -138,11 +138,7 @@ set statusline+=%{FugitiveStatusline()}%{ObsessionStatus()}
 set statusline+=\ %f\ %y\ %=%c,%l/%L
 
 " Colors
-if $ITERM_PROFILE == 'Light'
-    set background=light
-else
-    set background=dark
-endif
+set background=dark
 if exists('+termguicolors')
     " :help xterm-true-color (possibly unnecessary in nvim)
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -159,11 +155,11 @@ augroup customize_iceberg
     autocmd ColorScheme * highlight! link SpellLocal SpellBad
     autocmd ColorScheme * highlight! link SpellRare SpellBad
     " Tweak Error group (used for comments, etc.)
-    " italic and no bg (so it doesn't look weird under CursorLine)
-    if system("uname") == "Darwin\n"
-        autocmd ColorScheme * highlight! Error cterm=italic gui=italic ctermbg=NONE guibg=NONE
-    else
-        autocmd ColorScheme * highlight! Error ctermbg=NONE guibg=NONE
+    " no bg (so it doesn't look weird under CursorLine)
+    autocmd ColorScheme * highlight Error ctermbg=NONE guibg=NONE
+    " italic where it works, i.e. tmux-256color, xterm-256color, alacritty, etc.
+    if &term !~ '^screen'
+        autocmd ColorScheme * highlight Error cterm=italic gui=italic
     endif
     " Prominent comments
     autocmd ColorScheme * highlight! link Comment Error
