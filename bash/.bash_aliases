@@ -5,8 +5,8 @@ alias l='ls'
 alias ll='ls -l'
 alias grep='grep --color'
 alias jn='jupyter notebook'
-alias n='cd ${HOME}/notes && vim'
-alias t='vim ${HOME}/notes/$(date +"%Y-%m-%d").md'
+alias n='vim -c ":cd ~/notes"'
+alias v='vim -c ":History"'
 
 if command -v direnv >/dev/null 2>&1; then
     alias tmux='direnv exec / tmux'
