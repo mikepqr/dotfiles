@@ -70,6 +70,7 @@ window:
 key_bindings:
   # enter
   - { key: 36,        mods: Command,   action: ToggleFullscreen             }
+  - { key: W,         mods: Command,   action: None                         }
 
   # make Alt work as modifier
   - { key: A,         mods: Alt,       chars: "\x1ba"                       }
