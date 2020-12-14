@@ -138,7 +138,11 @@ set statusline+=%{FugitiveStatusline()}%{ObsessionStatus()}
 set statusline+=\ %f\ %y\ %=%c,%l/%L
 
 " Colors
-set background=dark
+if filereadable(expand("~/.background-light"))
+    set background=light
+else
+    set background=dark
+endif
 if exists('+termguicolors')
     " :help xterm-true-color (possibly unnecessary in nvim)
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"

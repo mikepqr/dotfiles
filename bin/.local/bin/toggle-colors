@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# Toggles between "colors: *dark" and "colors: *light" in alacritty config
+# Also creates a sentinel file ~/.background-light if light, deleted if dark
+
+# This must be the real config file, not the symlink at ~/.config/alacritty,
+# otherwise sed -i does not work
+alacritty_config="${HOME}/.dotfiles/alacritty/.config/alacritty/alacritty.yml"
+
+if grep -q '^colors: \*dark' "${alacritty_config}" ; then
+    sed -i '' 's/^colors: \*dark/colors: *light/' "${alacritty_config}"
+    touch "${HOME}/.background-light"
+else
+    sed -i '' 's/^colors: \*light/colors: *dark/' "${alacritty_config}"
+    rm -f "${HOME}/.background-light"
+fi
