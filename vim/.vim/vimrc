@@ -207,6 +207,8 @@ augroup edit_text
         \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
         \ nojoinspaces spell spellcapcheck=
+    " Don't spellcheck URLs https://vi.stackexchange.com/a/4003
+    syntax match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
 augroup END
 
 augroup edit_code
