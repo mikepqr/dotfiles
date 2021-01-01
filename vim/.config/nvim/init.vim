@@ -2,6 +2,13 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vim/vimrc
 
+if filereadable('/Users/mike/.ves/neovim2/bin/python')
+    let g:python_host_prog = '/Users/mike/.ves/neovim2/bin/python'
+endif
+if filereadable('/Users/mike/.ves/neovim3/bin/python')
+    let g:python3_host_prog = '/Users/mike/.ves/neovim3/bin/python'
+endif
+
 lua <<
     CorpusDirectories = {
       ['~/notes'] = {
