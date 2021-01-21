@@ -222,6 +222,7 @@ augroup edit_code
     autocmd FileType css,html setlocal shiftwidth=2
     autocmd FileType javascript,typescript,typescriptreact setlocal shiftwidth=2
     autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
+    autocmd BufRead,BufNewFile Dockerfile.fragment set filetype=Dockerfile
 augroup END
 
 let g:ale_fixers = {'python': ['isort', 'black']}
