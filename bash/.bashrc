@@ -60,6 +60,9 @@ fi
 
 ## -- PYTHON --
 export PYTHONSTARTUP=${HOME}/.config/python/pythonrc.py
+# add pyenv itself to path
+pathadd "$HOME/.pyenv/bin"
+# add pyenv versions to path
 pathadd "${HOME}/.pyenv/shims"
 export VENVHOME="${HOME}/.ves"
 workon () {
