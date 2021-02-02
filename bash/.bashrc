@@ -60,15 +60,7 @@ fi
 
 ## -- PYTHON --
 export PYTHONSTARTUP=${HOME}/.config/python/pythonrc.py
-pathadd "$HOME/.pyenv/bin"
-# Lazily load pyenv (saves ~200ms of shell startup)
-if command -v pyenv >/dev/null 2>&1; then
-    function pyenv() {
-        unset -f "pyenv"
-        eval "$(pyenv init -)"
-        pyenv "${@}"
-    }
-fi
+pathadd "${HOME}/.pyenv/shims"
 export VENVHOME="${HOME}/.ves"
 workon () {
     if [ -f "${VENVHOME}/$1/bin/activate" ]; then
