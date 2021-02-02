@@ -179,12 +179,13 @@ augroup customize_iceberg
     autocmd ColorScheme * highlight! link StatusLineNC LineNr
     autocmd ColorScheme * highlight! link StatusLineTermNC LineNr
     " focus
-    autocmd ColorScheme * highlight! NormalNC guibg=#1e2132
+    autocmd ColorScheme * highlight! Normal guibg=NONE
     autocmd ColorScheme * highlight! EndOfBuffer guibg=NONE
+    autocmd ColorScheme * highlight! NormalNC guibg=#1e2132
     autocmd FocusLost *
                 \ execute 'highlight! Normal guibg=#1e2132'
     autocmd FocusGained,BufEnter *
-                \ execute 'highlight! Normal guibg=#161821'
+                \ execute 'highlight! Normal guibg=NONE'
 augroup END
 try
     colorscheme iceberg
