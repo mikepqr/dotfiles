@@ -226,6 +226,9 @@ augroup edit_code
     autocmd BufRead,BufNewFile Dockerfile.fragment set filetype=Dockerfile
 augroup END
 
+" Treat trailing whitespace as TODO syntax group
+match Todo /\s\+$/
+
 let g:ale_fixers = {'python': ['isort', 'black']}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
