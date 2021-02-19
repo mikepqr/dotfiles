@@ -21,9 +21,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         source /etc/profile
     fi
 fi
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 pathadd "$HOME/bin"
 GOPATH=$HOME/go
 pathadd "$GOPATH/bin"
@@ -38,15 +35,23 @@ esac
 ## -- OS SPECIFIC --
 if [[ "$OSTYPE" == "darwin"* ]]; then
     export XDG_CACHE_HOME="${HOME}/Library/Caches"
-    if command -v brew >/dev/null 2>&1; then
-        BREW_PREFIX=/usr/local  # hard-coded for speed, `brew --prefix`
-        pathadd "$BREW_PREFIX/sbin"
-        pathadd "$BREW_PREFIX/opt/coreutils/libexec/gnubin"
-        pathadd "$BREW_PREFIX/opt/findutils/libexec/gnubin"
-        manpathadd "$BREW_PREFIX/opt/coreutils/libexec/gnuman"
-        manpathadd "$BREW_PREFIX/opt/findutils/libexec/gnuman"
-        [[ -r "$BREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$BREW_PREFIX/etc/profile.d/bash_completion.sh"
+    pathadd "/opt/homebrew/bin"
+    if [ -d /opt/homebrew ]; then
+        BREW_PREFIX=/opt/homebrew  # hard-coded for speed, `brew --prefix`
+    else
+        BREW_PREFIX=/usr/local
     fi
+    pathadd "$BREW_PREFIX/sbin"
+    pathadd "$BREW_PREFIX/opt/coreutils/libexec/gnubin"
+    pathadd "$BREW_PREFIX/opt/findutils/libexec/gnubin"
+    manpathadd "$BREW_PREFIX/opt/coreutils/libexec/gnuman"
+    manpathadd "$BREW_PREFIX/opt/findutils/libexec/gnuman"
+    [[ -r "$BREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$BREW_PREFIX/etc/profile.d/bash_completion.sh"
+fi
+
+# Aliases must come after brew activation
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
 
 # Make completion work on Debian-like systems
