@@ -152,32 +152,32 @@ endif
 " Must happen before we set colorscheme; will rerun when colorscheme changes
 augroup customize_iceberg
     autocmd!
-    autocmd ColorScheme * highlight! link IndentGuidesEven LineNr
+    autocmd ColorScheme iceberg highlight! link IndentGuidesEven LineNr
     " Underline spelling problems
-    autocmd ColorScheme * highlight! link SpellBad Underlined
-    autocmd ColorScheme * highlight! link SpellCap SpellBad
-    autocmd ColorScheme * highlight! link SpellLocal SpellBad
-    autocmd ColorScheme * highlight! link SpellRare SpellBad
+    autocmd ColorScheme iceberg highlight! link SpellBad Underlined
+    autocmd ColorScheme iceberg highlight! link SpellCap SpellBad
+    autocmd ColorScheme iceberg highlight! link SpellLocal SpellBad
+    autocmd ColorScheme iceberg highlight! link SpellRare SpellBad
     " Tweak Error group (used for comments, etc.)
     " no bg (so it doesn't look weird under CursorLine)
-    autocmd ColorScheme * highlight Error ctermbg=NONE guibg=NONE
+    autocmd ColorScheme iceberg highlight Error ctermbg=NONE guibg=NONE
     " italic where it works, i.e. tmux-256color, xterm-256color, alacritty, etc.
     if &term !~ '^screen'
-        autocmd ColorScheme * highlight Error cterm=italic gui=italic
+        autocmd ColorScheme iceberg highlight Error cterm=italic gui=italic
     endif
     " Prominent comments
-    autocmd ColorScheme * highlight! link Comment Error
+    autocmd ColorScheme iceberg highlight! link Comment Error
     " Reverse selection
-    autocmd ColorScheme * highlight! Visual cterm=reverse gui=reverse
+    autocmd ColorScheme iceberg highlight! Visual cterm=reverse gui=reverse
     " buftabline
-    autocmd ColorScheme * highlight! link BufTabLineCurrent PmenuSel
-    autocmd ColorScheme * highlight! link BufTabLineHidden LineNr
-    autocmd ColorScheme * highlight! link BufTabLineFill LineNr
+    autocmd ColorScheme iceberg highlight! link BufTabLineCurrent PmenuSel
+    autocmd ColorScheme iceberg highlight! link BufTabLineHidden LineNr
+    autocmd ColorScheme iceberg highlight! link BufTabLineFill LineNr
     " statusline
-    autocmd ColorScheme * highlight! link StatusLine PmenuSel
-    autocmd ColorScheme * highlight! link StatusLineTerm PmenuSel
-    autocmd ColorScheme * highlight! link StatusLineNC LineNr
-    autocmd ColorScheme * highlight! link StatusLineTermNC LineNr
+    autocmd ColorScheme iceberg highlight! link StatusLine PmenuSel
+    autocmd ColorScheme iceberg highlight! link StatusLineTerm PmenuSel
+    autocmd ColorScheme iceberg highlight! link StatusLineNC LineNr
+    autocmd ColorScheme iceberg highlight! link StatusLineTermNC LineNr
 augroup END
 try
     colorscheme iceberg
