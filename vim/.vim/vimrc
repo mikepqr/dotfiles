@@ -51,7 +51,11 @@ set colorcolumn=80
 set scrolloff=5
 set sidescrolloff=3
 set nowrap
-set diffopt+=vertical
+try
+    set diffopt+=vertical
+catch /E474:/
+    echom "This vim does not support diffopt vertical"
+endtry
 " Change default position of new splits
 set splitbelow
 set splitright
