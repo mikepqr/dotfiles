@@ -7,6 +7,7 @@ alias grep='grep --color'
 alias jn='jupyter notebook'
 alias n='vim -c ":cd ~/notes"'
 alias v='vim -c ":History"'
+alias pdf='(cd "$HOME/.dotfiles" && git pull)'
 
 if command -v direnv >/dev/null 2>&1; then
     alias tmux='direnv exec / tmux'
