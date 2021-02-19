@@ -35,7 +35,8 @@ call plug#end()
 
 try
     source ~/.vim/private.vim
-catch
+catch /E484:/
+    echom "private.vim not found"
 endtry
 
 " Buffers
@@ -76,9 +77,8 @@ if !has("nvim")
         let &t_BD="\<Esc>[?2004l"
         let &t_PS="\<Esc>[200~"
         let &t_PE="\<Esc>[201~"
-    catch
-        " Fail silently on error. Bracketed paste mode doesn't work in vim
-        " ~8.0.3, which I sometimes use :-(
+    catch /E18:/
+        echom "Bracketed paste mode doesn't work in this version of vim"
     endtry
 endif
 " Clipboard
@@ -181,7 +181,8 @@ augroup customize_iceberg
 augroup END
 try
     colorscheme iceberg
-catch
+catch /E185:/
+    echom "iceberg colorscheme not available"
     colorscheme default
 endtry
 
