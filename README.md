@@ -1,10 +1,10 @@
 # Mike Lee Williams's dotfiles
 
-The install script uses [stowsh](https://github.com/williamsmj/stowsh) to
+The install script uses [stowsh](https://github.com/mikepqr/stowsh) to
 symlink dotfiles into the appropriate location.
 
 ```sh
-git clone git@github.com:williamsmj/dotfiles.git ~/.dotfiles
+git clone git@github.com:mikepqr/dotfiles.git ~/.dotfiles
 ~/.dotfiles/install.sh
 ```
 
