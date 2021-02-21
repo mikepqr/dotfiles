@@ -21,6 +21,8 @@ fi
 function edex() {
     $EDITOR $(which "$1")
 }
+# add commands (i.e executables) as completions
+complete -A command edex
 
 function mktempdir() {
     dir="$1"
