@@ -78,7 +78,7 @@ workon () {
 workon default
 mkvirtualenv () {
     deactivate 2> /dev/null || true
-    python -m virtualenv "${VENVHOME}/${1}"
+    python -m venv "${VENVHOME}/${1}"
     workon "${1}"
 }
 
