@@ -7,7 +7,7 @@ alias grep='grep --color'
 alias jn='jupyter notebook'
 alias n='vim -c ":cd ~/notes"'
 alias v='vim -c ":History"'
-alias pdf='(cd "$HOME/.dotfiles" && git pull)'
+alias pdf='(cd "$HOME/.dotfiles" && git pull && cd "$HOME/.dotfiles-private" && git pull)'
 alias cdf='cd "$HOME/.dotfiles"'
 
 if command -v direnv >/dev/null 2>&1; then
@@ -17,6 +17,10 @@ fi
 if command -v nvim > /dev/null 2>&1; then
     alias vim=nvim
 fi
+
+function edex() {
+    $EDITOR $(which "$1")
+}
 
 function mktempdir() {
     dir="$1"
