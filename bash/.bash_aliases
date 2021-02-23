@@ -1,9 +1,9 @@
 #!/bin/bash
 
-alias ls='ls -F --color=auto'
-alias l='ls'
-alias ll='ls -l'
-alias grep='grep --color'
+alias ls='gls -F --color=auto'
+alias ll='gls -Fl --color=auto'
+alias la='gls -aFl --color=auto'
+alias grep='ggrep --color'
 alias jn='jupyter notebook'
 alias n='vim -c ":cd ~/notes"'
 alias v='vim -c ":History"'
@@ -69,16 +69,6 @@ function compare_versions () {
     done
     return 0
 }
-
-if [[ -n "$ITERM_PROFILE" ]]; then
-    function toggle-profile() {
-        case "$ITERM_PROFILE" in
-            "Dark") export ITERM_PROFILE="Light" ;;
-            "Light") export ITERM_PROFILE="Dark" ;;
-        esac
-        echo -ne "\033]50;SetProfile=$ITERM_PROFILE\a"
-    }
-fi
 
 # Alias diff --color to dif if possible
 diff_version=$(diff --version | head -1 | grep -o -E '[0-9]+\.[0-9]+')
