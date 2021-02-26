@@ -206,9 +206,9 @@ set formatoptions-=t
 match Todo /\s\+$/
 
 let g:ale_fixers = {
-            \ 'python': ['isort', 'black'],
-            \ 'bash': ['shfmt'],
-            \ 'sh': ['shfmt']}
+    \ 'python': ['isort', 'black'],
+    \ 'bash': ['shfmt'],
+    \ 'sh': ['shfmt']}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
 " Unimpaired-style mappings to jump to ALE warnings/errors
@@ -246,12 +246,15 @@ noremap <silent> <Leader>y :Oscyank<cr>
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 
+" Don't indent continued lines 3 * shiftwidth(?!)
+let g:vim_indent_cont = &sw
+
 augroup vimrc
     autocmd! vimrc
 
     " Set shfmt options depending on shiftwidth
     autocmd OptionSet shiftwidth
-                \ exec 'let g:ale_sh_shfmt_options = "-ci -i " . &shiftwidth'
+        \ exec 'let g:ale_sh_shfmt_options = "-ci -i " . &shiftwidth'
 
     " Markdown: link selected text using URL in system clipboard
     autocmd Filetype markdown vnoremap <Leader>k <ESC>`>a](<ESC>"*pa)<ESC>`<i[<ESC>
@@ -266,21 +269,21 @@ augroup vimrc
     " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
     " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
     autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
-                \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+        \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
 
     " Notification after file change
     " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
     autocmd FileChangedShellPost *
-                \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+        \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
     " When editing a file, always jump to the last known cursor position.
     " Don't do it for commit messages, when the position is invalid, or when
     " inside an event handler (happens when dropping a file on gvim).
     " https://github.com/dkarter/dotfiles/blob/99b4c5675cb859a9e50f95c40b73cb3f95414ad0/vimrc#L1128-L1134
     autocmd BufReadPost *
-                \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-                \   exe "normal g`\"" |
-                \ endif
+        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
 
     " formatlistpat taken from ftplugin/markdown.vim
     " spellcapcheck= disables capitalization checks
