@@ -266,6 +266,15 @@ augroup vimrc
     autocmd FileChangedShellPost *
                 \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it for commit messages, when the position is invalid, or when
+    " inside an event handler (happens when dropping a file on gvim).
+    " https://github.com/dkarter/dotfiles/blob/99b4c5675cb859a9e50f95c40b73cb3f95414ad0/vimrc#L1128-L1134
+    autocmd BufReadPost *
+                \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+                \   exe "normal g`\"" |
+                \ endif
+
     " formatlistpat taken from ftplugin/markdown.vim
     " spellcapcheck= disables capitalization checks
     autocmd FileType asciidoc,markdown,text,gitcommit setlocal
