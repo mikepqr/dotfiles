@@ -7,7 +7,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/iceberg.vim'
 Plug 'delphinus/vim-auto-cursorline'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'farmergreg/vim-lastplace'
 Plug 'greymd/oscyank.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -203,26 +202,6 @@ ca w!! w !sudo tee "%"
 " Default (overriden for specific filetypes below)
 set formatoptions-=t
 
-" Filetype-specific configuration
-augroup edit_text
-    autocmd!
-    " taken from ftplugin/markdown.vim
-    " spellcapcheck= disables capitalization checks
-    autocmd FileType asciidoc,markdown,text,gitcommit setlocal
-        \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
-        \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
-        \ nojoinspaces spell spellcapcheck=
-    " Don't spellcheck URLs https://vi.stackexchange.com/a/4003
-    syntax match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
-augroup END
-
-augroup edit_code
-    autocmd FileType css,html setlocal shiftwidth=2
-    autocmd FileType javascript,typescript,typescriptreact setlocal shiftwidth=2
-    autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
-    autocmd BufRead,BufNewFile Dockerfile.fragment set filetype=Dockerfile
-augroup END
-
 " Treat trailing whitespace as TODO syntax group
 match Todo /\s\+$/
 
@@ -264,11 +243,44 @@ noremap <silent> <Leader>y :Oscyank<cr>
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 
-" Markdown: link selected text using URL in system clipboard
-augroup mdkeys
-  autocmd! mdkeys
-  autocmd Filetype markdown vnoremap <Leader>k <ESC>`>a](<ESC>"*pa)<ESC>`<i[<ESC>
-augroup end
+augroup vimrc
+    autocmd! vimrc
+
+    " Markdown: link selected text using URL in system clipboard
+    autocmd Filetype markdown vnoremap <Leader>k <ESC>`>a](<ESC>"*pa)<ESC>`<i[<ESC>
+
+    " Automatic rename of tmux window
+    if exists('$TMUX') && !exists('$NORENAME')
+        autocmd BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
+        autocmd VimLeave * call system('tmux set-window automatic-rename on')
+    endif
+
+    " Trigger `autoread` when files changes on disk
+    " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+    " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+    autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+                \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+
+    " Notification after file change
+    " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
+    autocmd FileChangedShellPost *
+                \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
+    " formatlistpat taken from ftplugin/markdown.vim
+    " spellcapcheck= disables capitalization checks
+    autocmd FileType asciidoc,markdown,text,gitcommit setlocal
+        \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
+        \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
+        \ nojoinspaces spell spellcapcheck=
+
+    " Don't spellcheck URLs https://vi.stackexchange.com/a/4003
+    syntax match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
+
+    autocmd FileType css,html setlocal shiftwidth=2
+    autocmd FileType javascript,typescript,typescriptreact setlocal shiftwidth=2
+    autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
+    autocmd BufRead,BufNewFile Dockerfile.fragment set filetype=Dockerfile
+augroup END
 
 " splitjoin
 let g:splitjoin_trailing_comma = 1
@@ -276,23 +288,6 @@ let g:splitjoin_python_brackets_on_separate_lines = 1
 
 " fugitive
 let g:github_enterprise_urls = ['https://github.infra.cloudera.com']
-
-" Automatic rename of tmux window
-if exists('$TMUX') && !exists('$NORENAME')
-    au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
-    au VimLeave * call system('tmux set-window automatic-rename on')
-endif
-
-" Trigger `autoread` when files changes on disk
-" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
-" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
-autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
-    \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
-
-" Notification after file change
-" https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
-autocmd FileChangedShellPost *
-  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 " Write file without changing modification time
 " https://unix.stackexchange.com/a/527154/20079
@@ -310,3 +305,4 @@ for d in glob('~/.vim/spell/*.add', 1, 1)
         exec 'mkspell! ' . fnameescape(d)
     endif
 endfor
+
