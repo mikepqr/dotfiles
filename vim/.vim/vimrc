@@ -205,7 +205,10 @@ set formatoptions-=t
 " Treat trailing whitespace as TODO syntax group
 match Todo /\s\+$/
 
-let g:ale_fixers = {'python': ['isort', 'black']}
+let g:ale_fixers = {
+            \ 'python': ['isort', 'black'],
+            \ 'bash': ['shfmt'],
+            \ 'sh': ['shfmt']}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
 " Unimpaired-style mappings to jump to ALE warnings/errors
@@ -245,6 +248,10 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 augroup vimrc
     autocmd! vimrc
+
+    " Set shfmt options depending on shiftwidth
+    autocmd OptionSet shiftwidth
+                \ exec 'let g:ale_sh_shfmt_options = "-ci -i " . &shiftwidth'
 
     " Markdown: link selected text using URL in system clipboard
     autocmd Filetype markdown vnoremap <Leader>k <ESC>`>a](<ESC>"*pa)<ESC>`<i[<ESC>
