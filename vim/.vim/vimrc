@@ -302,3 +302,11 @@ function! WriteSmall()
     call system("touch --date='@".mtime."' ".shellescape(expand('%:p')))
     edit
 endfunction
+
+" Recompile .vim/spell/*.add to *.add.spl if necessary
+" https://vi.stackexchange.com/a/5052
+for d in glob('~/.vim/spell/*.add', 1, 1)
+    if filereadable(d) && (!filereadable(d . '.spl') || getftime(d) > getftime(d . '.spl'))
+        exec 'mkspell! ' . fnameescape(d)
+    endif
+endfor
