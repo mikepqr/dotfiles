@@ -32,8 +32,10 @@ function sync-if-clean {
         local dir="${1:-.}"
         cd "$dir" || return
         if non-dirty; then
-            git pull --rebase
-            git push
+            git pull --rebase | grep -v '^Already up to date.$'
+            # git push writes this message to stderr
+            git push 2>&1 | grep -v '^Everything up-to-date$'
+            return 0
         else
             git status
         fi
