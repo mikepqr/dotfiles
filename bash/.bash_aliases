@@ -7,8 +7,6 @@ alias grep='ggrep --color'
 alias jn='jupyter notebook'
 alias n='vim -c ":cd ~/notes"'
 alias v='vim -c ":History"'
-# sync dotfiles
-alias sdf='sync-if-clean $HOME/.dotfiles; sync-if-clean $HOME/.dotfiles-private'
 alias cdf='cd "$HOME/.dotfiles"'
 
 if command -v direnv >/dev/null 2>&1; then
@@ -38,6 +36,7 @@ function sync-if-clean {
             return 0
         else
             git status
+            return 1
         fi
     )
 }
@@ -47,6 +46,48 @@ function cspell {
         cd "$HOME/.dotfiles-private" || return
         git commit -m "Update spellfile" vim/.vim/spell/en.utf-8.add
     )
+}
+
+function sdf {
+    print-run-ok "sync-if-clean $HOME/.dotfiles"
+    print-run-ok "sync-if-clean $HOME/.dotfiles-private"
+}
+
+function print-run-ok() {
+    # $1 is a command
+    # $2 is an optional message
+    # This function
+    # - prints command (or the optional message)
+    # - runs the command exits
+    # - prints "OK" (on the same line if there was no output)
+    local cmd="${1}"
+    local msg="${2:-$1}"
+    local col='\033[0;33m'    # orange
+    local colerr='\033[0;31m' # red
+    local colok='\033[0;32m'  # green
+    local nc='\033[0m'        # no color
+    local up='\033[1A'        # move cursor up a line
+
+    echo -e "${col}>>> ${msg} ... ${nc}"
+
+    # run the command and capture and print the output
+    # pipefail ensures subshell exits with exit of $cmd, not tee
+    if output=$(
+        set -o pipefail
+        $cmd | tee /dev/tty
+    ); then
+        local exitmessage="OK ($?)"
+        col=${colok}
+    else
+        local exitmessage="ERROR ($?)"
+        col=${colerr}
+    fi
+
+    if [[ -z $output ]]; then
+        move="${up}"
+    fi
+
+    echo -e "${move:-}${col}>>> ${msg} ... ${exitmessage}${nc}"
 }
 
 function edex() {
