@@ -7,7 +7,8 @@ alias grep='ggrep --color'
 alias jn='jupyter notebook'
 alias n='vim -c ":cd ~/notes"'
 alias v='vim -c ":History"'
-alias pdf='(cd "$HOME/.dotfiles" && git pull && cd "$HOME/.dotfiles-private" && git pull)'
+# sync dotfiles
+alias pdf='sync-if-clean $HOME/.dotfiles; sync-if-clean $HOME/.dotfiles-private'
 alias cdf='cd "$HOME/.dotfiles"'
 
 if command -v direnv >/dev/null 2>&1; then
@@ -17,6 +18,27 @@ fi
 if command -v nvim >/dev/null 2>&1; then
     alias vim=nvim
 fi
+
+# Returns zero if git repository is clean
+function non-dirty {
+    if [ -z "$(git status --porcelain)" ]; then
+        return 0
+    fi
+    return 1
+}
+
+function sync-if-clean {
+    (
+        local dir="${1:-.}"
+        cd "$dir" || return
+        if non-dirty; then
+            git pull --rebase
+            git push
+        else
+            git status
+        fi
+    )
+}
 
 function edex() {
     $EDITOR "$(which "$1")"
