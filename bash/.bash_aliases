@@ -8,7 +8,7 @@ alias jn='jupyter notebook'
 alias n='vim -c ":cd ~/notes"'
 alias v='vim -c ":History"'
 # sync dotfiles
-alias pdf='sync-if-clean $HOME/.dotfiles; sync-if-clean $HOME/.dotfiles-private'
+alias sdf='sync-if-clean $HOME/.dotfiles; sync-if-clean $HOME/.dotfiles-private'
 alias cdf='cd "$HOME/.dotfiles"'
 
 if command -v direnv >/dev/null 2>&1; then
@@ -37,6 +37,13 @@ function sync-if-clean {
         else
             git status
         fi
+    )
+}
+
+function cspell {
+    (
+        cd "$HOME/.dotfiles-private" || return
+        git commit -m "Update spellfile" vim/.vim/spell/en.utf-8.add
     )
 }
 
