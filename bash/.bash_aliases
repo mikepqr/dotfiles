@@ -17,7 +17,7 @@ if command -v nvim >/dev/null 2>&1; then
     alias vim=nvim
 fi
 
-# Returns zero if git repository is clean
+# Returns zero if git repository is clean (i.e. non-dirty)
 function non-dirty {
     if [ -z "$(git status --porcelain)" ]; then
         return 0
@@ -40,6 +40,7 @@ function sync-if-clean {
         fi
     )
 }
+complete -A directory sync-if-clean
 
 function cspell {
     (
@@ -49,8 +50,8 @@ function cspell {
 }
 
 function sdf {
-    print-run-ok "sync-if-clean $HOME/.dotfiles"
-    print-run-ok "sync-if-clean $HOME/.dotfiles-private"
+    print-run-ok "sync-if-clean $HOME/.dotfiles" "dotfiles"
+    print-run-ok "sync-if-clean $HOME/.dotfiles-private" "private dotfiles"
 }
 
 function print-run-ok() {
@@ -70,8 +71,9 @@ function print-run-ok() {
 
     echo -e "${col}>>> ${msg} ... ${nc}"
 
-    # run the command and capture and print the output
+    # run $cmd and both capture and print the output
     # pipefail ensures subshell exits with exit of $cmd, not tee
+    # set exitmessage appropriately based on $cmd's exit
     if output=$(
         set -o pipefail
         $cmd | tee /dev/tty
@@ -83,6 +85,7 @@ function print-run-ok() {
         col=${colerr}
     fi
 
+    # if $cmd produced no output, overwrite the message line
     if [[ -z $output ]]; then
         move="${up}"
     fi
