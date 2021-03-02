@@ -1,21 +1,31 @@
 #!/bin/bash
 
-alias ls='gls -F --color=auto'
-alias ll='gls -Fl --color=auto'
-alias la='gls -aFl --color=auto'
-alias grep='ggrep --color'
-alias jn='jupyter notebook'
-alias n='vim -c ":cd ~/notes"'
-alias v='vim -c ":History"'
-alias cdf='cd "$HOME/.dotfiles"'
+if command -v gls >/dev/null 2>&1; then
+    alias ls='gls -F --color=auto'
+else
+    alias ls='ls -F --color=auto'
+fi
+alias ll='ls -Fl --color=auto'
+alias la='ls -aFl --color=auto'
 
-if command -v direnv >/dev/null 2>&1; then
-    alias tmux='direnv exec / tmux'
+if command -v ggrep >/dev/null 2>&1; then
+    alias grep="ggrep --color"
+else
+    alias grep="grep --color"
 fi
 
 if command -v nvim >/dev/null 2>&1; then
     alias vim=nvim
 fi
+alias n='vim -c ":cd ~/notes"'
+alias v='vim -c ":History"'
+
+if command -v direnv >/dev/null 2>&1; then
+    alias tmux='direnv exec / tmux'
+fi
+
+alias jn='jupyter notebook'
+alias cdf='cd "$HOME/.dotfiles"'
 
 # Returns zero if git repository is clean (i.e. non-dirty)
 function non-dirty {
