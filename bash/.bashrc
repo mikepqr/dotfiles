@@ -28,8 +28,8 @@ pathadd "$HOME/.local/bin"
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-    *) return ;;
+*i*) ;;
+*) return ;;
 esac
 
 ## -- OS SPECIFIC --
@@ -49,7 +49,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -r "$BREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$BREW_PREFIX/etc/profile.d/bash_completion.sh"
 fi
 
-# Aliases must come after brew activation
+# Aliases must come after brew activation, before use of cmd-available
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -85,7 +85,7 @@ mkvirtualenv() {
 ## -- VI --
 set -o vi
 export EDITOR
-if command -v nvim >/dev/null 2>&1; then
+if cmd-available nvim; then
     EDITOR=nvim
 else
     EDITOR=vim
@@ -213,12 +213,12 @@ function savelastdir {
 PROMPT_COMMAND+='savelastdir;'
 
 # source .envrc
-if command -v direnv >/dev/null 2>&1; then
+if cmd-available direnv; then
     eval "$(direnv hook bash)"
 fi
 
 # readable colors
-if command -v dircolors >/dev/null 2>&1; then
+if cmd-available dircolors; then
     [ -e ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)"
 fi
 

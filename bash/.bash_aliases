@@ -1,6 +1,14 @@
 #!/bin/bash
 
-if command -v gls >/dev/null 2>&1; then
+function cmd-available() {
+    if command -v "$1" >/dev/null 2>&1; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+if cmd-available gls; then
     alias ls='gls -F --color=auto'
 else
     alias ls='ls -F --color=auto'
@@ -8,19 +16,19 @@ fi
 alias ll='ls -Fl --color=auto'
 alias la='ls -aFl --color=auto'
 
-if command -v ggrep >/dev/null 2>&1; then
+if cmd-available ggrep; then
     alias grep="ggrep --color"
 else
     alias grep="grep --color"
 fi
 
-if command -v nvim >/dev/null 2>&1; then
+if cmd-available nvim; then
     alias vim=nvim
 fi
 alias n='vim -c ":cd ~/notes"'
 alias v='vim -c ":History"'
 
-if command -v direnv >/dev/null 2>&1; then
+if cmd-available direnv; then
     alias tmux='direnv exec / tmux'
 fi
 
@@ -86,7 +94,7 @@ function print-run-ok() {
     # set exitmessage appropriately based on $cmd's exit
     if output=$(
         set -o pipefail
-        $cmd | tee /dev/tty
+        $cmd 2>&1 | tee /dev/tty
     ); then
         local exitmessage="OK ($?)"
         col=${colok}
