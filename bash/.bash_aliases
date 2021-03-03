@@ -79,15 +79,17 @@ function print-run-ok() {
     # - prints command (or the optional message)
     # - runs the command exits
     # - prints "OK" (on the same line if there was no output)
-    local cmd="${1}"
-    local msg="${2:-$1}"
-    local col='\033[0;33m'    # orange
-    local colerr='\033[0;31m' # red
-    local colok='\033[0;32m'  # green
-    local nc='\033[0m'        # no color
-    local up='\033[1A'        # move cursor up a line
+    local -r cmd="${1}"
+    local -r msg="${2:-$1}"
+    local -r colbefore='\033[0;33m' # orange
+    local -r colerr='\033[0;31m'    # red
+    local -r colok='\033[0;32m'     # green
+    local -r nc='\033[0m'           # no color
+    local -r up='\033[1A'           # move cursor up a line
+    local output
+    local col
 
-    echo -e "${col}>>> ${msg} ... ${nc}"
+    echo -e "${colbefore}>>> ${msg} ... ${nc}"
 
     # run $cmd and both capture and print the output
     # pipefail ensures subshell exits with exit of $cmd, not tee
@@ -105,7 +107,7 @@ function print-run-ok() {
 
     # if $cmd produced no output, overwrite the message line
     if [[ -z $output ]]; then
-        move="${up}"
+        local -r move="${up}"
     fi
 
     echo -e "${move:-}${col}>>> ${msg} ... ${exitmessage}${nc}"
