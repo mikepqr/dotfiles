@@ -16,18 +16,16 @@ pkgs=${pkgs//linux/}
 # ignored by stowsh, not linked outside this directory
 pkgs=${pkgs//nolink/}
 
-for pkg in $pkgs
-do
+for pkg in $pkgs; do
     bin/.local/bin/stowsh -v -s "$pkg" -t "$HOME"
 done
 
 # install OS-specific packages if appropriate
-if [[ $(uname) == "Darwin" ]] ; then
+if [[ $(uname) == "Darwin" ]]; then
     bin/.local/bin/stowsh -s darwin -t "$HOME"
-    nolink/iterm/iterm.sh
 fi
 
-if [[ $(uname) == "Linux" ]] ; then
+if [[ $(uname) == "Linux" ]]; then
     bin/.local/bin/stowsh -s linux -t "$HOME"
 fi
 
