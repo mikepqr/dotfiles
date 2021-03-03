@@ -13,6 +13,8 @@ pkgs="$(find . -maxdepth 1 ! -name '.*' -type d | sed "s|./||")"
 pkgs=${pkgs//darwin/}
 # symlinked on macOS only
 pkgs=${pkgs//linux/}
+# symlinked if hostname is *.cloudera.com
+pkgs=${pkgs//cloudera/}
 # ignored by stowsh, not linked outside this directory
 pkgs=${pkgs//nolink/}
 
@@ -27,6 +29,10 @@ fi
 
 if [[ $(uname) == "Linux" ]]; then
     bin/.local/bin/stowsh -s linux -t "$HOME"
+fi
+
+if [[ $(hostname) == *".cloudera.com" ]]; then
+    bin/.local/bin/stowsh -s cloudera -t "$HOME"
 fi
 
 # bootstrap vim plugin configuration
