@@ -34,6 +34,7 @@ fi
 
 alias jn='jupyter notebook'
 alias cdf='cd "$HOME/.dotfiles"'
+alias cdfp='cd "$HOME/.dotfiles-private"'
 
 # Returns zero if git repository is clean (i.e. non-dirty)
 function non-dirty {
