@@ -13,6 +13,7 @@ if cmd-available gls; then
 else
     alias ls='ls -F --color=auto'
 fi
+alias l=ls
 alias ll='ls -Fl --color=auto'
 alias la='ls -aFl --color=auto'
 
