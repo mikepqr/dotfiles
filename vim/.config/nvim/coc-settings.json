@@ -1,3 +1,4 @@
 {
-    "suggest.autoTrigger": false
+    "suggest.autoTrigger": false,
+    "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
 }
