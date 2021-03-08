@@ -37,6 +37,16 @@ alias jn='jupyter notebook'
 alias cdf='cd "$HOME/.dotfiles"'
 alias cdfp='cd "$HOME/.dotfiles-private"'
 
+function usepyenv {
+    if [ -f .envrc ]; then
+        echo ".envrc already exists"
+        return 1
+    else
+        echo "layout pyenv $(pyenv global)" >>./.envrc
+        direnv allow
+    fi
+}
+
 # Returns zero if git repository is clean (i.e. non-dirty)
 function non-dirty {
     if [ -z "$(git status --porcelain)" ]; then
