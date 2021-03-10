@@ -227,6 +227,9 @@ if [ -f ~/.fzf.bash ]; then
     source ~/.fzf.bash
     export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude .git"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    # ctrl-t lists everything under pwd by default. Then ctrl-f switches to
+    # everying under $HOME, and ctrl-t switches back.
+    export FZF_CTRL_T_OPTS="--bind 'ctrl-f:reload($FZF_DEFAULT_COMMAND .  $HOME),ctrl-t:reload($FZF_DEFAULT_COMMAND)'"
     if [ -d ~/p ]; then
         export FZF_ALT_C_COMMAND='(fd --type d . ~/p; fd --type d --exclude "/p" . ~)'
     else
