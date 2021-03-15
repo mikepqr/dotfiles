@@ -1,8 +1,11 @@
 # Create venvs etc. in XDG_CACHE_HOME/directoryname-hash
 # Set XDG_CACHE_HOME if not set (see https://stackoverflow.com/a/7444565/409879)
 : ${XDG_CACHE_HOME:=$HOME/.cache}
-pwd_hash=$(basename $PWD)-$(echo -n $PWD | shasum | cut -d ' ' -f 1 | head -c 7)
-direnv_layout_dir=$XDG_CACHE_HOME/direnv/layouts/$pwd_hash
+direnv_layout_dir() {
+  local pwd_hash
+  pwd_hash=$(basename "$PWD")-$(echo -n "$PWD" | shasum | cut -d ' ' -f 1 | head -c 7)
+  echo "$XDG_CACHE_HOME/direnv/layouts/$pwd_hash"
+}
 
 # Used by me until November 2020
 #   echo "use python <version>" > .envrc
