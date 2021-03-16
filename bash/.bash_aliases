@@ -82,7 +82,7 @@ function cspell {
 
 function sdf {
     print-run-ok "sync-if-clean $HOME/.dotfiles" "dotfiles"
-    print-run-ok "sync-if-clean $HOME/.dotfiles-private" "private dotfiles"
+    [ -d "$HOME/.dotfiles-private" ] && print-run-ok "sync-if-clean $HOME/.dotfiles-private" "private dotfiles"
 }
 
 function print-run-ok() {
