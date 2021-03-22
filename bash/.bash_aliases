@@ -41,15 +41,22 @@ alias csp='(cdfp && git commit -m "Add words" vim/.vim/spell/en.utf-8.add)'
 function sd() {
     # fancy du -sh * | sort -h. Takes a directory as $1. Adds color and trailing
     # slash for directories. Prints a total.
+    local -r blue=$(tput bold && tput setaf 4)
+    local -r none=$(tput sgr0)
     (
-        # list files and directories (directories with trailing slash)
-        # \0-separated
         cd "${1:-.}" || return 1
-        gfind . -maxdepth 1 \( -type d -printf "%f/\0" , -type f -printf "%f\0" \) |
-            xargs -0 du -sh |
+        {
+            # list files and directories (directories with trailing slash)
+            find . -maxdepth 1 -type d | sed 's/$/\//'
+            find . -maxdepth 1 \! -type d
+        } |
+            # strip leading ./
+            sed -e 's/^\.\///' |
+            tr '\n' '\0' |
+            xargs -0 du -csh |
             sort -h |
             # make lines ending in / (i.e. directories) blue
-            gsed -e 's/^.*\/$/\x1b[34;01m&\x1b[m/g'
+            sed -e "s/^.*\/$/${blue}&${none}/g"
     )
 }
 
