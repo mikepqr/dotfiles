@@ -1,4 +1,10 @@
 {
-    "suggest.autoTrigger": false,
-    "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
+  "suggest.autoTrigger": false,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "coc.preferences.extensionUpdateCheck": "daily"
 }
