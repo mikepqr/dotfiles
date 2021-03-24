@@ -47,8 +47,8 @@ function sd() {
         cd "${1:-.}" || return 1
         {
             # list files and directories (directories with trailing slash)
-            find . -maxdepth 1 -type d | sed 's/$/\//'
-            find . -maxdepth 1 \! -type d
+            find . -mindepth 1 -maxdepth 1 -type d | sed 's/$/\//'
+            find . -mindepth 1 -maxdepth 1 \! -type d
         } |
             # strip leading ./
             sed -e 's/^\.\///' |
