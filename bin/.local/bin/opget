@@ -1,0 +1,15 @@
+#!/bin/bash
+# Usage: opget <1password item> <1password field>
+# e.g. opget gmail password
+
+opget() {
+    local -r item=$1
+    local -r field=$2
+    op get item "$item" |
+        jq -r --arg field "$field" \
+            -c '.details.fields[] | select(.designation==$field).value'
+}
+
+eval "$(opsignin)"
+
+opget "$1" "$2"

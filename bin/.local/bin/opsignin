@@ -1,0 +1,5 @@
+#!/bin/bash
+# Prints exports for 1password
+# Usage: eval $(opsignin)
+
+[ -z "${OP_SESSION_leewilliams:-}" ] && op signin leewilliams
