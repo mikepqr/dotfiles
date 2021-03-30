@@ -38,28 +38,6 @@ alias cdf='cd "$HOME/.dotfiles"'
 alias cdfp='cd "$HOME/.dotfiles-private"'
 alias csp='(cdfp && git commit -m "Add words" vim/.vim/spell/en.utf-8.add)'
 
-function sd() {
-    # fancy du -sh * | sort -h. Takes a directory as $1. Adds color and trailing
-    # slash for directories. Prints a total.
-    local -r blue=$(tput bold && tput setaf 4)
-    local -r none=$(tput sgr0)
-    (
-        cd "${1:-.}" || return 1
-        {
-            # list files and directories (directories with trailing slash)
-            find . -mindepth 1 -maxdepth 1 -type d | sed 's/$/\//'
-            find . -mindepth 1 -maxdepth 1 \! -type d
-        } |
-            # strip leading ./
-            sed -e 's/^\.\///' |
-            tr '\n' '\0' |
-            xargs -0 du -csh |
-            sort -h |
-            # make lines ending in / (i.e. directories) blue
-            sed -e "s/^.*\/$/${blue}&${none}/g"
-    )
-}
-
 function usepyenv {
     if [ -f .envrc ]; then
         echo ".envrc already exists"
