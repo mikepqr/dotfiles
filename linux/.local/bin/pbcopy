@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Pipe to this to copy to system clipboard from remote host using osc52, i.e.
+# pbcopy that works on non-macOS hosts when using terminals with osc52 support
+#
+# Adapted from https://github.com/chromium/hterm/blob/dfa57bf449980024c80b960214cc83c43fd3d218/etc/osc52.vim#L48-L52
+
+if [ -e /usr/bin/pbcopy ]; then
+    /usr/bin/pbcopy
+else
+    echo -ne '\e]52;c;'"$(base64 -)"'\x07'
+fi

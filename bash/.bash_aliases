@@ -177,11 +177,3 @@ function tms {
     session=${1:-$(hostname -s)}
     tmux attach -t "${session}" || tmux new -s "${session}"
 }
-
-# Pipe to this to copy to system clipboard from remote host using osc52
-# Adapted from https://github.com/chromium/hterm/blob/dfa57bf449980024c80b960214cc83c43fd3d218/etc/osc52.vim#L48-L52
-if ! command -v pbcopy >/dev/null 2>&1; then
-    function pbcopy {
-        echo -ne '\e]52;c;'"$(base64 -)"'\x07'
-    }
-fi
