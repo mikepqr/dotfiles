@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "alias"
-
 if cmd-available gls; then
     alias ls='gls -F --color=auto'
 else
