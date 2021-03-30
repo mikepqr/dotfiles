@@ -1,12 +1,6 @@
 #!/bin/bash
 
-function cmd-available() {
-    if command -v "$1" >/dev/null 2>&1; then
-        return 0
-    else
-        return 1
-    fi
-}
+echo "alias"
 
 if cmd-available gls; then
     alias ls='gls -F --color=auto'
@@ -23,9 +17,6 @@ else
     alias grep="grep --color"
 fi
 
-if cmd-available nvim; then
-    alias vim=nvim
-fi
 alias n='vim -c ":cd ~/notes"'
 alias v='vim -c ":History"'
 

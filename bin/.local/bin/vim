@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if cmd-available nvim; then
+    exec nvim "${@}"
+else
+    exec vim "${@}"
+fi

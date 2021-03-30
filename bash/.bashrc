@@ -21,15 +21,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         source /etc/profile
     fi
 fi
-pathadd "$HOME/bin"
-GOPATH=$HOME/go
-pathadd "$GOPATH/bin"
-pathadd "$HOME/.local/bin"
-
 # If not running interactively, don't do anything
 case $- in
-*i*) ;;
-*) return ;;
+    *i*) ;;
+    *) return ;;
 esac
 
 ## -- OS SPECIFIC --
@@ -49,6 +44,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     manpathadd "$BREW_PREFIX/opt/findutils/libexec/gnuman"
     [[ -r "$BREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$BREW_PREFIX/etc/profile.d/bash_completion.sh"
 fi
+
+pathadd "$HOME/bin"
+GOPATH=$HOME/go
+pathadd "$GOPATH/bin"
+pathadd "$HOME/.local/bin"
 
 # Aliases must come after brew activation, before use of cmd-available
 if [ -f ~/.bash_aliases ]; then

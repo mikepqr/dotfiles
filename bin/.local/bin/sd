@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# fancy du -sh * | sort -h. Takes a directory as $1. Adds color and trailing
+# slash for directories. Prints a total.
+
+blue=$(tput bold && tput setaf 4)
+none=$(tput sgr0)
+(
+    cd "${1:-.}" || return 1
+    {
+        # list files and directories (directories with trailing slash)
+        find . -mindepth 1 -maxdepth 1 -type d | sed 's/$/\//'
+        find . -mindepth 1 -maxdepth 1 \! -type d
+    } |
+        # strip leading ./
+        sed -e 's/^\.\///' |
+        tr '\n' '\0' |
+        xargs -0 du -csh |
+        sort -h |
+        # make lines ending in / (i.e. directories) blue
+        sed -e "s/^.*\/$/${blue}&${none}/g"
+)
