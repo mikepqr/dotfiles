@@ -25,7 +25,7 @@ fi
 alias jn='jupyter notebook'
 alias cdf='cd "$HOME/.dotfiles"'
 alias cdfp='cd "$HOME/.dotfiles-private"'
-alias csp='(cdfp && git commit -m "Add words" vim/.vim/spell/en.utf-8.add)'
+alias cspell='(cdfp && git commit -m "Add words" vim/.vim/spell/en.utf-8.add)'
 
 function usepyenv {
     if [ -f .envrc ]; then
@@ -61,13 +61,6 @@ function sync-if-clean {
     )
 }
 complete -A directory sync-if-clean
-
-function cspell {
-    (
-        cd "$HOME/.dotfiles-private" || return
-        git commit -m "Update spellfile" vim/.vim/spell/en.utf-8.add
-    )
-}
 
 function sdf {
     print-run-ok "sync-if-clean $HOME/.dotfiles" "dotfiles"
