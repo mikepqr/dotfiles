@@ -6,5 +6,6 @@
     "typescript",
     "typescriptreact"
   ],
-  "coc.preferences.extensionUpdateCheck": "daily"
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "prettier.eslintIntegration": true
 }
