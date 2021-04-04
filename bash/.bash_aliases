@@ -108,11 +108,12 @@ function print-run-ok() {
     echo -e "${move:-}${col}>>> ${msg} ... ${exitmessage}${nc}"
 }
 
-function edex() {
+# edit command
+function edc() {
     $EDITOR "$(which "$1")"
 }
 # add commands (i.e executables) as completions
-complete -A command edex
+complete -A command edc
 
 function mktempdir() {
     dir="$1"
