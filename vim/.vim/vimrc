@@ -233,14 +233,6 @@ nnoremap <silent> ss <C-w>s
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 
-" FZF bindings
-nmap <leader>h :History<cr>
-nmap <leader>b :Buffers<cr>
-nmap <leader>f :Files<cr>
-nmap <leader>g :Rg<space>
-" Search for current word
-nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
-
 " Leader-y to yank to system clipboard (works over remote tmux)
 noremap <silent> <Leader>y :Oscyank<cr>
 
@@ -325,4 +317,23 @@ for d in glob('~/.vim/spell/*.add', 1, 1)
         exec 'mkspell! ' . fnameescape(d)
     endif
 endfor
+
+" Delegated RG, see https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" FZF bindings
+nmap <leader>h :History<cr>
+nmap <leader>b :Buffers<cr>
+nmap <leader>f :Files<cr>
+nmap <leader>g :RG<space>
+" Search for current word
+nnoremap <silent> <Leader>rg :RG <C-R><C-W><CR>
 
