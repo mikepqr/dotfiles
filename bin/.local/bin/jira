@@ -1,15 +1,14 @@
 #!/bin/bash
 
-function jira() {
-    arg="$*"
-    # Assume arg is a DSE ticket if only numerals
-    if echo "${arg}" | grep -q "^[0-9]\+$" ; then
-        url="https://jira.cloudera.com/browse/DSE-${arg}"
-    else
-        url="https://jira.cloudera.com/secure/QuickSearch.jspa?searchString=$*"
-    fi
-    open "$url"
-}
+# join all args into one string rather than treat as an arry
+arg="${*}"
 
+# Assume arg is a DSE ticket if only numerals
+if echo "${arg}" | grep -q "^[0-9]\+$"; then
+    url="https://jira.cloudera.com/browse/DSE-$*"
+else
+    data=$(/usr/bin/python -c "import urllib; print(urllib.quote('${arg}'))")
+    url="https://jira.cloudera.com/secure/QuickSearch.jspa?searchString="$data
+fi
 
-jira "$*"
+open "$url"
