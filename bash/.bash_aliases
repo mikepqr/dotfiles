@@ -22,6 +22,9 @@ if cmd-available direnv; then
     alias tmux='direnv exec / tmux'
 fi
 
+alias ibrew='arch -x86_64 /usr/local/bin/brew'
+complete -o bashdefault -o default -F _brew ibrew
+
 alias jn='jupyter notebook'
 alias cdf='cd "$HOME/.dotfiles"'
 alias cdfp='cd "$HOME/.dotfiles-private"'
