@@ -2,10 +2,10 @@ live_config_reload: true
 
 font:
   normal:
-    family: Fira Code
+    family: FiraCode Nerd Font Mono
     style: Retina
   bold:
-    family: Fira Code
+    family: FiraCode Nerd Font Mono
     style: Bold
   italic:
     family: Menlo
