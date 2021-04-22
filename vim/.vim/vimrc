@@ -344,3 +344,4 @@ nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 let g:nvim_tree_special_files = []
+let g:nvim_tree_ignore = [ '.git', '.stfolder', '__pycache__', '.DS_Store' ]
