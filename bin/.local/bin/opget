@@ -10,8 +10,15 @@ opget() {
             -c '.details.fields[] | select(.designation==$field).value'
 }
 
-set +x # ensure 1password token is not logged
+# Save current set of options
+readonly presets=$-
+
+# ensure 1password token is not logged
+set +x
+
 eval "$(opsignin)"
-set -x
+
+# Restore current set of options
+set -$presets
 
 opget "$1" "$2"
