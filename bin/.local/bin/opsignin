@@ -2,4 +2,9 @@
 # Prints exports for 1password
 # Usage: eval $(opsignin)
 
-[ -z "${OP_SESSION_leewilliams:-}" ] && op signin leewilliams
+[ -n "${OP_SESSION_leewilliams:-}" ] && exit 0
+
+# Run this command until it succeeds
+while ! op signin leewilliams; do
+    :
+done
