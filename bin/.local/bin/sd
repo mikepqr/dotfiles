@@ -2,11 +2,11 @@
 
 # fancy du -sh * | sort -h. Takes a directory as $1. Adds color and trailing
 # slash for directories. Prints a total.
-
+path="${1:-.}"
 blue=$(tput bold && tput setaf 4)
 none=$(tput sgr0)
 (
-    cd "${1:-.}" || return 1
+    cd "$path" || exit 1
     {
         # list files and directories (directories with trailing slash)
         find . -mindepth 1 -maxdepth 1 -type d | sed 's/$/\//'
