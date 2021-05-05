@@ -18,6 +18,8 @@ fi
 alias n='vim -c ":cd ~/notes"'
 alias v='vim -c ":History"'
 
+alias cdl='cd "$(cat $HOME/.lastdir)"'
+
 if cmd-available direnv; then
     alias tmux='direnv exec / tmux'
 fi
