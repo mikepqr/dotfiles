@@ -31,6 +31,7 @@ alias jn='jupyter notebook'
 alias cdf='cd "$HOME/.dotfiles"'
 alias cdfp='cd "$HOME/.dotfiles-private"'
 alias cspell='(cdfp && git commit -m "Add words" vim/.vim/spell/en.utf-8.add)'
+alias ..='cd ..'
 
 function usepyenv {
     if [ -f .envrc ]; then
