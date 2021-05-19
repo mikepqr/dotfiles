@@ -16,10 +16,6 @@ font:
     y: 0
   use_thin_strokes: true
 
-mouse:
-  url:
-    modifiers: Shift
-
 color_schemes:
     # Iceberg Dark
     dark: &dark
