@@ -45,6 +45,9 @@ set autoread
 set noswapfile
 " Remember more files
 set viminfo=!,'1000,<50,s10,h
+" Overwrite files to update, instead of renaming + rewriting (which messes up
+" file watchers and crontab -e)
+set backupcopy=yes
 " Windows
 set textwidth=80
 set colorcolumn=80
