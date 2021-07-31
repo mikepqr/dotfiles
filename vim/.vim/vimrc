@@ -105,18 +105,17 @@ set whichwrap=h,l,~
 nnoremap Q gqap
 vnoremap Q gq
 " Use up and down to move by screen line
-map <up> gk
-map <down> gj
-vmap <up> gk
-vmap <down> gj
-inoremap <up> <c-o>gk
-inoremap <down> <c-o>gj
-nmap k gk
-nmap j gj
-vmap k gk
-vmap j gj
+nnoremap k gk
+nnoremap j gj
+vnoremap k gk
+vnoremap j gj
 " jk for esc
 inoremap jk <esc>
+" keep cursor centered on n/N
+nnoremap n nzz
+nnoremap N Nzz
+" keep cursor stationary on J
+nnoremap J mzJ`z
 
 " Use undotree and persist undo across sessions
 if !isdirectory($HOME."/.vim")
