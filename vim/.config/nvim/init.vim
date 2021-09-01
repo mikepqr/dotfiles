@@ -1,5 +1,4 @@
 call plug#begin(stdpath('data') . 'vimplug')
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'ap/vim-buftabline'
 Plug 'aymericbeaumet/vim-symlink'
@@ -8,29 +7,20 @@ Plug 'cocopon/iceberg.vim'
 Plug 'delphinus/vim-auto-cursorline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'greymd/oscyank.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
-Plug 'machakann/vim-highlightedyank'  " not needed in neovim
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'machakann/vim-highlightedyank'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-obsession'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'w0rp/ale'
-if has("nvim")
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'wincent/corpus'
-    Plug 'kyazdani42/nvim-tree.lua'
-    Plug 'lukas-reineke/indent-blankline.nvim'
-endif
+Plug 'wincent/corpus'
 call plug#end()
 
 try
@@ -54,11 +44,7 @@ set colorcolumn=80
 set scrolloff=5
 set sidescrolloff=3
 set nowrap
-try
-    set diffopt+=vertical
-catch /E474:/
-    echom "This vim does not support diffopt vertical"
-endtry
+set diffopt+=vertical
 " Change default position of new splits
 set splitbelow
 set splitright
@@ -69,25 +55,6 @@ set list
 " Mouse
 set mouse=a  " mouse support in terminals
 
-if !has("nvim")
-    " resize vim splits in tmux (not necessary and raises error in nvim)
-    if &term =~ '^(tmux|screen)'
-        set ttymouse=xterm2
-    endif
-    " make italics work in macOS's broken xterm-256color
-    " https://stackoverflow.com/a/53625973/409879
-    let &t_ZH="\e[3m"
-    let &t_ZR="\e[23m"
-    " " make bracketed paste mode work, https://vi.stackexchange.com/a/16579
-    try
-        let &t_BE="\<Esc>[?2004h"
-        let &t_BD="\<Esc>[?2004l"
-        let &t_PS="\<Esc>[200~"
-        let &t_PE="\<Esc>[201~"
-    catch /E18:/
-        echom "Bracketed paste mode doesn't work in this version of vim"
-    endtry
-endif
 " Clipboard
 set clipboard^=unnamed  " yanks and cuts go in system clipboard
 " Search
@@ -187,13 +154,6 @@ catch /E185:/
     set notermguicolors
 endtry
 
-" Set fullscreen background to same color as normal text
-if has("gui_running")
-    set gfn=Fira\ Code:h14
-    set fuoptions=maxvert
-    set guioptions-=T
-endif
-
 " Use :w!! to save root files you forgot to open with sudo
 ca w!! w !sudo tee "%"
 
@@ -202,19 +162,6 @@ set formatoptions-=t
 
 " Treat trailing whitespace as TODO syntax group
 match Todo /\s\+$/
-
-let g:ale_fixers = {
-    \ 'python': ['isort', 'black'],
-    \ 'bash': ['shfmt'],
-    \ 'sh': ['shfmt']}
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_fix_on_save = 1
-let g:ale_sh_shfmt_options = "-ci -i " . &shiftwidth
-" Unimpaired-style mappings to jump to ALE warnings/errors
-nmap <silent> [W <Plug>(ale_first)
-nmap <silent> [w <Plug>(ale_previous)
-nmap <silent> ]w <Plug>(ale_next)
-nmap <silent> ]W <Plug>(ale_last)
 
 " Expand %% to directory of file in current buffer (also %:h<Tab>)
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -237,15 +184,11 @@ noremap <silent> <Leader>y :Oscyank<cr>
 " Indentation
 let g:indent_blankline_show_first_indent_level = v:false
 
-" Don't indent continued lines 3 * shiftwidth(?!)
+" Don't indent continued vimscript lines 3 * shiftwidth(?!)
 let g:vim_indent_cont = &sw
 
 augroup vimrc
     autocmd! vimrc
-
-    " Set shfmt options depending on shiftwidth
-    autocmd OptionSet shiftwidth
-        \ exec 'let g:ale_sh_shfmt_options = "-ci -i " . &shiftwidth'
 
     " Markdown: link selected text using URL in system clipboard
     autocmd Filetype markdown vnoremap <Leader>k <ESC>`>a](<ESC>"*pa)<ESC>`<i[<ESC>
@@ -292,10 +235,6 @@ augroup vimrc
     autocmd BufRead,BufNewFile Dockerfile.fragment set filetype=Dockerfile
 augroup END
 
-" splitjoin
-let g:splitjoin_trailing_comma = 1
-let g:splitjoin_python_brackets_on_separate_lines = 1
-
 " fugitive
 let g:github_enterprise_urls = ['https://github.infra.cloudera.com']
 
@@ -316,36 +255,6 @@ for d in glob('~/.vim/spell/*.add', 1, 1)
     endif
 endfor
 
-" Delegated RG, see https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-
-" FZF bindings
-nmap <leader>h :History<cr>
-nmap <leader>b :Buffers<cr>
-nmap <leader>f :Files<cr>
-nmap <leader>g :RG<space>
-" Search for current word
-nnoremap <silent> <Leader>rg :RG <C-R><C-W><CR>
-
-" nvim-tree
-let g:nvim_tree_show_icons = {
-    \ 'git': 1,
-    \ 'folders': 0,
-    \ 'files': 0,
-    \ }
-nnoremap <C-n> :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
-let g:nvim_tree_special_files = []
-let g:nvim_tree_ignore = [ '.git', '.stfolder', '__pycache__', '.DS_Store' ]
 if filereadable('/Users/mike/.ves/neovim2/bin/python')
     let g:python_host_prog = '/Users/mike/.ves/neovim2/bin/python'
 endif
@@ -366,34 +275,6 @@ lua <<
 .
 
 let g:CorpusPreviewWinhighlight='Normal:Normal'
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 au TermOpen * setlocal nonumber norelativenumber
 tnoremap <Esc> <C-\><C-n>
