@@ -20,7 +20,17 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'wincent/corpus'
+" Plug 'wincent/corpus'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'glepnir/lspsaga.nvim'
+Plug 'hrsh7th/nvim-compe'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 call plug#end()
 
 try
@@ -262,20 +272,43 @@ if filereadable('/Users/mike/.ves/neovim3/bin/python')
     let g:python3_host_prog = '/Users/mike/.ves/neovim3/bin/python'
 endif
 
-lua <<
-    CorpusDirectories = {
-      ['~/notes'] = {
-        autocommit = true,
-        autoreference = false,
-        autotitle = 1,
-        base = './',
-        transform = 'local',
-      },
-  }
-.
-
-let g:CorpusPreviewWinhighlight='Normal:Normal'
-
 au TermOpen * setlocal nonumber norelativenumber
 tnoremap <Esc> <C-\><C-n>
 nmap <leader>t :terminal<cr>i
+
+" >> Telescope bindings
+nnoremap <Leader>pp <cmd>lua require'telescope.builtin'.builtin{}<CR>
+
+" most recently used files
+nnoremap <Leader>h <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
+
+" " git files
+" nnoremap <Leader>f <cmd>lua require'telescope.builtin'.git_files{}<CR>
+
+" all files
+nnoremap <Leader>f <cmd>lua require'telescope.builtin'.find_files{}<CR>
+
+" ripgrep like grep through dir
+nnoremap <Leader>rg <cmd>lua require'telescope.builtin'.live_grep{}<CR>
+
+" >> Lsp key bindings
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <C-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> K     <cmd>Lspsaga hover_doc<CR>
+nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <C-p> <cmd>Lspsaga diagnostic_jump_prev<CR>
+nnoremap <silent> <C-n> <cmd>Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> gn    <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> ga    <cmd>Lspsaga code_action<CR>
+xnoremap <silent> ga    <cmd>Lspsaga range_code_action<CR>
+nnoremap <silent> gs    <cmd>Lspsaga signature_help<CR>
+
+lua <<EOF
+require("lsp")
+require("completion")
+require("treesitter")
+EOF
