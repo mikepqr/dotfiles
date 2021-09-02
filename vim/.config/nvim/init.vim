@@ -21,6 +21,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 " Plug 'wincent/corpus'
+Plug 'dense-analysis/ale'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
@@ -264,6 +265,14 @@ for d in glob('~/.vim/spell/*.add', 1, 1)
         exec 'mkspell! ' . fnameescape(d)
     endif
 endfor
+
+let g:ale_fixers = {
+    \ 'python': ['isort', 'black'],
+    \ 'bash': ['shfmt'],
+    \ 'sh': ['shfmt']}
+let g:ale_sh_shfmt_options = "-ci -i " . &shiftwidth
+let g:ale_fix_on_save = 1
+let g:ale_enabled = 0  " fix only, use LSP for diagnostics
 
 if filereadable('/Users/mike/.ves/neovim2/bin/python')
     let g:python_host_prog = '/Users/mike/.ves/neovim2/bin/python'
