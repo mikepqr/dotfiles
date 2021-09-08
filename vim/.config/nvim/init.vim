@@ -1,4 +1,4 @@
-call plug#begin(stdpath('data') . 'vimplug')
+call plug#begin(stdpath('data') . '/vimplug')
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'ap/vim-buftabline'
 Plug 'aymericbeaumet/vim-symlink'
@@ -309,7 +309,7 @@ nnoremap <silent> K     <cmd>Lspsaga hover_doc<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <C-p> <cmd>Lspsaga diagnostic_jump_prev<CR>
 nnoremap <silent> <C-n> <cmd>Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
+" nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> gn    <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> gs    <cmd>Lspsaga signature_help<CR>
 
