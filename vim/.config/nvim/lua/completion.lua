@@ -15,22 +15,22 @@ require'compe'.setup {
     documentation = true,
 
     source = {
-        path = {kind = "   (Path)"},
-        buffer = {kind = "   (Buffer)"},
-        calc = {kind = "   (Calc)"},
+        path = {kind = "  "},
+        buffer = {kind = "  "},
+        calc = {kind = "  "},
         vsnip = false,
-        nvim_lsp = {kind = "   (LSP)"},
+        nvim_lsp = {kind = "  "},
         nvim_lua = false,
         -- nvim_lua = {kind = "  "},
-        spell = {kind = "   (Spell)"},
+        spell = {kind = "  "},
         tags = false,
         vim_dadbod_completion = true,
-        -- vsnip = {kind = "   (Snippet)"},
+        -- vsnip = {kind = "  "},
         -- snippets_nvim = {kind = "  "},
         -- ultisnips = {kind = "  "},
         treesitter = {kind = "  "},
-        emoji = {kind = " ﲃ  (Emoji)", filetypes={"markdown", "text"}}
-        -- for emoji press : (idk if that in compe tho)
+        emoji = {kind = " ﲃ ", filetypes={"markdown", "text"}}
+        -- for emoji press :
     }
 }
 
