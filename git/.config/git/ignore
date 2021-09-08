@@ -57,6 +57,8 @@ __pycache__
 Scratch.ipynb
 Untitled*.ipynb
 .mypy_cache
+.coverage
+/htmlcov
 
 # Environments
 ######################
