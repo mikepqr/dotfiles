@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# With no arguments: open the only notebook in the directory, or open the
+# jupyter notebook file browser if there is not one notebook.
+#
+# With arguments: forward those arguments to jupyter notebook.
+
+function jn_noargs {
+    notebooks=$(find . -depth 1 -name '*.ipynb')
+    if [ "$(echo "$notebooks" | wc -l)" -eq 1 ]; then
+        jupyter notebook "$notebooks"
+    else
+        jupyter notebook
+    fi
+}
+
+if [ "$#" -eq 0 ]; then
+    jn_noargs
+else
+    jupyter notebook "$@"
+fi
