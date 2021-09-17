@@ -5,11 +5,9 @@ Plug 'aymericbeaumet/vim-symlink'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/iceberg.vim'
 Plug 'delphinus/vim-auto-cursorline'
-Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'greymd/oscyank.vim'
 Plug 'justinmk/vim-dirvish'
-Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-commentary'
@@ -21,8 +19,9 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'wincent/corpus'
 
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -32,6 +31,7 @@ Plug 'glepnir/lspsaga.nvim'
 Plug 'hrsh7th/nvim-compe'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'wincent/corpus'
 call plug#end()
 
 try
@@ -266,14 +266,6 @@ for d in glob('~/.vim/spell/*.add', 1, 1)
     endif
 endfor
 
-let g:ale_fixers = {
-    \ 'python': ['isort', 'black'],
-    \ 'bash': ['shfmt'],
-    \ 'sh': ['shfmt']}
-let g:ale_sh_shfmt_options = "-ci -i " . &shiftwidth
-let g:ale_fix_on_save = 1
-let g:ale_enabled = 0  " fix only, use LSP for diagnostics
-
 if filereadable('/Users/mike/.ves/neovim2/bin/python')
     let g:python_host_prog = '/Users/mike/.ves/neovim2/bin/python'
 endif
@@ -300,7 +292,7 @@ nnoremap <Leader>f <cmd>lua require'telescope.builtin'.find_files{}<CR>
 " ripgrep like grep through dir
 nnoremap <Leader>rg <cmd>lua require'telescope.builtin'.live_grep{}<CR>
 
-" >> Lsp key bindings
+" LSP key bindings
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
@@ -310,7 +302,6 @@ nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <C-p> <cmd>Lspsaga diagnostic_jump_prev<CR>
 nnoremap <silent> <C-n> <cmd>Lspsaga diagnostic_jump_next<CR>
 " nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <silent> gn    <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> gs    <cmd>Lspsaga signature_help<CR>
 
 lua <<EOF
@@ -331,4 +322,5 @@ lua <<EOF
 require("lsp")
 require("completion")
 require("treesitter")
+require("nullls")
 EOF
