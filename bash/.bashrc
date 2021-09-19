@@ -240,7 +240,3 @@ fi
 if [ -f ~/.bashrc_private ]; then
     source ~/.bashrc_private
 fi
-
-if [ -f ~/.config/broot/launcher/bash/br ]; then
-    source ~/.config/broot/launcher/bash/br
-fi

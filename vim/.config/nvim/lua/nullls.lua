@@ -5,7 +5,7 @@ local sources = {
     null_ls.builtins.formatting.isort,
     null_ls.builtins.diagnostics.flake8,
     null_ls.builtins.formatting.shfmt.with({
-        extra_args = { "-i", "2", "-ci" }
+        extra_args = { "-i", "4", "-ci" }
     }),
     null_ls.builtins.diagnostics.shellcheck.with({
         diagnostics_format = "[#{c}] #{m}"
