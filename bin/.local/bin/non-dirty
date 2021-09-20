@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Returns zero if git repository is clean (i.e. non-dirty)
+function non-dirty {
+    if [ -z "$(git status --porcelain)" ]; then
+        return 0
+    fi
+    return 1
+}
+
+[[ "${BASH_SOURCE[0]}" == "$0" ]] && non-dirty

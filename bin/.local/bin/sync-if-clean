@@ -1,0 +1,23 @@
+#!/bin/bash
+
+source non-dirty
+
+function sync-if-clean {
+    (
+        local dir="${1:-.}"
+        cd "$dir" || return
+        if non-dirty; then
+            git pull --rebase | grep -v '^Already up to date.$'
+            # git push writes this message to stderr
+            git push 2>&1 | grep -v '^Everything up-to-date$'
+            return 0
+        else
+            git status
+            return 1
+        fi
+    )
+}
+
+[[ "${BASH_SOURCE[0]}" == "$0" ]] && sync-if-clean "$@"
+
+# complete -A directory sync-if-clean

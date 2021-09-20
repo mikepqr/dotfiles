@@ -43,31 +43,6 @@ function usepyenv {
     fi
 }
 
-# Returns zero if git repository is clean (i.e. non-dirty)
-function non-dirty {
-    if [ -z "$(git status --porcelain)" ]; then
-        return 0
-    fi
-    return 1
-}
-
-function sync-if-clean {
-    (
-        local dir="${1:-.}"
-        cd "$dir" || return
-        if non-dirty; then
-            git pull --rebase | grep -v '^Already up to date.$'
-            # git push writes this message to stderr
-            git push 2>&1 | grep -v '^Everything up-to-date$'
-            return 0
-        else
-            git status
-            return 1
-        fi
-    )
-}
-complete -A directory sync-if-clean
-
 function sdf {
     print-run-ok "sync-if-clean $HOME/.dotfiles" "dotfiles"
     [ -d "$HOME/.dotfiles-private" ] && print-run-ok "sync-if-clean $HOME/.dotfiles-private" "private dotfiles"
@@ -118,8 +93,6 @@ function print-run-ok() {
 function edc() {
     $EDITOR "$(which "$1")"
 }
-# add commands (i.e executables) as completions
-complete -A command edc
 
 function mktempdir() {
     dir="$1"
@@ -177,3 +150,7 @@ function tms {
     session=${1:-$(hostname -s)}
     tmux attach -t "${session}" || tmux new -s "${session}"
 }
+
+# completions for my functions and scripts
+complete -A command edc
+complete -A directory sync-if-clean
