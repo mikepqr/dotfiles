@@ -35,7 +35,7 @@ Plug 'wincent/corpus'
 call plug#end()
 
 try
-    source ~/.vim/private.vim
+    execute 'source ' . stdpath('config') . '/private.vim'
 catch /E484:/
     echom "private.vim not found"
 endtry
@@ -96,13 +96,10 @@ nnoremap N Nzz
 nnoremap J mzJ`z
 
 " Use undotree and persist undo across sessions
-if !isdirectory($HOME."/.vim")
-    call mkdir($HOME."/.vim", "", 0770)
+if !isdirectory(stdpath('data') . "/undo")
+    call mkdir(stdpath('data') . "/undo", "", 0700)
 endif
-if !isdirectory($HOME."/.vim/undo-dir")
-    call mkdir($HOME."/.vim/undo-dir", "", 0700)
-endif
-set undodir=~/.vim/undo-dir
+let &undodir=stdpath('data') . "/undo"
 set undofile
 nnoremap <leader>u :UndotreeToggle<CR>
 
@@ -258,9 +255,9 @@ function! WriteSmall()
     edit
 endfunction
 
-" Recompile .vim/spell/*.add to *.add.spl if necessary
+" Recompile spell/*.add to *.add.spl if necessary
 " https://vi.stackexchange.com/a/5052
-for d in glob('~/.vim/spell/*.add', 1, 1)
+for d in glob(stdpath('config') . '/spell/*.add', 1, 1)
     if filereadable(d) && (!filereadable(d . '.spl') || getftime(d) > getftime(d . '.spl'))
         exec 'mkspell! ' . fnameescape(d)
     endif
