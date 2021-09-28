@@ -274,32 +274,23 @@ au TermOpen * setlocal nonumber norelativenumber
 tnoremap <Esc> <C-\><C-n>
 nmap <leader>t :terminal<cr>i
 
-" >> Telescope bindings
-nnoremap <Leader>pp <cmd>lua require'telescope.builtin'.builtin{}<CR>
-
-" most recently used files
+" Telescope bindings
 nnoremap <Leader>h <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
-
-" " git files
-" nnoremap <Leader>f <cmd>lua require'telescope.builtin'.git_files{}<CR>
-
-" all files
 nnoremap <Leader>f <cmd>lua require'telescope.builtin'.find_files{}<CR>
-
-" ripgrep like grep through dir
 nnoremap <Leader>rg <cmd>lua require'telescope.builtin'.live_grep{}<CR>
+nnoremap <Leader>gb <cmd>lua require'telescope.builtin'.git_branches{}<CR>
+nnoremap <Leader>b <cmd>lua require'telescope.builtin'.buffers{}<CR>
 
-" LSP key bindings
+" LSP bindings
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> K     <cmd>Lspsaga hover_doc<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> <C-p> <cmd>Lspsaga diagnostic_jump_prev<CR>
-nnoremap <silent> <C-n> <cmd>Lspsaga diagnostic_jump_next<CR>
-" nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> gF    <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> gs    <cmd>Lspsaga signature_help<CR>
+nnoremap <silent> gl    <cmd>Lspsaga show_line_diagnostics<CR>
 
 lua <<EOF
 vim.g.CorpusDirectories = {
