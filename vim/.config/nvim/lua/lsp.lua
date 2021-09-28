@@ -66,13 +66,16 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gF', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local function setup_servers()
   require'lspinstall'.setup()
   local servers = require'lspinstall'.installed_servers()
   for _, server in pairs(servers) do
     require'lspconfig'[server].setup{
-        on_attach = on_attach
+        on_attach = on_attach,
+        capabilities = capabilities
     }
   end
   -- overwrite lua config
