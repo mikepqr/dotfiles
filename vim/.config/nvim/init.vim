@@ -8,7 +8,6 @@ Plug 'delphinus/vim-auto-cursorline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'greymd/oscyank.vim'
 Plug 'justinmk/vim-dirvish'
-Plug 'machakann/vim-highlightedyank'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -282,6 +281,12 @@ nnoremap <Leader>f <cmd>lua require'telescope.builtin'.find_files{}<CR>
 nnoremap <Leader>rg <cmd>lua require'telescope.builtin'.live_grep{}<CR>
 nnoremap <Leader>gb <cmd>lua require'telescope.builtin'.git_branches{}<CR>
 nnoremap <Leader>b <cmd>lua require'telescope.builtin'.buffers{}<CR>
+
+" Highlight on yank
+augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+augroup end
 
 lua <<EOF
 vim.g.CorpusDirectories = {
