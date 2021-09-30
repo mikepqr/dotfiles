@@ -91,6 +91,7 @@ if cmd-available nvim; then
 else
     EDITOR=vim
 fi
+export VISUAL=$EDITOR
 
 ## -- PROMPT --
 PROMPT_COMMAND=""
