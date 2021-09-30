@@ -1,0 +1,6 @@
+[user]
+    email = mleewilliams@twitter.com
+[diff]
+    renames = true
+[http]
+    postBuffer = 524288000

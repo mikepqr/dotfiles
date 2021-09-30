@@ -24,17 +24,17 @@ done
 
 # install OS-specific packages if appropriate
 if [[ $(uname) == "Darwin" ]]; then
-    bin/.local/bin/stowsh -s darwin -t "$HOME"
+    bin/.local/bin/stowsh -v -s darwin -t "$HOME"
 fi
 
 if [[ $(uname) == "Linux" ]]; then
-    bin/.local/bin/stowsh -s linux -t "$HOME"
+    bin/.local/bin/stowsh -v -s linux -t "$HOME"
 fi
 
-if [[ $(hostname) == *".cloudera.com" ]]; then
-    bin/.local/bin/stowsh -s cloudera -t "$HOME"
+if [[ $(hostname) == "tw-"* ]]; then
+    bin/.local/bin/stowsh -v -s twitter -t "$HOME"
 fi
 
 # bootstrap vim plugin configuration
 curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim -c PlugInstall +qall
+nvim -c PlugInstall +qall
