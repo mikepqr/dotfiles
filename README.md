@@ -5,7 +5,9 @@ symlink dotfiles into the appropriate location.
 
 ```sh
 git clone git@github.com:mikepqr/dotfiles.git ~/.dotfiles
-~/.dotfiles/install.sh
+cd .dotfiles
+git config --local user.email "mike@mike.place"
+./install.sh
 ```
 
 If you're running `install.sh` on an ssh one-liner, you need the `-t` option,
