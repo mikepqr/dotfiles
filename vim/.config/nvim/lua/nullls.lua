@@ -1,5 +1,8 @@
 local null_ls = require("null-ls")
 
+-- override shellcheck on PATH if installed in /usr/local/bin/shellcheck
+local shfmt_path = vim.fn.filereadable("/usr/local/bin/shellcheck") and "/usr/local/bin/shellcheck" or "shellcheck"
+
 local sources = {
     null_ls.builtins.formatting.black,
     null_ls.builtins.formatting.isort,
@@ -8,6 +11,7 @@ local sources = {
         extra_args = { "-i", vim.opt.shiftwidth:get(), "-ci" }
     }),
     null_ls.builtins.diagnostics.shellcheck.with({
+        command = shfmt_path,
         diagnostics_format = "[#{c}] #{m}"
     }),
 }
