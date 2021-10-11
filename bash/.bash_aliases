@@ -30,7 +30,7 @@ complete -o bashdefault -o default -F _brew ibrew
 
 alias cdf='cd "$HOME/.dotfiles"'
 alias cdfp='cd "$HOME/.dotfiles-private"'
-alias cspell='(cdfp && git commit -m "Add words" vim/.vim/spell/en.utf-8.add)'
+alias cspell='(cdfp && git commit -m "Add words" vim/.vim/spell/en.utf-8.add vim/.config/nvim/spell/en.utf-8.add)'
 alias ..='cd ..'
 
 function usepyenv {
