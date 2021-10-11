@@ -5,10 +5,10 @@ arg="${*}"
 
 # Assume arg is a DSE ticket if only numerals
 if echo "${arg}" | grep -q "^[0-9]\+$"; then
-    url="https://jira.cloudera.com/browse/DSE-$*"
+    url="${JIRA_HOST}browse/${JIRA_PROJECT}-$*"
 else
     data=$(/usr/bin/python -c "import urllib; print(urllib.quote('${arg}'))")
-    url="https://jira.cloudera.com/secure/QuickSearch.jspa?searchString="$data
+    url="${JIRA_HOST}secure/QuickSearch.jspa?searchString="$data
 fi
 
 open "$url"
