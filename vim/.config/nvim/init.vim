@@ -242,10 +242,12 @@ augroup vimrc
     " Don't spellcheck URLs https://vi.stackexchange.com/a/4003
     syntax match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
 
-    autocmd FileType css,html setlocal shiftwidth=2
-    autocmd FileType javascript,typescript,typescriptreact setlocal shiftwidth=2
+    autocmd FileType css,html,javascript,typescript,typescriptreact setlocal shiftwidth=2
     autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
-    autocmd BufRead,BufNewFile Dockerfile.fragment set filetype=Dockerfile
+    autocmd FileType bash,python,sh
+        \ setlocal foldexpr=nvim_treesitter#foldexpr() |
+        \ setlocal foldmethod=expr |
+        \ setlocal nofoldenable
 augroup END
 
 " fugitive

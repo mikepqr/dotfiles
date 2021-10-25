@@ -1,4 +1,8 @@
 require('nvim-treesitter.configs').setup {
+  ensure_installed = {
+    "bash",
+    "python"
+  },
   highlight = {
     enable = true, -- false will disable the whole extension
   },
