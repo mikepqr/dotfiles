@@ -243,6 +243,7 @@ augroup vimrc
     syntax match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
 
     autocmd FileType css,html,javascript,typescript,typescriptreact setlocal shiftwidth=2
+    autocmd FileType lua setlocal shiftwidth=2
     autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
     autocmd FileType bash,python,sh
         \ setlocal foldexpr=nvim_treesitter#foldexpr() |
