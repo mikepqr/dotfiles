@@ -61,7 +61,11 @@ set diffopt+=vertical
 set splitbelow
 set splitright
 " Tabs and whitespace
-set shiftwidth=4
+if $MONOREPO != 1
+    set shiftwidth=4
+else
+    set shiftwidth=2
+endif
 set expandtab
 set list
 " Mouse
