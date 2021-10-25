@@ -154,3 +154,7 @@ function tms {
 # completions for my functions and scripts
 complete -A command edc
 complete -A directory sync-if-clean
+
+function gos {
+    cd "${HOME}"/workspace/source/${1} || return
+}
