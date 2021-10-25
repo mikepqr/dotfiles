@@ -1,3 +1,5 @@
 [flake8]
-max-line-length = 88
-extend-ignore = E203
+max-line-length = 100
+# black recommends ignore E203
+# ignore E111 to allow 2 space indent
+extend-ignore = E203,E111
