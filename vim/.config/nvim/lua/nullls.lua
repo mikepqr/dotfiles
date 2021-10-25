@@ -1,31 +1,45 @@
 local null_ls = require("null-ls")
 
 -- override shellcheck on PATH if installed in /usr/local/bin/shellcheck
-local shfmt_path = vim.fn.filereadable("/usr/local/bin/shellcheck") == 1 and "/usr/local/bin/shellcheck" or "shellcheck"
+local shfmt_path
+if vim.fn.filereadable("/usr/local/bin/shellcheck") == 1 then
+  shfmt_path = "/usr/local/bin/shellcheck"
+end
+
+-- override black with cblack if available
+local black_path = "black"
+if vim.fn.filereadable(vim.fn.expand("~/.local/bin/cblack")) == 1 then
+  black_path = vim.fn.expand("~/.local/bin/cblack")
+end
+
 
 local sources = {
-    null_ls.builtins.formatting.black,
-    null_ls.builtins.formatting.isort,
-    null_ls.builtins.diagnostics.flake8,
-    null_ls.builtins.formatting.shfmt.with({
-        extra_args = { "-i", vim.opt.shiftwidth:get(), "-ci" }
-    }),
-    null_ls.builtins.diagnostics.shellcheck.with({
-        command = shfmt_path,
-        diagnostics_format = "[#{c}] #{m}"
-    }),
+  null_ls.builtins.formatting.black.with({
+    command = black_path
+  }),
+  null_ls.builtins.formatting.isort,
+  null_ls.builtins.diagnostics.flake8.with({
+    extra_args = { "--append-config", vim.fn.expand("~/.config/flake8") }
+  }),
+  null_ls.builtins.formatting.shfmt.with({
+    extra_args = { "-i", vim.opt.shiftwidth:get(), "-ci" }
+  }),
+  null_ls.builtins.diagnostics.shellcheck.with({
+    command = shfmt_path,
+    diagnostics_format = "[#{c}] #{m}"
+  }),
 }
 
 null_ls.config({
-    sources = sources
+  sources = sources
 })
 
 local on_attach = function(client, bufnr)
-    if client.resolved_capabilities.document_formatting then
-        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-    end
+  if client.resolved_capabilities.document_formatting then
+    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+  end
 end
 
 require("lspconfig")["null-ls"].setup({
-    on_attach = on_attach
+  on_attach = on_attach
 })
