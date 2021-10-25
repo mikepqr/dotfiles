@@ -44,6 +44,18 @@ local lua_settings = {
   }
 }
 
+local python_settings = {
+  python =  {
+    analysis = {
+      autoSearchPaths = true,
+      useLibraryCodeForTypes = true,
+      diagnosticMode = 'openFilesOnly',
+      verboseOutput = true,
+    }
+  }
+}
+
+
 -- config that activates keymaps and enables completion
 local function make_config()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -63,6 +75,10 @@ local function setup_servers()
 
     if server == "lua" then
       config.settings = lua_settings
+    end
+
+    if server == "python" then
+      config.settings = python_settings
     end
 
     require'lspconfig'[server].setup(config)
