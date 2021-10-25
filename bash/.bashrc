@@ -121,7 +121,11 @@ function parse_git_branch() {
 }
 
 function parse_git_dirty() {
-    [[ $(git status --porcelain) ]] && echo "*"
+    if [ "$MONOREPO" = "1" ]; then
+        :
+    else
+        [[ $(git status --porcelain) ]] && echo "*"
+    fi
 }
 
 # Return the prompt symbol to use, colorized based on the return value of the
