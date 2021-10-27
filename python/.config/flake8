@@ -2,4 +2,5 @@
 max-line-length = 100
 # black recommends ignore E203
 # ignore E111 to allow 2 space indent
-extend-ignore = E203,E111
+# ignore E114 to allow 2 space indent (comments)
+extend-ignore = E203,E111,E114
