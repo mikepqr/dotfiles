@@ -63,8 +63,10 @@ set splitright
 " Tabs and whitespace
 if $MONOREPO != 1
     set shiftwidth=4
+    set textwidth=80
 else
     set shiftwidth=2
+    set textwidth=100
 endif
 set expandtab
 set list
