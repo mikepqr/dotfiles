@@ -10,7 +10,7 @@
 [alias]
     pish = push
     co = checkout
-    st = status -uno
+    st = status
     unstage = reset HEAD --
     llg = log --oneline --numstat --decorate --graph
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
@@ -22,8 +22,6 @@
     first = !git checkout $(git rev-list --max-parents=0 HEAD)
 [merge]
     ff = only  # fast-forward merges only
-[status]
-    showUntrackedFiles = all  # show untracked files in untracked directories
 [pull]
     ff = only
 [init]

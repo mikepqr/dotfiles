@@ -4,3 +4,5 @@
     renames = true
 [http]
     postBuffer = 524288000
+[status]
+    showUntrackedFiles = no
