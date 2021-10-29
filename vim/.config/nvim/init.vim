@@ -262,9 +262,6 @@ augroup vimrc
         \ setlocal nofoldenable
 augroup END
 
-" fugitive
-let g:github_enterprise_urls = ['https://github.infra.cloudera.com']
-
 " Write file without changing modification time
 " https://unix.stackexchange.com/a/527154/20079
 function! WriteSmall()
