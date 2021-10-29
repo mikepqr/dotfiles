@@ -161,6 +161,15 @@ augroup customize_iceberg
     autocmd ColorScheme iceberg highlight! link StatusLineTerm PmenuSel
     autocmd ColorScheme iceberg highlight! link StatusLineNC LineNr
     autocmd ColorScheme iceberg highlight! link StatusLineTermNC LineNr
+    " LSP diagnostics
+    autocmd ColorScheme iceberg highlight! LspDiagnosticsDefaultHint
+        \ ctermbg=NONE ctermfg=245 guibg=NONE guifg=#686f9a
+    autocmd ColorScheme iceberg highlight! LspDiagnosticsDefaultWarning
+        \ ctermbg=NONE ctermfg=216 guibg=NONE guifg=#e2a478
+    autocmd ColorScheme iceberg highlight! LspDiagnosticsDefaultError
+        \ ctermbg=NONE ctermfg=203 guibg=NONE guifg=#e27878
+    autocmd ColorScheme iceberg highlight!
+        \ link LspDiagnosticsDefaultInformation LspDiagnosticsDefaultError
 augroup END
 try
     colorscheme iceberg
