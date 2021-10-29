@@ -262,6 +262,10 @@ augroup vimrc
         \ setlocal nofoldenable
 augroup END
 
+" Disable opinionated formatting behavior of python ftplugin, i.e.
+" setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+let g:python_recommended_style=0
+
 " Write file without changing modification time
 " https://unix.stackexchange.com/a/527154/20079
 function! WriteSmall()
