@@ -207,6 +207,7 @@ noremap <silent> <Leader>y :Oscyank<cr>
 
 " Indentation
 let g:indent_blankline_show_first_indent_level = v:false
+let g:indent_blankline_filetype_exclude = ['help']
 
 " Don't indent continued vimscript lines 3 * shiftwidth(?!)
 let g:vim_indent_cont = &sw
