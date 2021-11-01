@@ -104,46 +104,7 @@ function mktempdir() {
     fi
 }
 
-function compare_versions() {
-    # https://stackoverflow.com/a/4025065/409879
-    # returns 0 if first = second argument
-    # returns 1 if first > second
-    # returns 2 if first < second
-    if [[ "$1" == "$2" ]]; then
-        return 0
-    fi
-    local IFS=.
-    # shellcheck disable=SC2206
-    local i ver1=($1) ver2=($2)
-    # fill empty fields in ver1 with zeros
-    for ((i = ${#ver1[@]}; i < ${#ver2[@]}; i++)); do
-        ver1[i]=0
-    done
-    for ((i = 0; i < ${#ver1[@]}; i++)); do
-        if [[ -z ${ver2[i]} ]]; then
-            # fill empty fields in ver2 with zeros
-            ver2[i]=0
-        fi
-        if ((10#${ver1[i]} > 10#${ver2[i]})); then
-            return 1
-        fi
-        if ((10#${ver1[i]} < 10#${ver2[i]})); then
-            return 2
-        fi
-    done
-    return 0
-}
-
-# Alias diff --color to dif if possible
-diff_version=$(diff --version | head -1 | grep -o -E '[0-9]+\.[0-9]+')
-# --color added in diff 3.4
-compare_versions "$diff_version" 3.3.99999 || cmp_return=$?
-unset diff_version
-if [ $cmp_return -eq 1 ]; then
-    alias dif="diff --color -u"
-else
-    alias dif="diff -u"
-fi
+alias gdiff="git diff --no-index"
 
 # Launch or reconnect to tmux session named `hostname` or first argument
 function tms {
