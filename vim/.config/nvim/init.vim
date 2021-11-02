@@ -51,7 +51,6 @@ set viminfo=!,'1000,<50,s10,h
 " file watchers and crontab -e)
 set backupcopy=yes
 " Windows
-set textwidth=80
 set colorcolumn=80
 set scrolloff=5
 set sidescrolloff=3
@@ -61,12 +60,11 @@ set diffopt+=vertical
 set splitbelow
 set splitright
 " Tabs and whitespace
+set textwidth=80
 if $MONOREPO != 1
     set shiftwidth=4
-    set textwidth=80
 else
     set shiftwidth=2
-    set textwidth=100
 endif
 set expandtab
 set list
@@ -261,6 +259,9 @@ augroup vimrc
         \ setlocal foldexpr=nvim_treesitter#foldexpr() |
         \ setlocal foldmethod=expr |
         \ setlocal nofoldenable
+    if $MONOREPO == 1
+        autocmd FileType python setlocal textwidth=100
+    endif
 augroup END
 
 " Disable opinionated formatting behavior of python ftplugin, i.e.
