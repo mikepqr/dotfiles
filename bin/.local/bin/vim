@@ -2,6 +2,10 @@
 
 if cmd-available nvim; then
     exec nvim "${@}"
+elif [ -e /usr/local/bin/vim ]; then
+    exec /usr/local/bin/vim "${@}"
+elif [ -e /usr/bin/vim ]; then
+    exec /usr/bin/vim "${@}"
 else
-    exec vim "${@}"
+    echo "neovim and vim not installed"
 fi
