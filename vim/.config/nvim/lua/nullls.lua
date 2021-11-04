@@ -1,7 +1,7 @@
 local null_ls = require("null-ls")
 
 -- override shellcheck on PATH if installed in /usr/local/bin/shellcheck
-local shfmt_path
+local shfmt_path = "shellcheck"
 if vim.fn.filereadable("/usr/local/bin/shellcheck") == 1 then
   shfmt_path = "/usr/local/bin/shellcheck"
 end
@@ -31,7 +31,8 @@ local sources = {
 }
 
 null_ls.config({
-  sources = sources
+  sources = sources,
+  -- debug = true
 })
 
 local on_attach = function(client, bufnr)
