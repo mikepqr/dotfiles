@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -euo pipefail
+
+open "http://go/${1}"
