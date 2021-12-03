@@ -105,10 +105,6 @@ nnoremap N Nzz
 nnoremap J mzJ`z
 
 " Use undotree and persist undo across sessions
-if !isdirectory(stdpath('data') . "/undo")
-    call mkdir(stdpath('data') . "/undo", "", 0700)
-endif
-let &undodir=stdpath('data') . "/undo"
 set undofile
 nnoremap <leader>u :UndotreeToggle<CR>
 
