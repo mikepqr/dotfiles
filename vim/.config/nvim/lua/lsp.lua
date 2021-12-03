@@ -1,11 +1,11 @@
- -- Enable nerd-font based icons for diagnostics in the gutter, see:
- -- https://github.com/neovim/nvim-lspconfig/wiki/UI-customization#change-diagnostic-symbols-in-the-sign-column-gutter
- local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+-- Enable nerd-font based icons for diagnostics in the gutter, see:
+-- https://github.com/neovim/nvim-lspconfig/wiki/UI-customization#change-diagnostic-symbols-in-the-sign-column-gutter
+local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
 
- for type, icon in pairs(signs) do
-   local hl = "LspDiagnosticsSign" .. type
-   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
- end
+for type, icon in pairs(signs) do
+  local hl = "LspDiagnosticsSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -56,39 +56,18 @@ local python_settings = {
 }
 
 
--- config that activates keymaps and enables completion
-local function make_config()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-  return {
-    capabilities = capabilities,
-    on_attach = on_attach,
-  }
-end
+local lsp_installer = require("nvim-lsp-installer")
 
+lsp_installer.on_server_ready(function(server)
+  local opts = {}
 
-local function setup_servers()
-  require'lspinstall'.setup()
-  local servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(servers) do
-    local config = make_config()
-
-    if server == "lua" then
-      config.settings = lua_settings
-    end
-
-    if server == "python" then
-      config.settings = python_settings
-    end
-
-    require'lspconfig'[server].setup(config)
+  if server.name == "python" then
+    opts.settings = python_settings
   end
-end
 
-setup_servers()
+  if server.name == "sumneko_lua" then
+    opts.settings = lua_settings
+  end
 
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers()
-  vim.cmd("bufdo e")
-end
+  server:setup(opts)
+end)
