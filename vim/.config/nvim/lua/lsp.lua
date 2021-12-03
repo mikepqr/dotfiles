@@ -22,6 +22,10 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>F', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
+-- nvim-cmp supports additional completion capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 -- Configure lua language server for neovim development
 local lua_settings = {
   Lua = {
@@ -59,7 +63,10 @@ local python_settings = {
 local lsp_installer = require("nvim-lsp-installer")
 
 lsp_installer.on_server_ready(function(server)
-  local opts = {}
+  local opts = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
 
   if server.name == "python" then
     opts.settings = python_settings
