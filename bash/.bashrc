@@ -48,6 +48,7 @@ fi
 pathadd "$HOME/bin"
 GOPATH=$HOME/go
 pathadd "$GOPATH/bin"
+pathadd "$HOME/.cargo/bin"
 pathadd "$HOME/.local/bin"
 
 # Aliases must come after brew activation, before use of cmd-available
