@@ -48,7 +48,7 @@ local lua_settings = {
   }
 }
 
-local python_settings = {
+local pyright_settings = {
   python =  {
     analysis = {
       autoSearchPaths = true,
@@ -68,8 +68,8 @@ lsp_installer.on_server_ready(function(server)
     capabilities = capabilities,
   }
 
-  if server.name == "python" then
-    opts.settings = python_settings
+  if server.name == "pyright" then
+    opts.settings = pyright_settings
   end
 
   if server.name == "sumneko_lua" then
