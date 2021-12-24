@@ -6,7 +6,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " Plug 'cocopon/iceberg.vim'
 " https://github.com/cocopon/iceberg.vim/pull/76
 Plug 'woodyZootopia/iceberg.vim', { 'branch': 'support_LSP' }
-Plug 'delphinus/vim-auto-cursorline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'greymd/oscyank.vim'
 Plug 'justinmk/vim-dirvish'
