@@ -3,9 +3,7 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'ap/vim-buftabline'
 Plug 'aymericbeaumet/vim-symlink'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'cocopon/iceberg.vim'
-" https://github.com/cocopon/iceberg.vim/pull/76
-Plug 'woodyZootopia/iceberg.vim', { 'branch': 'support_LSP' }
+Plug 'cocopon/iceberg.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'greymd/oscyank.vim'
 Plug 'justinmk/vim-dirvish'
