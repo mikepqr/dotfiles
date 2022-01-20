@@ -234,7 +234,7 @@ augroup vimrc
 
     " formatlistpat taken from ftplugin/markdown.vim
     " spellcapcheck= disables capitalization checks
-    autocmd FileType asciidoc,markdown,text,gitcommit setlocal
+    autocmd FileType asciidoc,markdown,text,gitcommit,rst setlocal
         \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
         \ nojoinspaces spell spellcapcheck=
