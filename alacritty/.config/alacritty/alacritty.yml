@@ -93,6 +93,8 @@ key_bindings:
   - { key: 36,        mods: Command,   action: ToggleFullscreen             }
   # disable Cmd-W to close window
   - { key: W,         mods: Command,   action: None                         }
+  # Create new window (rather than spawn second instance of alacritty)
+  - { key: N,         mods: Command,   action: CreateNewWindow              }
 
   # make Alt work as modifier
   - { key: A,         mods: Alt,       chars: "\x1ba"                       }
