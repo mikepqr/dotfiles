@@ -236,8 +236,10 @@ augroup vimrc
     " spellcapcheck= disables capitalization checks
     autocmd FileType asciidoc,markdown,text,gitcommit,rst setlocal
         \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
-        \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
+        \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s\\+[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
         \ nojoinspaces spell spellcapcheck=
+
+    autocmd BufNewFile,BufRead differential-update-comments :set filetype=gitcommit
 
     " Don't spellcheck URLs https://vi.stackexchange.com/a/4003
     syntax match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
