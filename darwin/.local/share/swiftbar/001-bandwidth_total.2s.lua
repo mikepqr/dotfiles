@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/lua
+#!/usr/bin/env lua
 
 -- 1. install lua with e.g. "brew install lua"
 -- 2. use this plugin
@@ -21,7 +21,18 @@
 --        en0                 en10               Total
 -- KB/s in  KB/s out   KB/s in  KB/s out   KB/s in  KB/s out
 -- 20.67      0.00     17.54      0.00     38.21      0.00
-local file = io.popen('/opt/homebrew/bin/ifstat -b -n -w -z -T 0.1 1')
+function file_exists(name)
+   local f=io.open(name,"r")
+   if f~=nil then io.close(f) return true else return false end
+end
+
+if file_exists("/opt/homebrew/bin/ifstat") then
+  ifstat_path = "/opt/homebrew/bin/ifstat"
+else
+  ifstat_path = "/usr/local/bin/ifstat"
+end
+
+local file = io.popen(ifstat_path .. ' -b -n -w -z -T 0.1 1')
 local output = file:read('*all')
 
 -- split into lines
