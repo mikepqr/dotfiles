@@ -4,7 +4,7 @@
 if [ -e /opt/homebrew/bin/ifstat ]; then
     ifstat=/opt/homebrew/bin/ifstat
 else
-    ifstat=$(env ifstat)
+    ifstat=ifstat
 fi
 
 # Final two numbers are total down and up in kilobits per second
