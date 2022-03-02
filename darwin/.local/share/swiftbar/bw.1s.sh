@@ -21,4 +21,4 @@ mbps_up=$(
     echo "$ifstat_out" | awk '{$(NF)/=1024;printf "%.2f",$(NF)}'
 )
 
-echo "$mbps_down ↓ $mbps_up ↑ Mb/s"
+echo "$mbps_down ↓ $mbps_up ↑|font='FiraCode Nerd Font'"
