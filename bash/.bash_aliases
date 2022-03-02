@@ -119,3 +119,6 @@ complete -A directory sync-if-clean
 function gos {
     cd "${HOME}"/workspace/source/${1} || return
 }
+function gosa {
+    cd "${HOME}"/workspace/source_alt/${1} || return
+}
