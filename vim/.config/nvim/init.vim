@@ -190,6 +190,9 @@ nnoremap <silent> ss <C-w>s
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 
+" leader-Y to copy current buffer path to clipboard
+noremap <silent> <leader>Y :let @+ = expand("%")<CR>
+
 " Leader-y to yank to system clipboard (works over remote tmux)
 noremap <silent> <Leader>y :Oscyank<cr>
 
