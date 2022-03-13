@@ -10,16 +10,27 @@ else
     branchfilter='mleewilliams'
 fi
 
-branches=$(git branch --all |
-    # don't offer main
-    grep --invert-match -E '(main|master)' |
-    # only offer remote branches on origin that belong to me
-    grep -E '^\s.remotes/origin/'"${branchfilter}" |
-    cut -c 3- |
-    fzf --multi --preview-window=bottom:40% --preview="git log {} --")
+candidate_branches=$(
+    git branch --all |
+        # don't offer main
+        grep --invert-match -E '(main|master)' |
+        # only offer remote branches on origin that belong to me
+        grep -E '^\s.remotes/origin/'"${branchfilter}" |
+        cut -c 3-
+)
 
-if [[ -n "$branches" ]]; then
-    printf "%s" "${branches}" |
+if [[ -n "$candidate_branches" ]]; then
+    chosen_branches=$(
+        printf "%s" "${candidate_branches}" |
+            fzf --multi --preview-window=bottom:40% --preview="git log {} --"
+    )
+else
+    echo "No remote branches to delete"
+    exit 0
+fi
+
+if [[ -n "$chosen_branches" ]]; then
+    printf "%s" "${chosen_branches}" |
         awk -F/ '{ print $3 }' |
         xargs git push --delete origin
 fi
