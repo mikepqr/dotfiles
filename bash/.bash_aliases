@@ -122,3 +122,6 @@ function gos {
 function gosa {
     cd "${HOME}"/workspace/source_alt/${1} || return
 }
+function got {
+    cd "${HOME}"/tmp || return
+}
