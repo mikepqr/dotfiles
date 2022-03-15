@@ -15,8 +15,9 @@ candidate_branches=$(
         # don't offer main
         grep --invert-match -E '(main|master)' |
         # only offer remote branches on origin that belong to me
-        grep -E '^\s.remotes/origin/'"${branchfilter}" |
-        cut -c 3-
+        grep -E '^\s.remotes/origin/'"${branchfilter}"'/' |
+        # strip trailing/leading whitespace from each line
+        xargs -n 1
 )
 
 if [[ -n "$candidate_branches" ]]; then
@@ -31,6 +32,7 @@ fi
 
 if [[ -n "$chosen_branches" ]]; then
     printf "%s" "${chosen_branches}" |
-        awk -F/ '{ print $3 }' |
+        # remove remotes/origin
+        sed -E 's/^remotes\/origin\///' |
         xargs git push --delete origin
 fi
