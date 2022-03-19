@@ -1,12 +1,68 @@
-#!/bin/bash
+#!/usr/bin/env python3
+import re
+import subprocess
 
-# Taken from https://seb.jambor.dev/posts/improving-shell-workflows-with-fzf/
-# Workaround for BSD xargs added (BSD xargs does not support --no-run-if-empty)
 
-branches=$(git branch |
-    grep --invert-match '\*' |
-    cut -c 3- |
-    fzf --multi --preview-window=bottom:40% --preview="git log {} --")
-if [[ -n "$branches" ]]; then
-    printf "%s" "${branches}" | xargs git branch --delete --force
-fi
+def run_and_get_stripped_lines(cmd):
+    return [
+        line.strip()
+        for line in subprocess.check_output(cmd, text=True, shell=True)
+        .rstrip()
+        .split("\n")
+    ]
+
+
+def get_branches():
+    remote = run_and_get_stripped_lines("git remote get-url origin")[0]
+    personal = re.search("github.com[:.]mikepqr", remote)
+    local_branches = [
+        line
+        for line in run_and_get_stripped_lines("git branch --list")
+        if "*" not in line
+    ]
+    all_branches = run_and_get_stripped_lines("git branch --list --remote")
+    return local_branches + [
+        branch
+        for branch in all_branches
+        if all(
+            (
+                "main" not in branch,
+                "master" not in branch,
+                "HEAD" not in branch,
+                branch.startswith("origin/" + ("mleewilliams" if not personal else "")),
+            )
+        )
+    ]
+
+
+def delete_branches(branches):
+    locals, remotes = [], []
+    for branch in branches:
+        if branch.startswith("origin/"):
+            remotes.append(branch)
+        else:
+            locals.append(branch)
+    if locals:
+        subprocess.run(f"git branch --delete --force {' '.join(locals)}", shell=True)
+    if remotes:
+        remotes = [remote.removeprefix("origin/") for remote in remotes]
+        subprocess.run(f"git push --delete origin {' '.join(remotes)}", shell=True)
+
+
+def main():
+    branches = get_branches()
+    if not branches:
+        return
+    fzf_output = subprocess.run(
+        "fzf --multi --preview-window=bottom:40% --preview='git log {} --'",
+        input="\n".join(branches),
+        shell=True,
+        stdout=subprocess.PIPE,
+        text=True,
+    ).stdout
+    chosen_branches = fzf_output.rstrip().split("\n")
+    delete_branches(chosen_branches)
+
+
+if __name__ == "__main__":
+    main()
