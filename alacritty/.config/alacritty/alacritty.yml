@@ -96,6 +96,20 @@ key_bindings:
   # Create new window (rather than spawn second instance of alacritty)
   - { key: N,         mods: Command,   action: CreateNewWindow              }
 
+  # Browser-style bindings for tmux
+  # See https://www.joshmedeski.com/posts/macos-keyboard-shortcuts-for-tmux
+  # Bind cmd-F to tmux search i.e. C-s [ /
+  - { key: F,         mods: Command,   chars: "\x13\x5b\x2F"                }
+  # Cmd-G -> n (i.e. next search result)
+  - { key: G,         mods: Command,   chars: "\x6e"                        }
+  # Cmd-G -> n (i.e. previous search result)
+  - { key: G,         mods: Command|Shift, chars: "\x4e"                    }
+  # Cmd-T -> C-s c (i.e. new window)
+  - { key: T,         mods: Command, chars: "\x13\x63"                      }
+  # Cmd-Shift-[ and Cmd-Shift-] to page through tmux windows
+  - { key: RBracket, mods: Command|Shift, chars: "\x13\x6e" }
+  - { key: LBracket, mods: Command|Shift, chars: "\x13\x70" }
+
   # make Alt work as modifier
   - { key: A,         mods: Alt,       chars: "\x1ba"                       }
   - { key: B,         mods: Alt,       chars: "\x1bb"                       }
