@@ -242,20 +242,21 @@ augroup vimrc
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s\\+[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
         \ nojoinspaces spell spellcapcheck= shiftwidth=4
 
-    autocmd BufNewFile,BufRead differential-update-comments setlocal filetype=gitcommit tw=100000
+    " Very large textwidth to ensure gq formats unbroken for phabs :-(
+    " Required gq with textwidth=0 formats to 79 characters
+    autocmd BufNewFile,BufRead differential-update-comments,new-commit setlocal filetype=gitcommit textwidth=100000
 
     " Don't spellcheck URLs https://vi.stackexchange.com/a/4003
     syntax match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
 
-    autocmd FileType css,html,javascript,typescript,typescriptreact setlocal shiftwidth=2
-    autocmd FileType lua setlocal shiftwidth=2
+    autocmd FileType css,html,javascript,typescript,typescriptreact,lua setlocal shiftwidth=2
     autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
     autocmd FileType bash,python,sh
         \ setlocal foldexpr=nvim_treesitter#foldexpr() |
         \ setlocal foldmethod=expr |
         \ setlocal nofoldenable
     if $MONOREPO == 1
-        autocmd FileType python setlocal textwidth=100
+        autocmd FileType bash,python,sh setlocal textwidth=100
     endif
 augroup END
 
