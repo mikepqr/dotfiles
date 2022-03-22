@@ -106,9 +106,9 @@ key_bindings:
   - { key: G,         mods: Command|Shift, chars: "\x4e"                    }
   # Cmd-T -> C-s c (i.e. new window)
   - { key: T,         mods: Command, chars: "\x13\x63"                      }
-  # Cmd-Shift-[ and Cmd-Shift-] to page through tmux windows
-  - { key: RBracket, mods: Command|Shift, chars: "\x13\x6e" }
-  - { key: LBracket, mods: Command|Shift, chars: "\x13\x70" }
+  # Cmd-Shift-[ and Cmd-Shift-] to page through vim buffers using [b and ]b
+  - { key: RBracket, mods: Command|Shift, chars: "\x5d\x62" }
+  - { key: LBracket, mods: Command|Shift, chars: "\x5b\x62" }
 
   # make Alt work as modifier
   - { key: A,         mods: Alt,       chars: "\x1ba"                       }
