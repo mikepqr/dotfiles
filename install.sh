@@ -13,8 +13,8 @@ pkgs="$(find . -maxdepth 1 ! -name '.*' -type d | sed "s|./||")"
 pkgs=${pkgs//darwin/}
 # symlinked on macOS only
 pkgs=${pkgs//linux/}
-# symlinked if hostname is *.cloudera.com
-pkgs=${pkgs//cloudera/}
+# symlinked if hostname is tw-*
+pkgs=${pkgs//twitter/}
 # ignored by stowsh, not linked outside this directory
 pkgs=${pkgs//nolink/}
 
