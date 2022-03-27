@@ -1,0 +1,5 @@
+#!/bin/sh
+
+github_slug=$(git remote get-url origin | awk -F : '{ print $2 }')
+prefix="https://github.com"
+git remote set-url origin "$prefix/$github_slug"
