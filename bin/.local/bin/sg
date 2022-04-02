@@ -1,6 +1,8 @@
 #!/bin/bash
 # Open the current branch on sourcegraph. Go to $1 if provided.
 
+set -euo pipefail
+
 path=${1:-}
 branch=$(git rev-parse --abbrev-ref HEAD)
 # TODO:
