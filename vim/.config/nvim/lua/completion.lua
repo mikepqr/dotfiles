@@ -12,7 +12,7 @@ cmp.setup {
     ['<esc>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true, -- select first suggestion on enter if non selected
+      select = true, -- select first suggestion on enter if none selected
     },
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
