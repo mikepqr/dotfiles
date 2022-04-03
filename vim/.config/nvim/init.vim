@@ -158,6 +158,13 @@ augroup customize_iceberg
     autocmd ColorScheme iceberg highlight! link StatusLineTerm PmenuSel
     autocmd ColorScheme iceberg highlight! link StatusLineNC LineNr
     autocmd ColorScheme iceberg highlight! link StatusLineTermNC LineNr
+    " modify background if ~/.background-light file exists
+    " `nested` so that ColorScheme autocmds fire after this
+    autocmd FocusGained * nested if filereadable(expand("~/.background-light"))
+        \ | set background=light
+        \ | else
+        \ | set background=dark
+        \ | endif
 augroup END
 try
     colorscheme iceberg
@@ -245,7 +252,7 @@ augroup vimrc
         \ nojoinspaces spell spellcapcheck= shiftwidth=4
 
     " Very large textwidth to ensure gq formats unbroken for phabs :-(
-    " Required gq with textwidth=0 formats to 79 characters
+    " Required because gq with textwidth=0 formats to 79 characters
     autocmd BufNewFile,BufRead differential-update-comments,new-commit setlocal filetype=gitcommit textwidth=100000
 
     " Don't spellcheck URLs https://vi.stackexchange.com/a/4003
@@ -260,6 +267,7 @@ augroup vimrc
     if $MONOREPO == 1
         autocmd FileType bash,python,sh setlocal textwidth=100
     endif
+
 augroup END
 
 " Disable opinionated formatting behavior of python ftplugin, i.e.
