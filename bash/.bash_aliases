@@ -125,3 +125,9 @@ function gosa {
 function got {
     cd "${HOME}"/tmp || return
 }
+function goss {
+    cd "${HOME}"/workspace/source/sandbox/users/mleewilliams || return
+}
+function gosas {
+    cd "${HOME}"/workspace/source_alt/sandbox/users/mleewilliams || return
+}
