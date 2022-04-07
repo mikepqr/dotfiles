@@ -37,6 +37,7 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'wincent/corpus'
 Plug 'lewis6991/spellsitter.nvim'
 Plug 'petertriho/nvim-scrollbar'
+Plug 'nvim-telescope/telescope-fzf-native.nvim'
 call plug#end()
 
 try
@@ -336,6 +337,8 @@ require("completion")
 require("treesitter")
 require("nullls")
 require("scrollbar").setup()
+require('telescope').setup()
+require('telescope').load_extension('fzf')
 EOF
 
 function! OpenInSourceGraph()
