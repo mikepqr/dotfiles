@@ -6,6 +6,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/iceberg.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'greymd/oscyank.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-commentary'
@@ -37,7 +39,6 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'wincent/corpus'
 Plug 'lewis6991/spellsitter.nvim'
 Plug 'petertriho/nvim-scrollbar'
-Plug 'nvim-telescope/telescope-fzf-native.nvim'
 call plug#end()
 
 try
@@ -304,12 +305,24 @@ au TermOpen * setlocal nonumber norelativenumber
 tnoremap <Esc> <C-\><C-n>
 nmap <leader>t :terminal<cr>i
 
-" Telescope bindings
-nnoremap <Leader>h <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
-nnoremap <Leader>f <cmd>lua require'telescope.builtin'.find_files{}<CR>
-nnoremap <Leader>rg <cmd>lua require'telescope.builtin'.live_grep{}<CR>
-nnoremap <Leader>gb <cmd>lua require'telescope.builtin'.git_branches{}<CR>
-nnoremap <Leader>b <cmd>lua require'telescope.builtin'.buffers{}<CR>
+" Delegated RG, see https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" FZF bindings
+nmap <leader>h :History<cr>
+nmap <leader>b :Buffers<cr>
+nmap <leader>f :Files<cr>
+nmap <leader>g :RG<space>
+" Search for current word
+nnoremap <silent> <Leader>rg :RG <C-R><C-W><CR>
 
 " Highlight on yank
 augroup YankHighlight
@@ -337,8 +350,6 @@ require("completion")
 require("treesitter")
 require("nullls")
 require("scrollbar").setup()
-require('telescope').setup()
-require('telescope').load_extension('fzf')
 EOF
 
 function! OpenInSourceGraph()
