@@ -8,14 +8,17 @@ end
 
 -- override black with cblack if available
 local black_path = "black"
+local black_args = {}
 if vim.fn.filereadable(vim.fn.expand("~/.local/bin/cblack")) == 1 then
   black_path = vim.fn.expand("~/.local/bin/cblack")
+  black_args = { "--line-length=100" }
 end
 
 
 local sources = {
   null_ls.builtins.formatting.black.with({
-    command = black_path
+    command = black_path,
+    extra_args = black_args,
   }),
   null_ls.builtins.formatting.isort,
   null_ls.builtins.diagnostics.flake8.with({
