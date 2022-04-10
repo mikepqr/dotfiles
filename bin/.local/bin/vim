@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/bash
+
+source "$HOME/.bash_lib"
 
 if cmd-available nvim; then
     exec nvim "${@}"
-elif [ -e /usr/local/bin/vim ]; then
-    exec /usr/local/bin/vim "${@}"
-elif [ -e /usr/bin/vim ]; then
-    exec /usr/bin/vim "${@}"
 else
-    echo "neovim and vim not installed"
+    script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+    pathremove "$script_dir"
+    vim "${@}"
 fi

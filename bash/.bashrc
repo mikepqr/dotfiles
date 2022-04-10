@@ -1,17 +1,8 @@
 #!/bin/bash
 # shellcheck disable=SC1090,SC1091
 
-## -- PATH --
-pathadd() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        export PATH="$1:$PATH"
-    fi
-}
-manpathadd() {
-    if [ -d "$1" ] && [[ ":$MANPATH:" != *":$1:"* ]]; then
-        export MANPATH="$1:$MANPATH"
-    fi
-}
+source ~/.bash_lib
+
 # See http://superuser.com/a/583502. Prevent global /etc/profile
 # path_helper utility from prepending default PATH to previously chosen
 # PATH in, e.g. tmux.
@@ -231,11 +222,6 @@ fi
 
 if [ -f ~/.fzf.bash ]; then
     source ~/.fzf.bash
-    if [ -e ~/.background-light ]; then
-        export FZF_DEFAULT_OPTS="--color=light"
-    else
-        unset FZF_DEFAULT_OPTS
-    fi
     export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude .git"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     # ctrl-t lists everything under pwd by default. Then ctrl-f switches to

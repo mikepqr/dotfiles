@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        export PATH="$1:$PATH"
+    fi
+}
+
+function manpathadd() {
+    if [ -d "$1" ] && [[ ":$MANPATH:" != *":$1:"* ]]; then
+        export MANPATH="$1:$MANPATH"
+    fi
+}
+
+function pathremove() {
+    # delete path by parts so we can never accidentally remove sub paths
+    PATH=${PATH//":$1:"/":"} # delete any instances in the middle
+    PATH=${PATH/#"$1:"/}     # delete any instance at the beginning
+    PATH=${PATH/%":$1"/}     # delete any instance in the at the end
+}
+
+function cmd-available() {
+    if command -v "$1" >/dev/null 2>&1; then
+        return 0
+    else
+        return 1
+    fi
+}
