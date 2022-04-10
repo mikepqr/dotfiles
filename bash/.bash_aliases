@@ -33,6 +33,8 @@ alias cdfp='cd "$HOME/.dotfiles-private"'
 alias cspell='(cdfp && git commit -m "Add words" vim/.vim/spell/en.utf-8.add vim/.config/nvim/spell/en.utf-8.add)'
 alias ..='cd ..'
 
+alias toggle-colors='source $HOME/.local/bin/_toggle-colors'
+
 function usepyenv {
     if [ -f .envrc ]; then
         echo ".envrc already exists"

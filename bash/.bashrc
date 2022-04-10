@@ -231,6 +231,11 @@ fi
 
 if [ -f ~/.fzf.bash ]; then
     source ~/.fzf.bash
+    if [ -e ~/.background-light ]; then
+        export FZF_DEFAULT_OPTS="--color=light"
+    else
+        unset FZF_DEFAULT_OPTS
+    fi
     export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude .git"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     # ctrl-t lists everything under pwd by default. Then ctrl-f switches to
