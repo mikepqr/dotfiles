@@ -28,10 +28,10 @@
     ff = only
 [init]
     defaultBranch = main
+[credential "https://github.com"]
+    helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+    helper = !/opt/homebrew/bin/gh auth git-credential
 # Comes last so it can override anything set earlier
 [include]
     path = ~/.config/git/config.local
-[credential "https://github.com"]
-       helper = !/usr/local/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-       helper = !/usr/local/bin/gh auth git-credential
