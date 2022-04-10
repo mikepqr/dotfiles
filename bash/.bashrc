@@ -63,17 +63,9 @@ pathadd "$HOME/.pyenv/bin"
 # add pyenv versions to path
 pathadd "${HOME}/.pyenv/shims"
 export VENVHOME="${HOME}/.ves"
-workon() {
-    if [ -f "${VENVHOME}/$1/bin/activate" ]; then
-        source "${VENVHOME}/$1/bin/activate"
-    fi
-}
-workon default
-mkvirtualenv() {
-    deactivate 2>/dev/null || true
-    python -m venv "${VENVHOME}/${1}"
-    workon "${1}"
-}
+if [ -f "${VENVHOME}/$1/bin/activate" ]; then
+    source "${VENVHOME}/$1/bin/activate"
+fi
 
 ## -- VI --
 set -o vi
