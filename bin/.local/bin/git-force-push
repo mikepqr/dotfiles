@@ -6,10 +6,11 @@ branch_name="$(git rev-parse --abbrev-ref HEAD)"
 local_sha="$(git rev-parse HEAD)"
 remote_sha="$(git ls-remote origin "$(git rev-parse --abbrev-ref HEAD)" | cut -f1)"
 
-if [ "$local_sha" = "$remote_sha" ]; then
-    echo "Nothing to do. Remote branch $branch_name is up to date."
-    exit 0
-else
+if [ -z "$remote_sha" ]; then
+    git push origin HEAD
+elif [ "$local_sha" != "$remote_sha" ]; then
     git push --delete origin "$branch_name"
     git push origin HEAD
+else
+    echo "Nothing to do. Remote branch $branch_name is up to date."
 fi
