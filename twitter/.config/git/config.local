@@ -4,7 +4,3 @@
     renames = true
 [http]
     postBuffer = 524288000
-[credential "https://github.com"]
-    helper = !/usr/local/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-    helper = !/usr/local/bin/gh auth git-credential
