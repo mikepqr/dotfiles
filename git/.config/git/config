@@ -1,3 +1,16 @@
+[core]
+    pager = delta --$([ -f ~/.background-light ] && echo light || echo dark)
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    line-numbers = true
+    line-numbers-left-format = ""
+    line-numbers-plus-style = ""
+    line-numbers-zero-style = ""
+    hunk-header-style = "omit"
+    file-style = ""
+    file-modified-label = "modified:"
+    syntax-theme = none
 [push]
     default = simple
 [user]
@@ -25,6 +38,7 @@
     showUntrackedFiles = all
 [merge]
     ff = only  # fast-forward merges only
+    conflictstyle = diff3  # http://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html
 [pull]
     ff = only
 [init]
