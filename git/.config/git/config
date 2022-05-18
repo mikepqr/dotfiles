@@ -1,7 +1,7 @@
 [core]
     pager = delta --$([ -f ~/.background-light ] && echo light || echo dark)
 [interactive]
-    diffFilter = delta --color-only
+    diffFilter = delta --$([ -f ~/.background-light ] && echo light || echo dark) --color-only
 [delta]
     line-numbers = true
     line-numbers-left-format = ""
