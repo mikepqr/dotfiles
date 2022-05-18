@@ -37,7 +37,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'wincent/corpus'
 Plug 'lewis6991/spellsitter.nvim'
-Plug 'petertriho/nvim-scrollbar'
 call plug#end()
 
 try
@@ -348,7 +347,6 @@ require("lsp")
 require("completion")
 require("treesitter")
 require("nullls")
-require("scrollbar").setup()
 EOF
 
 function! OpenInSourceGraph()
