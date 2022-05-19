@@ -1,4 +1,5 @@
 call plug#begin(stdpath('data') . '/vimplug')
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'ap/vim-buftabline'
 Plug 'aymericbeaumet/vim-symlink'
 Plug 'christoomey/vim-tmux-navigator'
