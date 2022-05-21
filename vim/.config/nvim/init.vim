@@ -18,6 +18,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'Vimjas/vim-python-pep8-indent'
 
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
