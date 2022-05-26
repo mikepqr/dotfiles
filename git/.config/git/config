@@ -22,7 +22,6 @@
     verbose = true
 [alias]
     pish = push
-    co = checkout
     st = status
     unstage = reset HEAD --
     llg = log --oneline --numstat --decorate --graph
