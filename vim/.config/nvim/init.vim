@@ -70,6 +70,7 @@ set splitright
 set textwidth=80
 set expandtab
 set list
+set shiftwidth=4
 " Mouse
 set mouse=a  " mouse support in terminals
 
