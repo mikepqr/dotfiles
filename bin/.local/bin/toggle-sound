@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+import os
+import shutil
+import subprocess
+from typing import Sequence
+
+
+def toggle(current, known: Sequence):
+    """
+    Given a current value and a two element sequence, one of which is the
+    current value, return the other value.
+    """
+    if current not in known:
+        raise ValueError(f"{current} is not one of {known}")
+    else:
+        return known[0] if current == known[1] else known[1]
+
+
+def find_switchaudiosource():
+    which_result = shutil.which("SwitchAudioSource")
+    if which_result:
+        return which_result
+    elif os.path.exists("/opt/homebrew/bin/SwitchAudioSource"):
+        return "/opt/homebrew/bin/SwitchAudioSource"
+    else:
+        print("SwitchAudioSource not installed")
+        raise SystemExit(1)
+
+
+def get_output():
+    return subprocess.check_output(
+        [switchaudiosource, "-c", "-t", "output"], text=True
+    ).strip()
+
+
+def set_output(device):
+    subprocess.run([switchaudiosource, "-s", device, "-t", "output"], text=True)
+
+
+speakers = "Klipsch R-41PM"
+headphones = "Jabra Evolve2 30"
+known = [speakers, headphones]
+switchaudiosource = find_switchaudiosource()
+
+if __name__ == "__main__":
+    current = get_output()
+    try:
+        new = toggle(current, known)
+    except ValueError:
+        print(f"Unknown output {current}")
+        raise SystemExit(1)
+    set_output(new)
