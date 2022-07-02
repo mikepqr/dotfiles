@@ -68,7 +68,7 @@ color_schemes:
         cyan:    '#327698'
         white:   '#262a3f'
 
-colors: *light
+colors: *dark
 
 bell:
   animation: EaseOutExpo
