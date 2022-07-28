@@ -63,9 +63,6 @@ pathadd "$HOME/.pyenv/bin"
 # add pyenv versions to path
 pathadd "${HOME}/.pyenv/shims"
 export VENVHOME="${HOME}/.ves"
-if [ -f "${VENVHOME}/default/bin/activate" ]; then
-    source "${VENVHOME}/default/bin/activate"
-fi
 
 ## -- VI --
 set -o vi
