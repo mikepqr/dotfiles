@@ -20,7 +20,6 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'tpope/vim-sleuth'
 
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -68,9 +67,13 @@ set splitbelow
 set splitright
 " Tabs and whitespace
 set textwidth=80
+if $MONOREPO != 1
+    set shiftwidth=4
+else
+    set shiftwidth=2
+endif
 set expandtab
 set list
-set shiftwidth=4
 " Mouse
 set mouse=a  " mouse support in terminals
 
@@ -249,7 +252,7 @@ augroup vimrc
     autocmd FileType asciidoc,markdown,text,gitcommit,rst setlocal
         \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s\\+[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
-        \ nojoinspaces spell spellcapcheck=
+        \ nojoinspaces spell spellcapcheck= shiftwidth=4
 
     " Very large textwidth to ensure gq formats unbroken for phabs :-(
     " Required because gq with textwidth=0 formats to 79 characters
@@ -258,6 +261,8 @@ augroup vimrc
     " Don't spellcheck URLs https://vi.stackexchange.com/a/4003
     syntax match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
 
+    autocmd FileType css,html,javascript,typescript,typescriptreact,lua setlocal shiftwidth=2
+    autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
     autocmd FileType bash,python,sh
         \ setlocal foldexpr=nvim_treesitter#foldexpr() |
         \ setlocal foldmethod=expr |
