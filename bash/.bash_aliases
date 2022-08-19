@@ -18,6 +18,7 @@ fi
 alias n='vim -c ":cd ~/notes"'
 alias v='vim -c ":History"'
 alias t='tms'
+alias k='kubectl'
 
 alias cdl='cd "$(cat $HOME/.lastdir)"'
 
