@@ -71,3 +71,5 @@
 # Comes last so it can override anything set earlier
 [include]
     path = ~/.config/git/config.local
+[add "interactive"]
+	useBuiltin = false
