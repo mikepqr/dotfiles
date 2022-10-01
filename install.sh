@@ -13,8 +13,6 @@ pkgs="$(find . -maxdepth 1 ! -name '.*' -type d | sed "s|./||")"
 pkgs=${pkgs//darwin/}
 # symlinked on macOS only
 pkgs=${pkgs//linux/}
-# symlinked if hostname is tw-*
-pkgs=${pkgs//twitter/}
 # ignored by stowsh, not linked outside this directory
 pkgs=${pkgs//nolink/}
 
@@ -29,10 +27,6 @@ fi
 
 if [[ $(uname) == "Linux" ]]; then
     bin/.local/bin/stowsh -v -s linux -t "$HOME"
-fi
-
-if [[ $(hostname) == "tw-"* ]]; then
-    bin/.local/bin/stowsh -v -s twitter -t "$HOME"
 fi
 
 # bootstrap vim plugin configuration

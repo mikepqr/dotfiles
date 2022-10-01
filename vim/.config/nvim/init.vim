@@ -352,12 +352,3 @@ require("treesitter")
 require("nullls")
 require('gitsigns').setup()
 EOF
-
-function! OpenInSourceGraph()
-    let prefix = $SOURCEGRAPH_URL . "source/-/blob/"
-    let filename = trim(system('git ls-tree --name-only --full-name -- HEAD ' . expand('%')))
-    let lineNumber = "\\#L" . line(".")
-    let url = prefix . filename . lineNumber
-    silent exec "!open '" . url . "'"
-endfunction
-nnoremap <Leader>sg :call OpenInSourceGraph()<CR>
