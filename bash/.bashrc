@@ -42,6 +42,10 @@ pathadd "$GOPATH/bin"
 pathadd "$HOME/.cargo/bin"
 pathadd "$HOME/.local/bin"
 
+if [[ $USER == "mlw" ]]; then
+    pathadd "$HOME/.toolbox/bin"
+fi
+
 # Aliases must come after brew activation, before use of cmd-available
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
