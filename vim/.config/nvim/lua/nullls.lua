@@ -34,7 +34,7 @@ local sources = {
 }
 
 local on_attach = function(client, bufnr)
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.documentFormattingProvider then
     vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
   end
 end
