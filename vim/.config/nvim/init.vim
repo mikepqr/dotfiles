@@ -67,11 +67,7 @@ set splitbelow
 set splitright
 " Tabs and whitespace
 set textwidth=80
-if $MONOREPO != 1
-    set shiftwidth=4
-else
-    set shiftwidth=2
-endif
+set shiftwidth=4
 set expandtab
 set list
 " Mouse
@@ -253,10 +249,6 @@ augroup vimrc
         \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s\\+[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
         \ nojoinspaces spell spellcapcheck= shiftwidth=4
-
-    " Very large textwidth to ensure gq formats unbroken for phabs :-(
-    " Required because gq with textwidth=0 formats to 79 characters
-    autocmd BufNewFile,BufRead differential-update-comments,new-commit setlocal filetype=gitcommit textwidth=100000
 
     " Don't spellcheck URLs https://vi.stackexchange.com/a/4003
     syntax match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
