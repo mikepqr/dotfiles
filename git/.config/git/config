@@ -35,6 +35,7 @@
     zero-style = dim syntax
 [push]
     default = simple
+	autoSetupRemote = true
 [user]
     name = Mike Lee Williams
     email = mike@mike.place
