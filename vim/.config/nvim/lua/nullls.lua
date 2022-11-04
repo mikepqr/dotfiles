@@ -16,6 +16,12 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.documentFormattingProvider then
     vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })")
   end
+  -- neovim 0.8 sets formatexpr (and therefore gq) to use LSP for any buffer to
+  -- which an LSP that declares formatting capabilities is attached. null-ls
+  -- declares all capabilities (incl. formatting), so this always happens for
+  -- python and sh. I don't want this, so I reset formatexpr when this happens.
+  -- See https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
+  vim.api.nvim_buf_set_option(bufnr, 'formatexpr', '')
 end
 
 null_ls.setup({
