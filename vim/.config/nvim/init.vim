@@ -259,9 +259,6 @@ augroup vimrc
         \ setlocal foldexpr=nvim_treesitter#foldexpr() |
         \ setlocal foldmethod=expr |
         \ setlocal nofoldenable
-    if $MONOREPO == 1
-        autocmd FileType bash,python,sh setlocal textwidth=100
-    endif
 
 augroup END
 
