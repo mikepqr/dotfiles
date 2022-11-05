@@ -333,6 +333,19 @@ require("obsidian").setup({
   daily_notes = {
     folder = "daily",
   },
+  note_id_func = function(title)
+    suffix = ""
+    if title ~= nil then
+      -- If title is given, transform it into valid file name.
+      suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+    else
+      -- If title is nil, use 4 random letters
+      for _ = 1, 4 do
+        suffix = suffix .. string.char(math.random(97, 122))
+      end
+    end
+    return tostring(os.date("%Y-%m-%d")) .. "-" .. suffix
+  end
 })
 EOF
 
