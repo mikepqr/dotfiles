@@ -37,8 +37,8 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'wincent/corpus'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'epwalsh/obsidian.nvim'
 call plug#end()
 
 try
@@ -292,7 +292,6 @@ endif
 
 au TermOpen * setlocal nonumber norelativenumber
 tnoremap <Esc> <C-\><C-n>
-nmap <leader>t :terminal<cr>i
 
 " Delegated RG, see https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
 function! RipgrepFzf(query, fullscreen)
@@ -320,23 +319,22 @@ augroup YankHighlight
 augroup end
 
 lua <<EOF
-vim.g.CorpusDirectories = {
-      ['~/vault/notes'] = {
-        autocommit = true,
-        autoreference = false,
-        autotitle = 1,
-        base = './',
-        transform = 'local',
-      },
-  }
-EOF
-
-let g:CorpusPreviewWinhighlight='Normal:Normal'
-
-lua <<EOF
 require("lsp")
 require("completion")
 require("treesitter")
 require("nullls")
 require('gitsigns').setup()
+require("obsidian").setup({
+  dir = "~/vault",
+  notes_subdir = "notes",
+  completion = {
+    nvim_cmp = true,
+  },
+  daily_notes = {
+    folder = "daily",
+  },
+})
 EOF
+
+nmap <leader>c :ObsidianSearch<space>
+nmap <leader>t :ObsidianToday<cr>
