@@ -13,19 +13,15 @@ Plug 'mbbill/undotree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'Vimjas/vim-python-pep8-indent'
 
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 Plug 'neovim/nvim-lspconfig'
 " Plug 'glepnir/lspsaga.nvim'
 " https://github.com/glepnir/lspsaga.nvim/issues/249
@@ -261,10 +257,6 @@ augroup vimrc
         \ setlocal nofoldenable
 
 augroup END
-
-" Disable opinionated formatting behavior of python ftplugin, i.e.
-" setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
-let g:python_recommended_style=0
 
 " Write file without changing modification time
 " https://unix.stackexchange.com/a/527154/20079
