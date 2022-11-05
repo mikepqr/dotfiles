@@ -15,7 +15,7 @@ else
     alias grep="grep --color"
 fi
 
-alias n='vim -c ":cd ~/notes"'
+alias n='vim -c ":cd ~/vault/notes"'
 alias v='vim -c ":History"'
 alias t='tms'
 alias k='kubectl'

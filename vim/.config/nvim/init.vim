@@ -321,7 +321,7 @@ augroup end
 
 lua <<EOF
 vim.g.CorpusDirectories = {
-      ['~/notes'] = {
+      ['~/vault/notes'] = {
         autocommit = true,
         autoreference = false,
         autotitle = 1,
