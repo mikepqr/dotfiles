@@ -1,5 +1,4 @@
-#!/usr/bin/env python3.9
-import re
+#!/usr/bin/env python3
 import subprocess
 
 
@@ -13,8 +12,6 @@ def run_and_get_stripped_lines(cmd):
 
 
 def get_branches():
-    remote = run_and_get_stripped_lines("git remote get-url origin")[0]
-    personal = re.search("github.com[:.]mikepqr", remote)
     local_branches = [
         line
         for line in run_and_get_stripped_lines("git branch --list")
@@ -29,7 +26,6 @@ def get_branches():
                 "main" not in branch,
                 "master" not in branch,
                 "HEAD" not in branch,
-                branch.startswith("origin/" + ("mleewilliams" if not personal else "")),
             )
         )
     ]
