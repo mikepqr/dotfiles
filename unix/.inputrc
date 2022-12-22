@@ -11,3 +11,5 @@ set completion-ignore-case on
 "\e_": yank-last-arg
 # jk = escape
 "jk":"\e"
+# Append slash when completing symlinks to directories
+set mark-symlinked-directories on
