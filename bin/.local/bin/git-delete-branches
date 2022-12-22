@@ -56,8 +56,9 @@ def main():
         stdout=subprocess.PIPE,
         text=True,
     ).stdout
-    chosen_branches = fzf_output.rstrip().split("\n")
-    delete_branches(chosen_branches)
+    if fzf_output.rstrip():
+        chosen_branches = fzf_output.rstrip().split("\n")
+        delete_branches(chosen_branches)
 
 
 if __name__ == "__main__":
