@@ -221,9 +221,9 @@ if [ -f ~/.fzf.bash ]; then
     # everying under $HOME, and ctrl-t switches back.
     export FZF_CTRL_T_OPTS="--bind 'ctrl-f:reload($FZF_DEFAULT_COMMAND .  $HOME),ctrl-t:reload($FZF_DEFAULT_COMMAND)'"
     if [ -d ~/p ]; then
-        export FZF_ALT_C_COMMAND='(fd --type d . ~/p; fd --type d --exclude "/p" . ~)'
+        export FZF_ALT_C_COMMAND='(fd --follow --type d . ~/p; fd --folow --type d --exclude "/p" . ~)'
     else
-        export FZF_ALT_C_COMMAND="fd --type d . ~"
+        export FZF_ALT_C_COMMAND="fd  --follow --type d . ~"
     fi
 fi
 
