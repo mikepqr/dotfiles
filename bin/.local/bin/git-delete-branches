@@ -11,24 +11,20 @@ def run_and_get_stripped_lines(cmd):
     ]
 
 
-def get_branches():
-    local_branches = [
-        line
-        for line in run_and_get_stripped_lines("git branch --list")
-        if "*" not in line
-    ]
-    all_branches = run_and_get_stripped_lines("git branch --list --remote")
-    return local_branches + [
-        branch
-        for branch in all_branches
-        if all(
-            (
-                "main" not in branch,
-                "master" not in branch,
-                "HEAD" not in branch,
-            )
+def is_deletable(branch):
+    return all(
+        (
+            "*" not in branch,
+            "main" not in branch,
+            "master" not in branch,
+            "HEAD" not in branch,
         )
-    ]
+    )
+
+
+def get_branches():
+    branches = run_and_get_stripped_lines("git branch --list --all")
+    return [branch for branch in branches if is_deletable(branch)]
 
 
 def delete_branches(branches):
