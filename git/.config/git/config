@@ -56,6 +56,7 @@
     # Check out the first commit
     first = !git checkout $(git rev-list --max-parents=0 HEAD)
     jump = !$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump
+    root = rev-parse --show-cdup
 [status]
     showUntrackedFiles = all
 [merge]
