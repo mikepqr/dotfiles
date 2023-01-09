@@ -9,6 +9,7 @@
 *.pyc
 build/
 cdk.out/
+cdk.context.json
 
 # Packages #
 ############
