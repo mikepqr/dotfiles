@@ -141,7 +141,7 @@ augroup customize_iceberg
     " Prominent comments
     autocmd ColorScheme iceberg highlight! link Comment Error
     " Reverse selection
-    autocmd ColorScheme iceberg highlight! Visual cterm=reverse gui=reverse
+    autocmd ColorScheme iceberg highlight! Visual cterm=reverse gui=reverse guibg=NONE guifg=NONE
     " buftabline
     autocmd ColorScheme iceberg highlight! link BufTabLineCurrent PmenuSel
     autocmd ColorScheme iceberg highlight! link BufTabLineHidden LineNr
