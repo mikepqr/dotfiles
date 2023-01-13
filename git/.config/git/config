@@ -38,8 +38,6 @@
     helper = !gh auth git-credential
 [credential "https://gist.github.com"]
     helper = !gh auth git-credential
-[add "interactive"]
-    useBuiltin = false
 [core]
     pager = delta --$([ -f ~/.background-light ] && echo light || echo dark)
 [interactive]
