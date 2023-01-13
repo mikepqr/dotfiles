@@ -11,7 +11,10 @@
     default = simple
     autoSetupRemote = true
 [pull]
-    ff = only
+    ff = true
+    rebase = true
+[rebase]
+    autoStash = true
 [merge]
     ff = only  # fast-forward merges only
     conflictstyle = diff3  # http://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html
