@@ -1,3 +1,42 @@
+[user]
+    name = Mike Lee Williams
+    email = mike@mike.place
+[status]
+    showUntrackedFiles = all
+[color]
+    ui = true
+[init]
+    defaultBranch = main
+[push]
+    default = simple
+    autoSetupRemote = true
+[pull]
+    ff = only
+[merge]
+    ff = only  # fast-forward merges only
+    conflictstyle = diff3  # http://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html
+[commit]
+    verbose = true
+[alias]
+    pish = push
+    st = status
+    unstage = reset HEAD --
+    llg = log --oneline --numstat --decorate --graph
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    undo = reset --soft HEAD^  # undo last commit
+    recommit = commit --amend --no-edit
+    # List most recent branches, https://ses4j.github.io/2020/04/01/git-alias-recent-branches/
+    lb = !git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}'
+    # Check out the first commit
+    first = !git checkout $(git rev-list --max-parents=0 HEAD)
+    jump = !$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump
+    root = rev-parse --show-cdup
+[credential "https://github.com"]
+    helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+    helper = !gh auth git-credential
+[add "interactive"]
+    useBuiltin = false
 [core]
     pager = delta --$([ -f ~/.background-light ] && echo light || echo dark)
 [interactive]
@@ -33,45 +72,6 @@
     syntax-theme = OneHalfDark
     whitespace-error-style = reverse red
     zero-style = dim syntax
-[push]
-    default = simple
-	autoSetupRemote = true
-[user]
-    name = Mike Lee Williams
-    email = mike@mike.place
-[color]
-    ui = true
-[commit]
-    verbose = true
-[alias]
-    pish = push
-    st = status
-    unstage = reset HEAD --
-    llg = log --oneline --numstat --decorate --graph
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    undo = reset --soft HEAD^  # undo last commit
-    recommit = commit --amend --no-edit
-    # List most recent branches, https://ses4j.github.io/2020/04/01/git-alias-recent-branches/
-    lb = !git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}'
-    # Check out the first commit
-    first = !git checkout $(git rev-list --max-parents=0 HEAD)
-    jump = !$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump
-    root = rev-parse --show-cdup
-[status]
-    showUntrackedFiles = all
-[merge]
-    ff = only  # fast-forward merges only
-    conflictstyle = diff3  # http://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html
-[pull]
-    ff = only
-[init]
-    defaultBranch = main
-[credential "https://github.com"]
-    helper = !gh auth git-credential
-[credential "https://gist.github.com"]
-    helper = !gh auth git-credential
 # Comes last so it can override anything set earlier
 [include]
     path = ~/.config/git/config.local
-[add "interactive"]
-	useBuiltin = false
