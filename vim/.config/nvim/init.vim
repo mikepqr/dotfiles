@@ -18,6 +18,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
+Plug 'L3MON4D3/LuaSnip'
 Plug 'ibhagwan/smartyank.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
