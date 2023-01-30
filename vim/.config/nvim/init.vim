@@ -5,7 +5,6 @@ Plug 'aymericbeaumet/vim-symlink'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/iceberg.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'greymd/oscyank.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
@@ -19,6 +18,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
+Plug 'ibhagwan/smartyank.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -67,8 +67,6 @@ set list
 " Mouse
 set mouse=a  " mouse support in terminals
 
-" Clipboard
-set clipboard^=unnamed  " yanks and cuts go in system clipboard
 " Search
 set ignorecase
 set smartcase
@@ -195,9 +193,6 @@ noremap <silent> <leader>p :let @+ = expand("%")<CR>    " relative to current di
 noremap <silent> <leader>/ :let @+ = expand("%:p")<CR>  " absolute
 noremap <silent> <leader>~ :let @+ = expand("%:~")<CR>  " relative to home
 
-" Leader-y to yank to system clipboard (works over remote tmux)
-noremap <silent> <Leader>y :Oscyank<cr>
-
 " Indentation
 let g:indent_blankline_show_first_indent_level = v:false
 let g:indent_blankline_filetype_exclude = ['help']
@@ -302,12 +297,6 @@ nmap <leader>g :RG<space>
 " Search for current word
 nnoremap <silent> <Leader>rg :RG <C-R><C-W><CR>
 
-" Highlight on yank
-augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-augroup end
-
 lua <<EOF
 require("lsp")
 require("completion")
@@ -337,6 +326,11 @@ require("obsidian").setup({
     return tostring(os.date("%Y-%m-%d")) .. "-" .. suffix
   end
 })
+require('smartyank').setup {
+  highlight = {
+    timeout = 150,
+  }
+}
 EOF
 
 nmap <leader>c :ObsidianSearch<space>
