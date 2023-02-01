@@ -120,18 +120,9 @@ function tms {
 complete -A command edc
 complete -A directory sync-if-clean
 
-function gos {
-    cd "${HOME}"/workspace/source/${1} || return
+function goc {
+    cd "${HOME}/workplace/${__WORK_PROJ}" || return
 }
-function gosa {
-    cd "${HOME}"/workspace/source_alt/${1} || return
-}
-function got {
-    cd "${HOME}"/tmp || return
-}
-function goss {
-    cd "${HOME}"/workspace/source/sandbox/users/mleewilliams || return
-}
-function gosas {
-    cd "${HOME}"/workspace/source_alt/sandbox/users/mleewilliams || return
+function gow {
+    cd "${HOME}"/workplace/ || return
 }

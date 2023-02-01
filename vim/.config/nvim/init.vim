@@ -11,6 +11,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
@@ -336,3 +337,5 @@ EOF
 
 nmap <leader>c :ObsidianSearch<space>
 nmap <leader>t :ObsidianToday<cr>
+
+let g:fugitive_gitlab_domains = {'ssh://ssh.' . $__WORK_GITHOST: 'https://' . $__WORK_GITHOST}
