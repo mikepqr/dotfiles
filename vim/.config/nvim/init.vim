@@ -141,7 +141,14 @@ augroup customize_iceberg
     " Prominent comments
     autocmd ColorScheme iceberg highlight! link Comment Error
     " Reverse selection
-    autocmd ColorScheme iceberg highlight! Visual cterm=reverse gui=reverse guibg=NONE guifg=NONE
+    " guibg!=NONE is necessary to ensure some visual indicaction that whitespace
+    " has been selected. The hard-coded values are copied from Visual in
+    " iceberg.vim.
+    if &background == "dark"
+        autocmd ColorScheme iceberg highlight! Visual cterm=reverse gui=reverse guibg=#272c42 guifg=NONE
+    else
+        autocmd ColorScheme iceberg highlight! Visual cterm=reverse gui=reverse guibg=#c9cdd7 guifg=NONE
+    endif
     " buftabline
     autocmd ColorScheme iceberg highlight! link BufTabLineCurrent PmenuSel
     autocmd ColorScheme iceberg highlight! link BufTabLineHidden LineNr
