@@ -34,7 +34,8 @@ Plug 'hrsh7th/cmp-path'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'epwalsh/obsidian.nvim'
+" Plug 'epwalsh/obsidian.nvim'
+Plug 'wincent/corpus'
 call plug#end()
 
 try
@@ -309,37 +310,20 @@ require("completion")
 require("treesitter")
 require("nullls")
 require('gitsigns').setup()
-require("obsidian").setup({
-  dir = "~/vault",
-  notes_subdir = "notes",
-  completion = {
-    nvim_cmp = true,
-  },
-  daily_notes = {
-    folder = "daily",
-  },
-  note_id_func = function(title)
-    suffix = ""
-    if title ~= nil then
-      -- If title is given, transform it into valid file name.
-      suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-    else
-      -- If title is nil, use 4 random letters
-      for _ = 1, 4 do
-        suffix = suffix .. string.char(math.random(97, 122))
-      end
-    end
-    return tostring(os.date("%Y-%m-%d")) .. "-" .. suffix
-  end
-})
 require('smartyank').setup {
   highlight = {
     timeout = 150,
   }
 }
+vim.g.CorpusDirectories = {
+      ['~/notes'] = {
+        autocommit = true,
+        autoreference = false,
+        autotitle = 1,
+        base = './',
+        transform = 'local',
+      },
+  }
 EOF
-
-nmap <leader>c :ObsidianSearch<space>
-nmap <leader>t :ObsidianToday<cr>
-
+let g:CorpusPreviewWinhighlight='Normal:Normal'
 let g:fugitive_gitlab_domains = {'ssh://ssh.' . $__WORK_GITHOST: 'https://' . $__WORK_GITHOST}
