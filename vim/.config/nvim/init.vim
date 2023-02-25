@@ -313,7 +313,8 @@ require('gitsigns').setup()
 require('smartyank').setup {
   highlight = {
     timeout = 150,
-  }
+  },
+  validate_yank = false, -- https://github.com/ibhagwan/smartyank.nvim/issues/8
 }
 vim.g.CorpusDirectories = {
       ['~/notes'] = {
