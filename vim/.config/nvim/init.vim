@@ -4,9 +4,7 @@ Plug 'ap/vim-buftabline'
 Plug 'aymericbeaumet/vim-symlink'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/iceberg.vim'
-Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-commentary'
@@ -34,8 +32,8 @@ Plug 'hrsh7th/cmp-path'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'lewis6991/gitsigns.nvim'
-" Plug 'epwalsh/obsidian.nvim'
 Plug 'wincent/corpus'
+Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 call plug#end()
 
 try
@@ -285,24 +283,11 @@ endif
 au TermOpen * setlocal nonumber norelativenumber
 tnoremap <Esc> <C-\><C-n>
 
-" Delegated RG, see https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-
-" FZF bindings
-nmap <leader>h :History<cr>
-nmap <leader>b :Buffers<cr>
-nmap <leader>f :Files<cr>
-nmap <leader>g :RG<space>
-" Search for current word
-nnoremap <silent> <Leader>rg :RG <C-R><C-W><CR>
+nnoremap <leader>f <cmd>lua require('fzf-lua').files()<CR><cr>
+nnoremap <leader>h <cmd>lua require('fzf-lua').oldfiles()<CR><cr>
+nnoremap <leader>b <cmd>lua require('fzf-lua').buffers()<CR><cr>
+nnoremap <leader>c <cmd>lua require('fzf-lua').files({cwd="~/notes", cmd="rg --color=never --files --sortr modified"})<CR>
+nnoremap <leader>g <cmd>lua require('fzf-lua').live_grep({cwd="~/notes", search=""})<CR>
 
 lua <<EOF
 require("lsp")
