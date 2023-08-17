@@ -5,7 +5,9 @@ require('nvim-treesitter.configs').setup {
   },
   highlight = {
     enable = true,
-    disable = {"python"}, -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1573#issuecomment-1068634000
+  },
+  indent = {
+    enable = true,
   },
   incremental_selection = {
     enable = true,
@@ -15,10 +17,6 @@ require('nvim-treesitter.configs').setup {
       scope_incremental = 'grc',
       node_decremental = 'grm',
     },
-  },
-  indent = {
-    enable = true,
-    disable = {"python"}, -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
   },
   textobjects = {
     select = {
