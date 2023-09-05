@@ -30,14 +30,14 @@ def get_branches():
 def delete_branches(branches):
     locals, remotes = [], []
     for branch in branches:
-        if branch.startswith("origin/"):
+        if branch.startswith("remotes/origin/"):
             remotes.append(branch)
         else:
             locals.append(branch)
     if locals:
         subprocess.run(f"git branch --delete --force {' '.join(locals)}", shell=True)
     if remotes:
-        remotes = [remote.removeprefix("origin/") for remote in remotes]
+        remotes = [remote.removeprefix("remotes/origin/") for remote in remotes]
         subprocess.run(f"git push --delete origin {' '.join(remotes)}", shell=True)
 
 
