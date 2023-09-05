@@ -307,4 +307,6 @@ vim.g.CorpusDirectories = {
   }
 EOF
 let g:CorpusPreviewWinhighlight='Normal:Normal'
+let g:CorpusSort='stat'
+let g:CorpusAutoCd=1
 let g:fugitive_gitlab_domains = {'ssh://ssh.' . $__WORK_GITHOST: 'https://' . $__WORK_GITHOST}
