@@ -7,15 +7,15 @@
 # the symlink
 
 function _toggle-colors() {
-    local -r alacritty_config="${HOME}/.config/alacritty/alacritty.yml"
+    local -r alacritty_config="${HOME}/.config/alacritty/alacritty.toml"
     local -r tmux_config="${HOME}/.config/tmux/tmux.conf"
-    if grep -q '^colors: \*dark' "${alacritty_config}"; then
+    if grep -q 'iceberg-dark' "${alacritty_config}"; then
         echo "Switching from dark to light"
-        gsed --in-place --follow-symlinks 's/^colors: \*dark/colors: *light/' "${alacritty_config}"
+        gsed --in-place --follow-symlinks 's/iceberg-dark/iceberg-light/' "${alacritty_config}"
         touch "${HOME}/.background-light"
     else
         echo "Switching from light to dark"
-        gsed --in-place --follow-symlinks 's/^colors: \*light/colors: *dark/' "${alacritty_config}"
+        gsed --in-place --follow-symlinks 's/iceberg-light/iceberg-dark/' "${alacritty_config}"
         rm -f "${HOME}/.background-light"
     fi
     tmux source-file "${tmux_config}" 2>/dev/null || true
