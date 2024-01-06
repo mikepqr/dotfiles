@@ -3,6 +3,8 @@
     email = mike@mike.place
 [status]
     showUntrackedFiles = all
+	branch = true
+	short = true
 [color]
     ui = true
 [init]
