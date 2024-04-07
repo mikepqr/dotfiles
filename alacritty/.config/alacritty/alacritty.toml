@@ -16,4 +16,5 @@ bindings = [
 { action = "CreateNewWindow", key = "N", mods = "Command" },
 { chars = "]b", key = "{", mods = "Command|Shift" },
 { chars = "[b", key = "}", mods = "Command|Shift" },
+{ chars = "\u001Bc", key = "C", mods = "Alt"},
 ]
