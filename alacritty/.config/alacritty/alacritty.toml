@@ -12,7 +12,7 @@ italic = { family = "Menlo", style = "Italic" }
 
 [keyboard]
 bindings = [
-{ action = "ToggleSimpleFullscreen", key = "Enter", mods = "Command" },
+{ action = "ToggleFullscreen", key = "Enter", mods = "Command" },
 { action = "CreateNewWindow", key = "N", mods = "Command" },
 { chars = "]b", key = "{", mods = "Command|Shift" },
 { chars = "[b", key = "}", mods = "Command|Shift" },
