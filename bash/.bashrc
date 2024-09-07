@@ -39,7 +39,9 @@ fi
 pathadd "$HOME/bin"
 GOPATH=$HOME/go
 pathadd "$GOPATH/bin"
-pathadd "$HOME/.cargo/bin"
+if [ -f "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
 pathadd "$HOME/.local/bin"
 
 if [[ $USER == "mlw" ]]; then
