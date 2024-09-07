@@ -6,12 +6,6 @@ local sources = {
   require("none-ls.diagnostics.flake8").with({
     extra_args = { "--append-config", vim.fn.expand("~/.config/flake8") }
   }),
-  null_ls.builtins.formatting.shfmt.with({
-    extra_args = { "-i", vim.opt.shiftwidth:get(), "-ci" }
-  }),
-  null_ls.builtins.diagnostics.shellcheck.with({
-    diagnostics_format = "[#{c}] #{m}"
-  }),
 }
 
 local on_attach = function(client, bufnr)

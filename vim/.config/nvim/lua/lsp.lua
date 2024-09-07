@@ -28,7 +28,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 require('mason').setup()
 
-local servers = { 'pyright', 'tsserver' }
+local servers = { 'pyright', 'bashls' }
 
 require('mason-lspconfig').setup {
   ensure_installed = servers,
