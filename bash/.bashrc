@@ -36,6 +36,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -r "$BREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$BREW_PREFIX/etc/profile.d/bash_completion.sh"
 fi
 
+# Move /usr/local/bin ahead of brew in $PATH
+pathremove /usr/local/bin
+pathadd /usr/local/bin
+
 pathadd "$HOME/bin"
 GOPATH=$HOME/go
 pathadd "$GOPATH/bin"
@@ -64,10 +68,6 @@ fi
 
 ## -- PYTHON --
 export PYTHONSTARTUP=${HOME}/.config/python/pythonrc.py
-# add pyenv itself to path
-pathadd "$HOME/.pyenv/bin"
-# add pyenv versions to path
-pathadd "${HOME}/.pyenv/shims"
 export VENVHOME="${HOME}/.ves"
 
 ## -- VI --

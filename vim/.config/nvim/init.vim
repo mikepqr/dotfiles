@@ -269,13 +269,6 @@ for d in glob(stdpath('config') . '/spell/*.add', 1, 1)
     endif
 endfor
 
-if filereadable('/Users/mike/.ves/neovim2/bin/python')
-    let g:python_host_prog = '/Users/mike/.ves/neovim2/bin/python'
-endif
-if filereadable('/Users/mike/.ves/neovim3/bin/python')
-    let g:python3_host_prog = '/Users/mike/.ves/neovim3/bin/python'
-endif
-
 au TermOpen * setlocal nonumber norelativenumber
 tnoremap <Esc> <C-\><C-n>
 
