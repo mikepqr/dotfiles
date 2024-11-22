@@ -44,11 +44,9 @@ catch /E484:/
 endtry
 
 " Buffers
-set hidden
-set autoread
 set noswapfile
 " Remember more files
-set viminfo=!,'1000,<50,s10,h
+set shada=!,'1000,<50,s10,h
 " Overwrite files to update, instead of renaming + rewriting (which messes up
 " file watchers and crontab -e)
 set backupcopy=yes
@@ -203,9 +201,6 @@ let g:vim_indent_cont = &sw
 
 augroup vimrc
     autocmd! vimrc
-
-    " Markdown: link selected text using URL in system clipboard
-    autocmd Filetype markdown vnoremap <Leader>k <ESC>`>a](<ESC>"*pa)<ESC>`<i[<ESC>
 
     " Automatic rename of tmux window
     if exists('$TMUX') && !exists('$NORENAME')
