@@ -43,41 +43,51 @@ catch /E484:/
     echom "private.vim not found"
 endtry
 
-" Buffers
-set noswapfile
-" Remember more files
-set shada=!,'1000,<50,s10,h
-" Overwrite files to update, instead of renaming + rewriting (which messes up
-" file watchers and crontab -e)
-set backupcopy=yes
-" Windows
-set colorcolumn=80
-set scrolloff=5
-set sidescrolloff=3
-set nowrap
-set diffopt+=vertical
-" Change default position of new splits
-set splitbelow
-set splitright
-" Tabs and whitespace
-set textwidth=80
-set shiftwidth=4
-set expandtab
-set list
-" Mouse
-set mouse=a  " mouse support in terminals
+lua <<EOF
+-- files
+vim.opt.swapfile = false
+-- Remember more files
+vim.opt.shada = "!,'1000,<50,s10,h"
+-- Overwrite files to update, instead of renaming + rewriting (which messes up
+-- file watchers and crontab -e)
+vim.opt.backupcopy = "yes"
+-- Persist undo across sessions
+vim.opt.undofile = true
 
-" Search
-set ignorecase
-set smartcase
-set showmatch
-set hlsearch
+-- search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.showmatch = true
+
+-- whitespace
+vim.opt.list = true
+vim.opt.expandtab = true
+vim.opt.textwidth = 80
+vim.opt.shiftwidth = 4
+
+-- UI
+vim.opt.colorcolumn = "80"
+vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 3
+vim.opt.wrap = false
+vim.opt.diffopt:append("vertical")
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.mouse = "a"
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.cursorline = true
+vim.opt.statusline = "%{FugitiveStatusline()}%{ObsessionStatus()} %f %y %=%c,%l/%L"
+-- h and l and ~ wrap over lines
+vim.opt.whichwrap = "h,l,~"
+-- Show list of possible files on tab completion, rather than first guess
+vim.opt.wildmode = "longest,list"
+EOF
+
 " Keys
 set pastetoggle=<Leader>tp
 nnoremap <leader><space> :noh<cr>
 nnoremap <leader>w :bdelete<cr>
-" h and l and ~ wrap over lines
-set whichwrap=h,l,~
 " Q reformats current paragraph or selected text
 nnoremap Q gqap
 vnoremap Q gq
@@ -95,20 +105,9 @@ nnoremap N Nzz
 nnoremap J mzJ`z
 
 " Use undotree and persist undo across sessions
-set undofile
 nnoremap <leader>u :UndotreeToggle<CR>
 
-" Show list of possible files on tab completion, rather than first guess
-set wildmode=longest,list
-
 " Screen decoration
-set number
-set relativenumber
-set cursorline
-set statusline=
-set statusline+=%{FugitiveStatusline()}%{ObsessionStatus()}
-set statusline+=\ %f\ %y\ %=%c,%l/%L
-
 " Colors
 if filereadable(expand("~/.background-light"))
     set background=light
