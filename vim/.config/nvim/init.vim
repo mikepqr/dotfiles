@@ -59,13 +59,14 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.showmatch = true
 
--- whitespace
-vim.opt.list = true
+-- formatting
 vim.opt.expandtab = true
 vim.opt.textwidth = 80
 vim.opt.shiftwidth = 4
+vim.opt.formatoptions:remove("t")
 
 -- UI
+vim.opt.list = true
 vim.opt.colorcolumn = "80"
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 3
@@ -96,29 +97,35 @@ nnoremap k gk
 nnoremap j gj
 vnoremap k gk
 vnoremap j gj
-" jk for esc
-inoremap jk <esc>
 " keep cursor centered on n/N
 nnoremap n nzz
 nnoremap N Nzz
 " keep cursor stationary on J
 nnoremap J mzJ`z
-
-" Use undotree and persist undo across sessions
+" Use undotree
 nnoremap <leader>u :UndotreeToggle<CR>
+" Expand %% to directory of file in current buffer (also %:h<Tab>)
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+" ss to generate new split
+nnoremap <silent> ss <C-w>s
+" readline bindings for command mode
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+" copy current buffer path to clipboard
+noremap <silent> <leader>p :let @+ = expand("%")<CR>    " relative to current directory
+noremap <silent> <leader>/ :let @+ = expand("%:p")<CR>  " absolute
+noremap <silent> <leader>~ :let @+ = expand("%:~")<CR>  " relative to home
+nnoremap <leader>f <cmd>lua require('fzf-lua').files()<CR><cr>
+nnoremap <leader>h <cmd>lua require('fzf-lua').oldfiles()<CR><cr>
+nnoremap <leader>b <cmd>lua require('fzf-lua').buffers()<CR><cr>
+nnoremap <leader>c <cmd>lua require('fzf-lua').files({cwd="~/notes", cmd="rg --color=never --files --sortr modified"})<CR>
+nnoremap <leader>g <cmd>lua require('fzf-lua').live_grep({cwd="~/notes", search=""})<CR>
 
-" Screen decoration
 " Colors
 if filereadable(expand("~/.background-light"))
     set background=light
 else
     set background=dark
-endif
-if exists('+termguicolors')
-    " :help xterm-true-color (possibly unnecessary in nvim)
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set termguicolors
 endif
 " Must happen before we set colorscheme; will rerun when colorscheme changes
 augroup customize_iceberg
@@ -166,37 +173,11 @@ catch /E185:/
     echom "iceberg colorscheme not available"
     set notermguicolors
 endtry
-
-" Use :w!! to save root files you forgot to open with sudo
-ca w!! w !sudo tee "%"
-
-" Default (overriden for specific filetypes below)
-set formatoptions-=t
-
 " Treat trailing whitespace as TODO syntax group
 match Todo /\s\+$/
 
-" Expand %% to directory of file in current buffer (also %:h<Tab>)
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
-" ss to generate new split
-nnoremap <silent> ss <C-w>s
-
-" readline bindings for command mode
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
-
-" copy current buffer path to clipboard
-noremap <silent> <leader>p :let @+ = expand("%")<CR>    " relative to current directory
-noremap <silent> <leader>/ :let @+ = expand("%:p")<CR>  " absolute
-noremap <silent> <leader>~ :let @+ = expand("%:~")<CR>  " relative to home
-
-" Indentation
-let g:indent_blankline_show_first_indent_level = v:false
-let g:indent_blankline_filetype_exclude = ['help']
-
-" Don't indent continued vimscript lines 3 * shiftwidth(?!)
-let g:vim_indent_cont = &sw
+" Use :w!! to save root files you forgot to open with sudo
+cabbrev w!! w !sudo tee "%"
 
 augroup vimrc
     autocmd! vimrc
@@ -246,15 +227,6 @@ augroup vimrc
 
 augroup END
 
-" Write file without changing modification time
-" https://unix.stackexchange.com/a/527154/20079
-function! WriteSmall()
-    let mtime = system("stat -c %.Y ".shellescape(expand('%:p')))
-    write
-    call system("touch --date='@".mtime."' ".shellescape(expand('%:p')))
-    edit
-endfunction
-
 " Recompile spell/*.add to *.add.spl if necessary
 " https://vi.stackexchange.com/a/5052
 for d in glob(stdpath('config') . '/spell/*.add', 1, 1)
@@ -262,15 +234,6 @@ for d in glob(stdpath('config') . '/spell/*.add', 1, 1)
         exec 'mkspell! ' . fnameescape(d)
     endif
 endfor
-
-au TermOpen * setlocal nonumber norelativenumber
-tnoremap <Esc> <C-\><C-n>
-
-nnoremap <leader>f <cmd>lua require('fzf-lua').files()<CR><cr>
-nnoremap <leader>h <cmd>lua require('fzf-lua').oldfiles()<CR><cr>
-nnoremap <leader>b <cmd>lua require('fzf-lua').buffers()<CR><cr>
-nnoremap <leader>c <cmd>lua require('fzf-lua').files({cwd="~/notes", cmd="rg --color=never --files --sortr modified"})<CR>
-nnoremap <leader>g <cmd>lua require('fzf-lua').live_grep({cwd="~/notes", search=""})<CR>
 
 lua <<EOF
 require("lsp")
@@ -284,17 +247,11 @@ require('smartyank').setup {
   },
   validate_yank = false, -- https://github.com/ibhagwan/smartyank.nvim/issues/8
 }
-vim.g.CorpusDirectories = {
-      ['~/notes'] = {
-        autocommit = true,
-        autoreference = false,
-        autotitle = 1,
-        base = './',
-        transform = 'local',
-      },
-  }
 EOF
-let g:CorpusPreviewWinhighlight='Normal:Normal'
-let g:CorpusSort='stat'
-let g:CorpusAutoCd=1
+
 let g:fugitive_gitlab_domains = {'ssh://ssh.' . $__WORK_GITHOST: 'https://' . $__WORK_GITHOST}
+" Indentation
+let g:indent_blankline_show_first_indent_level = v:false
+let g:indent_blankline_filetype_exclude = ['help']
+" Don't indent continued vimscript lines 3 * shiftwidth(?!)
+let g:vim_indent_cont = &sw
