@@ -9,7 +9,5 @@ set completion-ignore-case on
 "\e[D": backward-char
 "\e.":yank-last-arg
 "\e_": yank-last-arg
-# jk = escape
-"jk":"\e"
 # Append slash when completing symlinks to directories
 set mark-symlinked-directories on
