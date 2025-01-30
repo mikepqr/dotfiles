@@ -1,0 +1,38 @@
+# Font configuration
+font-family = FiraCode Nerd Font
+font-size = 14
+font-family-italic = Menlo
+font-style = Retina
+font-thicken = true
+font-feature = -liga
+font-feature = -calt
+
+# Primary colors
+background = #161821
+foreground = #d2d4de
+
+# Cursor colors
+cursor-color = #d2d4de
+cursor-text = #161821
+
+# Normal colors (palette 0-7)
+palette = 0=#161821
+palette = 1=#e27878
+palette = 2=#b4be82
+palette = 3=#e2a478
+palette = 4=#84a0c6
+palette = 5=#a093c7
+palette = 6=#89b8c2
+palette = 7=#c6c8d1
+
+# Bright colors (palette 8-15)
+palette = 8=#6b7089
+palette = 9=#e98989
+palette = 10=#c0ca8e
+palette = 11=#e9b189
+palette = 12=#91acd1
+palette = 13=#ada0d3
+palette = 14=#95c4ce
+palette = 15=#d2d4de
+
+selection-invert-fg-bg = true
