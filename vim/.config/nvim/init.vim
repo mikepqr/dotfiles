@@ -9,7 +9,6 @@ Plug 'justinmk/vim-dirvish'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
@@ -19,7 +18,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'ibhagwan/smartyank.nvim'
 Plug 'stevearc/conform.nvim'
-Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
@@ -255,9 +253,5 @@ require("conform").setup({
 })
 EOF
 
-let g:fugitive_gitlab_domains = {'ssh://ssh.' . $__WORK_GITHOST: 'https://' . $__WORK_GITHOST}
-" Indentation
-let g:indent_blankline_show_first_indent_level = v:false
-let g:indent_blankline_filetype_exclude = ['help']
 " Don't indent continued vimscript lines 3 * shiftwidth(?!)
 let g:vim_indent_cont = &sw
