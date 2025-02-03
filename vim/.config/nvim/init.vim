@@ -19,8 +19,7 @@ Plug 'tpope/vim-unimpaired'
 
 Plug 'L3MON4D3/LuaSnip'
 Plug 'ibhagwan/smartyank.nvim'
-Plug 'nvimtools/none-ls.nvim'
-Plug 'nvimtools/none-ls-extras.nvim'
+Plug 'stevearc/conform.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
@@ -33,7 +32,6 @@ Plug 'hrsh7th/cmp-path'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'wincent/corpus'
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 call plug#end()
 
@@ -239,7 +237,6 @@ lua <<EOF
 require("lsp")
 require("completion")
 require("treesitter")
-require("nullls")
 require('gitsigns').setup()
 require('smartyank').setup {
   highlight = {
@@ -247,6 +244,16 @@ require('smartyank').setup {
   },
   validate_yank = false, -- https://github.com/ibhagwan/smartyank.nvim/issues/8
 }
+require("conform").setup({
+  formatters_by_ft = {
+    python = { "ruff_format", "ruff_organize_imports" },
+    bash = { "shfmt" },
+  },
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_format = "fallback",
+  },
+})
 EOF
 
 let g:fugitive_gitlab_domains = {'ssh://ssh.' . $__WORK_GITHOST: 'https://' . $__WORK_GITHOST}
