@@ -10,7 +10,6 @@ Plug 'mbbill/undotree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
-Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
@@ -76,7 +75,7 @@ vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
-vim.opt.statusline = "%{FugitiveStatusline()}%{ObsessionStatus()} %f %y %=%c,%l/%L"
+vim.opt.statusline = "%{FugitiveStatusline()} %f %y %=%c,%l/%L"
 -- h and l and ~ wrap over lines
 vim.opt.whichwrap = "h,l,~"
 -- Show list of possible files on tab completion, rather than first guess
