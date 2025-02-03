@@ -199,9 +199,6 @@ augroup vimrc
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*[ivxlcdmIVXLCDM]\\+\\.\\s\\+\\\|^\\s*[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:\\&^.\\{4\\}
         \ nojoinspaces spell spellcapcheck= shiftwidth=4
 
-    " Don't spellcheck URLs https://vi.stackexchange.com/a/4003
-    syntax match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
-
     autocmd FileType css,html,javascript,typescript,typescriptreact,lua setlocal shiftwidth=2
     autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
     autocmd FileType bash,python,sh
@@ -210,14 +207,6 @@ augroup vimrc
         \ setlocal nofoldenable
 
 augroup END
-
-" Recompile spell/*.add to *.add.spl if necessary
-" https://vi.stackexchange.com/a/5052
-for d in glob(stdpath('config') . '/spell/*.add', 1, 1)
-    if filereadable(d) && (!filereadable(d . '.spl') || getftime(d) > getftime(d . '.spl'))
-        exec 'mkspell! ' . fnameescape(d)
-    endif
-endfor
 
 lua <<EOF
 require("lsp")
