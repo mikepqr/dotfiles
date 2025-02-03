@@ -241,6 +241,3 @@ require("conform").setup({
   },
 })
 EOF
-
-" Don't indent continued vimscript lines 3 * shiftwidth(?!)
-let g:vim_indent_cont = &sw
