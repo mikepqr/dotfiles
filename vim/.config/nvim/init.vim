@@ -192,11 +192,11 @@ augroup vimrc
         \   exe "normal g`\"" |
         \ endif
 
-    " formatlistpat taken from ftplugin/markdown.vim
+    " formatlistpat taken from ftplugin/markdown.vim plus Roman numerals
     " spellcapcheck= disables capitalization checks
     autocmd FileType asciidoc,markdown,text,gitcommit,rst setlocal
         \ formatoptions+=tcqln formatoptions-=r formatoptions-=o
-        \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s\\+[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
+        \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*[ivxlcdmIVXLCDM]\\+\\.\\s\\+\\\|^\\s*[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:\\&^.\\{4\\}
         \ nojoinspaces spell spellcapcheck= shiftwidth=4
 
     " Don't spellcheck URLs https://vi.stackexchange.com/a/4003
