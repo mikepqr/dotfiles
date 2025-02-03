@@ -201,10 +201,6 @@ augroup vimrc
 
     autocmd FileType css,html,javascript,typescript,typescriptreact,lua setlocal shiftwidth=2
     autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
-    autocmd FileType bash,python,sh
-        \ setlocal foldexpr=nvim_treesitter#foldexpr() |
-        \ setlocal foldmethod=expr |
-        \ setlocal nofoldenable
 
 augroup END
 
