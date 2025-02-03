@@ -35,4 +35,6 @@ palette = 13=#ada0d3
 palette = 14=#95c4ce
 palette = 15=#d2d4de
 
-selection-invert-fg-bg = true
+# Keybinds
+keybind = cmd+shift+[=text:[b
+keybind = cmd+shift+]=text:]b
