@@ -1,10 +1,12 @@
 -- Enable nerd-font based icons for diagnostics in the gutter, see:
 -- https://github.com/neovim/nvim-lspconfig/wiki/UI-customization#change-diagnostic-symbols-in-the-sign-column-gutter
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = { Error = '', Warn = '', Info = '', Hint = '' }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
