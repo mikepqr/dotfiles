@@ -1,3 +1,7 @@
+# Window
+macos-titlebar-style = native
+macos-titlebar-proxy-icon = hidden
+
 # Font configuration
 font-family = FiraCode Nerd Font
 font-size = 14
@@ -12,6 +16,7 @@ background = #161821
 foreground = #d2d4de
 
 # Cursor colors
+shell-integration-features = no-cursor
 cursor-color = #d2d4de
 cursor-text = #161821
 
@@ -38,3 +43,4 @@ palette = 15=#d2d4de
 # Keybinds
 keybind = cmd+shift+[=text:[b
 keybind = cmd+shift+]=text:]b
+keybind = global:cmd+grave_accent=toggle_quick_terminal
