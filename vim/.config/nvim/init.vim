@@ -71,7 +71,6 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.mouse = "a"
 vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.statusline = "%{FugitiveStatusline()} %f %y %=%c,%l/%L"
 -- h and l and ~ wrap over lines
