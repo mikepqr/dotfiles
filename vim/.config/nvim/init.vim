@@ -5,7 +5,6 @@ Plug 'aymericbeaumet/vim-symlink'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/iceberg.vim'
 Plug 'junegunn/fzf'
-Plug 'justinmk/vim-dirvish'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -30,6 +29,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
+Plug 'stevearc/oil.nvim'
 call plug#end()
 
 try
@@ -39,8 +39,6 @@ catch /E484:/
 endtry
 
 lua <<EOF
--- files
-vim.opt.swapfile = false
 -- Remember more files
 vim.opt.shada = "!,'1000,<50,s10,h"
 -- Overwrite files to update, instead of renaming + rewriting (which messes up
@@ -80,7 +78,6 @@ vim.opt.wildmode = "longest,list"
 EOF
 
 " Keys
-set pastetoggle=<Leader>tp
 nnoremap <leader><space> :noh<cr>
 nnoremap <leader>w :bdelete<cr>
 " Q reformats current paragraph or selected text
@@ -112,8 +109,7 @@ noremap <silent> <leader>~ :let @+ = expand("%:~")<CR>  " relative to home
 nnoremap <leader>f <cmd>lua require('fzf-lua').files()<CR><cr>
 nnoremap <leader>h <cmd>lua require('fzf-lua').oldfiles()<CR><cr>
 nnoremap <leader>b <cmd>lua require('fzf-lua').buffers()<CR><cr>
-nnoremap <leader>c <cmd>lua require('fzf-lua').files({cwd="~/notes", cmd="rg --color=never --files --sortr modified"})<CR>
-nnoremap <leader>g <cmd>lua require('fzf-lua').live_grep({cwd="~/notes", search=""})<CR>
+
 
 " Colors
 if filereadable(expand("~/.background-light"))
@@ -208,6 +204,8 @@ require("lsp")
 require("completion")
 require("treesitter")
 require('gitsigns').setup()
+require("oil").setup()
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 require('smartyank').setup {
   highlight = {
     timeout = 150,
