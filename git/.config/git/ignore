@@ -76,3 +76,5 @@ zappa_settings.json
 node_modules/
 dist/
 .eslintcache
+
+**/.claude/settings.local.json
