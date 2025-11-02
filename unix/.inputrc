@@ -11,3 +11,13 @@ set completion-ignore-case on
 "\e_": yank-last-arg
 # Append slash when completing symlinks to directories
 set mark-symlinked-directories on
+
+# Tab completion behavior (zsh-like autolist)
+# First tab completes to longest prefix and shows options
+# Subsequent tabs cycle through the options
+set show-all-if-ambiguous on             # Show completions immediately if ambiguous
+set menu-complete-display-prefix on      # Display common prefix before cycling
+set colored-stats on                     # Colorize completion listings
+set visible-stats on                     # Show file type indicators (/, @, etc.)
+"\t": menu-complete                      # Tab: cycle through completions
+"\e[Z": menu-complete-backward           # Shift+Tab: cycle backward
