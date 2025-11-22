@@ -1,7 +1,0 @@
-#!/bin/bash
-# Highlights matches of patten in first argument in file or stream
-#   highlight <pattern> file
-#   cmd | highlight <pattern>
-# From https://unix.stackexchange.com/a/367/20079
-
-grep --color -E "$1|$" "${@:2}"
