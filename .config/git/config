@@ -39,6 +39,9 @@
     first = !git checkout $(git rev-list --max-parents=0 HEAD)
     jump = !$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump
     root = rev-parse --show-cdup
+    show-merged-branches = "!git branch --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" { print $1 }'"
+    delete-merged-branches = "!git branch --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" { print $1 }' | xargs -r git branch -D"
+    fetch-branch = "!f() { git fetch origin $1:$1; }; f"
 [credential "https://github.com"]
     helper = !gh auth git-credential
 [credential "https://gist.github.com"]
@@ -80,6 +83,6 @@
     zero-style = dim syntax
 [diff]
     algorithm = histogram  # https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
-# Comes last so it can override anything set earlier
+# Comes last so it can override anything set earlier (missing files silently ignored)
 [include]
     path = ~/.config/git/config.local

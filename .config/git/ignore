@@ -77,4 +77,4 @@ node_modules/
 dist/
 .eslintcache
 
-**/.claude/settings.local.json
+**/.claude/checkpoints
