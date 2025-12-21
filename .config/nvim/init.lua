@@ -123,7 +123,7 @@ require('lazy').setup({
   'christoomey/vim-tmux-navigator',
   {
     'stevearc/oil.nvim',
-    opts = {},
+    opts = { view_options = { show_hidden = true } },
     keys = {
       { '-', '<cmd>Oil<cr>', desc = 'Open parent directory' },
     },
@@ -163,7 +163,6 @@ require('lazy').setup({
   -- Fuzzy finder
   {
     'ibhagwan/fzf-lua',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       grep = { rg_opts = '--hidden -g "!.git/" --column --line-number --no-heading --color=always --smart-case' },
     },
