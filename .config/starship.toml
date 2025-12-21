@@ -1,6 +1,5 @@
 format = """
 $kubernetes\
-$username\
 $hostname\
 $directory\
 $git_branch\
