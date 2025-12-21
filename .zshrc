@@ -2,6 +2,10 @@ if [ -f $MONOREPO_ROOT_DIR/config/local/zsh/zshrc ]; then
     source $MONOREPO_ROOT_DIR/config/local/zsh/zshrc
 fi
 
+# Idempotent PATH handling (no duplicates)
+typeset -Ug path PATH
+path=("$HOME/.local/bin" "${path[@]}")
+
 # vi editing mode
 bindkey -v
 # Edit command in $EDITOR with 'v' in normal mode
