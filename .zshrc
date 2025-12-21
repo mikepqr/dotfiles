@@ -2,6 +2,10 @@ if [ -f $HOME/code/anthropic/config/local/zsh/zshrc ]; then
     source $HOME/code/anthropic/config/local/zsh/zshrc
 fi
 
+# Idempotent PATH handling (no duplicates)
+typeset -Ug path PATH
+path=("$HOME/.local/bin" "${path[@]}")
+
 # vi editing mode
 bindkey -v
 # Edit command in $EDITOR with 'v' in normal mode
