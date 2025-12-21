@@ -4,7 +4,16 @@ fi
 
 # Idempotent PATH handling (no duplicates)
 typeset -Ug path PATH
+
+# Homebrew
+if [[ -d /opt/homebrew ]]; then
+    path=("/opt/homebrew/bin" "/opt/homebrew/sbin" "${path[@]}")
+fi
+
+# Personal local binaries (highest priority)
 path=("$HOME/.local/bin" "${path[@]}")
+
+[[ "$OSTYPE" == darwin* && -d "${HOME}/Library/Caches" ]] && export XDG_CACHE_HOME="${HOME}/Library/Caches"
 
 # vi editing mode
 bindkey -v
@@ -84,8 +93,40 @@ function tms {
     tmux attach -t "${session}" || tmux new -s "${session}"
 }
 
+function sdf {
+    local ret=0
+    for repo in ~/.dotfiles ~/.dotfiles-private; do
+        [[ -d "$repo" ]] && (cd "$repo" && echo ">>> ${repo##*/}" && sync-if-clean .) || ret=1
+    done
+    return $ret
+}
+
+function edc() {
+    $EDITOR "$(which "$1")"
+}
+
+autoload -Uz compinit && compinit
+compdef _command edc
+
+if cmd-available gls; then
+    alias ls='gls -F --color=auto'
+    alias ll='gls -Fl --color=auto'
+    alias la='gls -aFl --color=auto'
+elif [[ "$OSTYPE" == darwin* ]]; then
+    alias ls='ls -FG'
+    alias ll='ls -FlG'
+    alias la='ls -aFlG'
+else
+    alias ls='ls -F --color=auto'
+    alias ll='ls -Fl --color=auto'
+    alias la='ls -aFl --color=auto'
+fi
+alias l='ls'
+
 alias c='claude'
 alias t='tms'
+alias cdf='cd "$HOME/.dotfiles"'
+alias cdfp='cd "$HOME/.dotfiles-private"'
 
 if [ -f "$HOME/.zshrc.local" ]; then
     source "$HOME/.zshrc.local"
