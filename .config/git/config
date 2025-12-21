@@ -5,15 +5,11 @@
     showUntrackedFiles = all
 	branch = true
 	short = true
-[color]
-    ui = true
 [init]
     defaultBranch = main
 [push]
-    default = simple
     autoSetupRemote = true
 [pull]
-    ff = true
     rebase = true
 [rebase]
     autoStash = true
