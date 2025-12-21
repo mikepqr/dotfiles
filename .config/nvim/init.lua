@@ -10,7 +10,6 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.wildmode = "longest,list"
 vim.o.scrolloff = 5
-vim.o.mouse = 'a'
 -- jump to last position when reopening files
 vim.api.nvim_create_autocmd('BufReadPost', {
   callback = function()
@@ -23,24 +22,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     if mark[1] > 0 and mark[1] <= lcount then
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
-  end,
-})
--- format python on save
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.py',
-  callback = function()
-    -- Organize imports first
-    vim.lsp.buf.code_action({
-      context = {
-        only = { 'source.organizeImports' },
-        diagnostics = {},
-      },
-      apply = true,
-    })
-    -- Format code (with small delay to let organize imports complete)
-    vim.defer_fn(function()
-      vim.lsp.buf.format({ timeout_ms = 500 })
-    end, 100)
   end,
 })
 -- clear formatexpr so gq uses textwidth/formatoptions
@@ -67,9 +48,13 @@ vim.keymap.set('n', 'k', 'gk')
 vim.keymap.set('n', '<Leader><space>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<Leader>w', '<cmd>bdelete<CR>')
 vim.keymap.set('n', 'ss', '<C-w>s', { silent = true })
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'References' })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostic' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, { desc = 'Previous diagnostic' })
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, { desc = 'Next diagnostic' })
 vim.keymap.set('n', '[q', ':cprev<CR>', { desc = 'Previous quickfix' })
 vim.keymap.set('n', ']q', ':cnext<CR>', { desc = 'Next quickfix' })
 vim.keymap.set('n', '[b', ':bprevious<CR>', { desc = 'Previous buffer' })
@@ -87,6 +72,7 @@ vim.o.colorcolumn = "80"
 vim.o.list = true
 vim.o.number = true
 vim.api.nvim_set_hl(0, 'ColorColumn', { link = 'CursorLine' })
+-- TODO: remove in nvim 0.12 (becomes default)
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -169,10 +155,14 @@ require('lazy').setup({
   {
     'ibhagwan/fzf-lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {
+      grep = { rg_opts = '--hidden -g "!.git/" --column --line-number --no-heading --color=always --smart-case' },
+    },
     keys = {
       { '<leader>f', '<cmd>lua require("fzf-lua").files()<cr>', desc = 'Find files' },
       { '<leader>h', '<cmd>lua require("fzf-lua").oldfiles()<cr>', desc = 'Recent files' },
       { '<leader>b', '<cmd>lua require("fzf-lua").buffers()<cr>', desc = 'Buffers' },
+      { '<leader>/', '<cmd>lua require("fzf-lua").live_grep()<cr>', desc = 'Grep' },
     },
   },
 
@@ -180,6 +170,17 @@ require('lazy').setup({
   {
     'lewis6991/gitsigns.nvim',
     opts = {},
+  },
+
+  -- Formatting
+  {
+    'stevearc/conform.nvim',
+    opts = {
+      formatters_by_ft = {
+        python = { 'ruff_organize_imports', 'ruff_format' },
+      },
+      format_on_save = { timeout_ms = 500 },
+    },
   },
 
 })
