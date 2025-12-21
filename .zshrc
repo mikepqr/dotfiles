@@ -38,16 +38,8 @@ bindkey '^[[B' history-beginning-search-forward-end
 bindkey '\e.' insert-last-word
 bindkey '\e_' insert-last-word
 
-function cmd-available() {
-    if command -v "$1" >/dev/null 2>&1; then
-        return 0
-    else
-        return 1
-    fi
-}
-
 export EDITOR
-if cmd-available nvim; then
+if (( $+commands[nvim] )); then
     EDITOR=nvim
 else
     EDITOR=vim
@@ -83,7 +75,7 @@ setopt inc_append_history       # Write to history file immediately, not when sh
 setopt share_history            # Share history among all sessions
 setopt rm_star_silent           # Don't ask for confirmation when using rm with *
 
-if cmd-available starship; then
+if (( $+commands[starship] )); then
     eval "$(starship init zsh)"
 fi
 
@@ -108,7 +100,7 @@ function edc() {
 autoload -Uz compinit && compinit
 compdef _command edc
 
-if cmd-available gls; then
+if (( $+commands[gls] )); then
     alias ls='gls -F --color=auto'
     alias ll='gls -Fl --color=auto'
     alias la='gls -aFl --color=auto'

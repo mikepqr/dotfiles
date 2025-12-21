@@ -1,11 +1,14 @@
-#!/bin/bash
+#!/bin/zsh
 
-source "$HOME/.bash_lib"
+# Wrapper: use nvim if available, otherwise fall back to system vim
 
-if cmd-available nvim; then
+if (( $+commands[nvim] )); then
     exec nvim "${@}"
 else
-    script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-    pathremove "$script_dir"
+    # Remove this script's directory from PATH to avoid infinite loop
+    # ${0:A:h} = absolute path (:A) of script, then dirname (:h)
+    # ${path:#pattern} removes elements matching pattern from array
+    script_dir=${0:A:h}
+    path=(${path:#$script_dir})
     vim "${@}"
 fi
