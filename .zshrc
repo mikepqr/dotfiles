@@ -56,7 +56,6 @@ fi
 export HISTSIZE=100000
 export SAVEHIST=100000
 setopt append_history           # allow multiple sessions to append to one history
-setopt bang_hist                # treat ! special during command expansion
 setopt extended_history         # Write history in :start:elasped;command format
 setopt hist_expire_dups_first   # expire duplicates first when trimming history
 setopt hist_find_no_dups        # When searching history, don't repeat
