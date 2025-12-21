@@ -62,6 +62,15 @@ vim.keymap.set('n', ']b', ':bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', ']p', 'o<Esc>p', { desc = 'Paste below on new line' })
 vim.keymap.set('n', '[p', 'O<Esc>p', { desc = 'Paste above on new line' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Diagnostic list' })
+vim.keymap.set('n', '<leader>gy', function()
+  local remote = vim.fn.system('git remote get-url origin'):gsub('%.git%s*$', ''):gsub('git@github.com:', 'https://github.com/')
+  local branch = vim.fn.system('git rev-parse HEAD'):gsub('%s+', '')
+  local file = vim.fn.expand('%:.')
+  local line = vim.fn.line('.')
+  local url = remote .. '/blob/' .. branch .. '/' .. file .. '#L' .. line
+  vim.fn.setreg('+', url)
+  print(url)
+end, { desc = 'Yank GitHub URL' })
 
 --
 -- appearance
@@ -172,12 +181,6 @@ require('lazy').setup({
     opts = {},
   },
 
-  -- GitHub URLs
-  {
-    'ruifm/gitlinker.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = {},
-  },
 
   -- Formatting
   {
