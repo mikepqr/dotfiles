@@ -50,14 +50,7 @@ if [ -f ~/.fzf.zsh ]; then
     source ~/.fzf.zsh
     export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude .git"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    # ctrl-t lists everything under pwd by default. Then ctrl-f switches to
-    # everything under $HOME, and ctrl-t switches back.
-    export FZF_CTRL_T_OPTS="--bind 'ctrl-f:reload($FZF_DEFAULT_COMMAND . $HOME),ctrl-t:reload($FZF_DEFAULT_COMMAND)'"
-    if [ -d ~/src ]; then
-        export FZF_ALT_C_COMMAND='(fd --follow --type d . ~/src; fd --follow --type d --exclude "/src" . ~)'
-    else
-        export FZF_ALT_C_COMMAND="fd --follow --type d . ~"
-    fi
+    export FZF_ALT_C_COMMAND="fd --follow --type d . ~"
 fi
 
 export HISTSIZE=100000
