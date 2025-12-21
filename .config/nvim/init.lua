@@ -172,6 +172,13 @@ require('lazy').setup({
     opts = {},
   },
 
+  -- GitHub URLs
+  {
+    'ruifm/gitlinker.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {},
+  },
+
   -- Formatting
   {
     'stevearc/conform.nvim',
