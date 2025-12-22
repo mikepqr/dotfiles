@@ -13,8 +13,6 @@ fi
 # Personal local binaries (highest priority)
 path=("$HOME/.local/bin" "${path[@]}")
 
-[[ "$OSTYPE" == darwin* && -d "${HOME}/Library/Caches" ]] && export XDG_CACHE_HOME="${HOME}/Library/Caches"
-
 # vi editing mode
 bindkey -v
 # Edit command in $EDITOR with 'v' in normal mode
