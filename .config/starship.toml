@@ -11,6 +11,10 @@ $character"""
 [kubernetes]
 disabled = false
 
+[hostname]
+ssh_only = false
+style = "green"
+
 [directory]
 style = "blue"
 
