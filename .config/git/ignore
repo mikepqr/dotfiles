@@ -78,3 +78,5 @@ dist/
 .eslintcache
 
 **/.claude/checkpoints
+
+**/.claude/settings.local.json
