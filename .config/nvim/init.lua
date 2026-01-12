@@ -4,6 +4,20 @@
 vim.o.undofile = true
 vim.opt.shada = { "'1000" }
 vim.schedule(function()
+  if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
+    -- clipboard=unnamedplus disables OSC52 auto-detection, so set it explicitly
+    vim.g.clipboard = {
+      name = 'OSC 52',
+      copy = {
+        ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+      },
+      paste = {
+        ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+      },
+    }
+  end
   vim.o.clipboard = 'unnamedplus'
 end)
 vim.o.ignorecase = true
