@@ -27,7 +27,6 @@ cdk.context.json
 # Logs and databases #
 ######################
 *.log
-*.sql
 *.sqlite
 
 # OS generated files #
@@ -37,14 +36,14 @@ cdk.context.json
 ._*
 .Spotlight-V100
 .Trashes
-Icon?
+Icon
 ehthumbs.db
 Thumbs.db
 
 # Vim
 ######################
 .*.swp
-tags
+/tags
 Session.vim
 
 # Python
@@ -54,7 +53,6 @@ __pycache__
 *.egg-info
 *.pkl
 *.npy
-.cache
 .hypothesis
 Scratch.ipynb
 Untitled*.ipynb
