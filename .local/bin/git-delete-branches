@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
+import os
 import subprocess
+
+PREFIX = os.environ.get("SAFEUSER", os.environ.get("USER", "")) + "/"
+YELLOW = "\033[33m"
+RESET = "\033[0m"
 
 
 def run_and_get_stripped_lines(cmd):
@@ -27,6 +32,18 @@ def get_branches():
     return [branch for branch in branches if is_deletable(branch)]
 
 
+def colorize(branch):
+    # Check the actual branch name (after remotes/origin/ if present)
+    remote_prefix = ""
+    name = branch
+    if branch.startswith("remotes/origin/"):
+        remote_prefix = "remotes/origin/"
+        name = branch.removeprefix("remotes/origin/")
+    if name.startswith(PREFIX):
+        return f"{remote_prefix}{YELLOW}{PREFIX}{RESET}{name[len(PREFIX):]}"
+    return branch
+
+
 def delete_branches(branches):
     locals, remotes = [], []
     for branch in branches:
@@ -45,15 +62,19 @@ def main():
     branches = get_branches()
     if not branches:
         return
+    # Map colored -> original for lookup after selection
+    colored_to_original = {colorize(b): b for b in branches}
+    colored_branches = list(colored_to_original.keys())
     fzf_output = subprocess.run(
-        "fzf --multi --preview-window=bottom:40% --preview='git log {} --'",
-        input="\n".join(branches),
+        "fzf --ansi --multi --preview-window=bottom:40% --preview='git log -15 {1}'",
+        input="\n".join(colored_branches),
         shell=True,
         stdout=subprocess.PIPE,
         text=True,
     ).stdout
     if fzf_output.rstrip():
-        chosen_branches = fzf_output.rstrip().split("\n")
+        chosen_colored = fzf_output.rstrip().split("\n")
+        chosen_branches = [colored_to_original[c] for c in chosen_colored]
         delete_branches(chosen_branches)
 
 
