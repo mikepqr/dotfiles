@@ -62,9 +62,7 @@ def main():
     branches = get_branches()
     if not branches:
         return
-    # Map colored -> original for lookup after selection
-    colored_to_original = {colorize(b): b for b in branches}
-    colored_branches = list(colored_to_original.keys())
+    colored_branches = [colorize(b) for b in branches]
     fzf_output = subprocess.run(
         "fzf --ansi --multi --preview-window=bottom:40% --preview='git log -15 {1}'",
         input="\n".join(colored_branches),
@@ -73,8 +71,8 @@ def main():
         text=True,
     ).stdout
     if fzf_output.rstrip():
-        chosen_colored = fzf_output.rstrip().split("\n")
-        chosen_branches = [colored_to_original[c] for c in chosen_colored]
+        # fzf strips ANSI codes from output, so we get the original branch names
+        chosen_branches = fzf_output.rstrip().split("\n")
         delete_branches(chosen_branches)
 
 
