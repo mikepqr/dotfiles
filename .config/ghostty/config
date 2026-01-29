@@ -43,5 +43,4 @@ palette = 15=#d2d4de
 # Keybinds
 keybind = cmd+shift+[=text:[b
 keybind = cmd+shift+]=text:]b
-keybind = global:cmd+shift+grave_accent=toggle_quick_terminal
-keybind = shift+enter=text:\n
+keybind = shift+enter=text:\x1b[13;2u
