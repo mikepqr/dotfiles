@@ -41,20 +41,10 @@ style = "bright-black"
 format = "[$duration]($style) "
 style = "yellow"
 
-# Warn when the AWS SSO session has expired. Only active on hosts where AWS SSO
-# has been configured (the cache directory exists), so it is inert elsewhere.
+# Warn when AWS SSO and/or gcloud need a fresh login. The check lives in an
+# external script so it stays inert on hosts that lack it.
 [custom.sso]
-when = '[ -d "$HOME/.aws/sso/cache" ]'
+when = '[ -x "$HOME/.local/bin/check-cloud-auth" ]'
 shell = ["bash", "--noprofile", "--norc"]
-command = '''
-now=$(date +%s)
-for f in "$HOME"/.aws/sso/cache/*.json; do
-  [ -f "$f" ] || continue
-  grep -q registrationExpiresAt "$f" && grep -q '"expiresAt"' "$f" || continue
-  exp=$(jq -r .expiresAt <"$f")
-  ts=$(date -d "$exp" +%s 2>/dev/null || date -j -f "%Y-%m-%dT%H:%M:%SZ" "$exp" +%s 2>/dev/null)
-  [ -n "$ts" ] && [ $((ts + 36000)) -gt "$now" ] && exit 0
-done
-echo "[sso-logout]"
-'''
+command = '"$HOME/.local/bin/check-cloud-auth" || true'
 format = '([$output](bold red) )'
