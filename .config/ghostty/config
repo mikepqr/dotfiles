@@ -1,6 +1,7 @@
 # Window
 macos-titlebar-style = native
 macos-titlebar-proxy-icon = hidden
+copy-on-select = clipboard
 
 # Font configuration
 font-family = FiraCode Nerd Font

@@ -39,9 +39,11 @@
     delete-merged-branches = "!git branch --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" { print $1 }' | xargs -r git branch -D"
     fetch-branch = "!f() { git fetch origin $1:$1; }; f"
 [credential "https://github.com"]
-    helper = !gh auth git-credential
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-    helper = !gh auth git-credential
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
 [core]
     pager = delta --$([ -f ~/.background-light ] && echo light || echo dark)
 [interactive]
