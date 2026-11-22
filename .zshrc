@@ -105,7 +105,11 @@ else
 fi
 alias l='ls'
 
-alias c='claude'
+unalias c 2>/dev/null
+c() (
+    [[ $PWD == $HOME ]] && cd "$HOME/tmp"
+    claude "$@"
+)
 alias t='tms'
 alias cdf='cd "$HOME/.dotfiles"'
 alias cdfp='cd "$HOME/.dotfiles-private"'
