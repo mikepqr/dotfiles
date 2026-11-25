@@ -1,0 +1,1 @@
+-- Rex configuration. Custom bindings removed 2026-11-25; old ones in init.lua.bak.
